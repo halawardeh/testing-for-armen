@@ -1,0 +1,316 @@
+﻿@{
+    ViewData["Title"] = "الملف الشخصي | آرمن للشحن";
+    Layout = "~/Views/Shared/_ImportLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Import/ImportProfile.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/Import/ImportProfile.js" asp-append-version="true"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0d2c4f',
+                        accent: '#00a878',
+                        navbar: '#025F70'
+                    }
+                }
+            }
+        }
+    </script>
+}
+
+<!-- Profile Header -->
+<header class="profile-header pt-32 pb-20 text-white">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-8" data-aos="fade-up">
+            <div class="profile-avatar">
+                <img src="https://i.pravatar.cc/100?img=4" alt="الصورة الشخصية" class="w-32 h-32 rounded-full border-4 border-white shadow-lg">
+                <div class="avatar-overlay rounded-full cursor-pointer">
+                    <i class="fas fa-camera text-2xl"></i>
+                </div>
+            </div>
+            <div class="text-center lg:text-right">
+                <h1 class="text-3xl font-bold mb-2">أحمد محمد</h1>
+                <p class="text-gray-200 mb-4">عميل منذ يناير 2024</p>
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                    <span class="bg-white/20 px-4 py-1 rounded-full text-sm">
+                        <i class="fas fa-envelope ml-2"></i>ahmed@example.com
+                    </span>
+                    <span class="bg-white/20 px-4 py-1 rounded-full text-sm">
+                        <i class="fas fa-phone ml-2"></i>+962 123 456 789
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Stats Section -->
+<section class="py-8 -mt-8">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Stat Card 1 -->
+            <div class="stat-card bg-white rounded-xl p-6 shadow-lg" data-aos="fade-up">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                        <i class="fas fa-box text-2xl text-accent"></i>
+                    </div>
+                    <span class="text-3xl font-bold text-primary">24</span>
+                </div>
+                <h3 class="text-gray-600">إجمالي الشحنات</h3>
+            </div>
+
+            <!-- Stat Card 2 -->
+            <div class="stat-card bg-white rounded-xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                        <i class="fas fa-truck-fast text-2xl text-accent"></i>
+                    </div>
+                    <span class="text-3xl font-bold text-primary">3</span>
+                </div>
+                <h3 class="text-gray-600">شحنات نشطة</h3>
+            </div>
+
+            <!-- Stat Card 3 -->
+            <div class="stat-card bg-white rounded-xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                        <i class="fas fa-check-circle text-2xl text-accent"></i>
+                    </div>
+                    <span class="text-3xl font-bold text-primary">21</span>
+                </div>
+                <h3 class="text-gray-600">شحنات مكتملة</h3>
+            </div>
+
+            <!-- Stat Card 4 -->
+            <div class="stat-card bg-white rounded-xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                        <i class="fas fa-star text-2xl text-accent"></i>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-3xl font-bold text-primary">4.8</span>
+                        <span class="text-gray-400 text-sm">/5</span>
+                    </div>
+                </div>
+                <h3 class="text-gray-600">تقييم العميل</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+                    <div class="flex flex-col space-y-2">
+                        <button class="tab-button active flex items-center space-x-3 space-x-reverse w-full p-3 rounded-lg text-right" data-tab="shipments">
+                            <i class="fas fa-box-open w-6"></i>
+                            <span>الشحنات النشطة</span>
+                        </button>
+                        <button class="tab-button flex items-center space-x-3 space-x-reverse w-full p-3 rounded-lg text-right" data-tab="history">
+                            <i class="fas fa-history w-6"></i>
+                            <span>سجل الشحنات</span>
+                        </button>
+                        <button class="tab-button flex items-center space-x-3 space-x-reverse w-full p-3 rounded-lg text-right" data-tab="addresses">
+                            <i class="fas fa-map-marker-alt w-6"></i>
+                            <span>العناوين المحفوظة</span>
+                        </button>
+                        <button class="tab-button flex items-center space-x-3 space-x-reverse w-full p-3 rounded-lg text-right" data-tab="settings">
+                            <i class="fas fa-cog w-6"></i>
+                            <span>إعدادات الحساب</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-2">
+                <!-- Active Shipments Section -->
+                <div class="profile-section active" id="shipments">
+                    <h2 class="text-2xl font-bold text-primary mb-6">الشحنات النشطة</h2>
+                    <div class="space-y-4">
+                        <!-- Shipment Card 1 -->
+                        <div class="shipment-card bg-white rounded-xl p-6 shadow-lg" data-aos="fade-left">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-ship text-2xl text-accent"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-primary">SHP-2025-001</h3>
+                                        <p class="text-sm text-gray-500">شحن بحري - دبي، الإمارات</p>
+                                    </div>
+                                </div>
+                                <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">في الطريق</span>
+                            </div>
+                            <div class="mb-4">
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">تاريخ الشحن: 15 يوليو 2025</span>
+                                <span class="text-gray-600">موعد التسليم المتوقع: 22 يوليو 2025</span>
+                            </div>
+                        </div>
+
+                        <!-- Shipment Card 2 -->
+                        <div class="shipment-card bg-white rounded-xl p-6 shadow-lg" data-aos="fade-left" data-aos-delay="100">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-plane text-2xl text-accent"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-primary">SHP-2025-002</h3>
+                                        <p class="text-sm text-gray-500">شحن جوي - لندن، المملكة المتحدة</p>
+                                    </div>
+                                </div>
+                                <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm">في الجمارك</span>
+                            </div>
+                            <div class="mb-4">
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">تاريخ الشحن: 18 يوليو 2025</span>
+                                <span class="text-gray-600">موعد التسليم المتوقع: 25 يوليو 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Section -->
+                <div class="profile-section hidden" id="history">
+                    <h2 class="text-2xl font-bold text-primary mb-6">سجل الشحنات</h2>
+                    <!-- Timeline -->
+                    <div class="relative">
+                        <div class="absolute top-0 left-0 ml-4 h-full border-l-2 border-gray-200"></div>
+                        <div class="space-y-8 relative">
+                            <!-- Timeline Item 1 -->
+                            <div class="flex items-center space-x-4 space-x-reverse" data-aos="fade-right">
+                                <div class="bg-accent w-8 h-8 rounded-full flex items-center justify-center relative z-10">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1 bg-white rounded-xl p-6 shadow-lg">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-bold text-primary">SHP-2025-003</h3>
+                                        <span class="text-sm text-gray-500">10 يوليو 2025</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-2">شحن بحري - نيويورك، الولايات المتحدة</p>
+                                    <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">تم التسليم</span>
+                                </div>
+                            </div>
+
+                            <!-- Timeline Item 2 -->
+                            <div class="flex items-center space-x-4 space-x-reverse" data-aos="fade-right" data-aos-delay="100">
+                                <div class="bg-accent w-8 h-8 rounded-full flex items-center justify-center relative z-10">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1 bg-white rounded-xl p-6 shadow-lg">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-bold text-primary">SHP-2025-004</h3>
+                                        <span class="text-sm text-gray-500">5 يوليو 2025</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-2">شحن جوي - باريس، فرنسا</p>
+                                    <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">تم التسليم</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Addresses Section -->
+                <div class="profile-section hidden" id="addresses">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-primary">العناوين المحفوظة</h2>
+                        <button class="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors">
+                            <i class="fas fa-plus ml-2"></i>
+                            إضافة عنوان جديد
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Address Card 1 -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg relative group" data-aos="fade-up">
+                            <div class="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="text-gray-400 hover:text-accent">
+                                    <i class="fas fa-pencil"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-red-500 mr-2">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="mb-4">
+                                <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm">المنزل</span>
+                            </div>
+                            <h3 class="font-bold text-primary mb-2">أحمد محمد</h3>
+                            <p class="text-gray-600 mb-1">شارع الملك حسين، عمان</p>
+                            <p class="text-gray-600 mb-1">الأردن</p>
+                            <p class="text-gray-600">+962 123 456 789</p>
+                        </div>
+
+                        <!-- Address Card 2 -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg relative group" data-aos="fade-up" data-aos-delay="100">
+                            <div class="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="text-gray-400 hover:text-accent">
+                                    <i class="fas fa-pencil"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-red-500 mr-2">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="mb-4">
+                                <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm">المكتب</span>
+                            </div>
+                            <h3 class="font-bold text-primary mb-2">شركة آرمن</h3>
+                            <p class="text-gray-600 mb-1">شارع المدينة المنورة، عمان</p>
+                            <p class="text-gray-600 mb-1">الأردن</p>
+                            <p class="text-gray-600">+962 123 456 789</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="profile-section hidden" id="settings">
+                    <h2 class="text-2xl font-bold text-primary mb-6">إعدادات الحساب</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 mb-2">الاسم الأول</label>
+                                    <input type="text" value="أحمد" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-accent">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">الاسم الأخير</label>
+                                    <input type="text" value="محمد" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-accent">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">البريد الإلكتروني</label>
+                                <input type="email" value="ahmed@example.com" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-accent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">رقم الهاتف</label>
+                                <input type="tel" value="+962 123 456 789" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-accent">
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="bg-accent text-white px-6 py-2 rounded-lg hover:bg-accent/90 transition-colors">
+                                    حفظ التغييرات
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

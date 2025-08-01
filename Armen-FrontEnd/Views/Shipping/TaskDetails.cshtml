@@ -1,0 +1,456 @@
+﻿@{
+    Layout = "~/Views/Shared/_shippingLayout.cshtml";
+}
+@section Styles {
+    <style>
+        /* Tailwind CSS Color Configuration for Shipping */
+        .bg-primary {
+            background: linear-gradient(180deg, #0d2c4f 0%, #025F70 100%) !important;
+        }
+        .bg-accent {
+            background-color: #00a878 !important;
+        }
+        .text-primary {
+            color: #0d2c4f !important;
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/Shipping/TaskDetails.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Import/ImportTaskDetails.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+}
+@section Scripts {
+    <script src="~/js/Shipping/TaskDetails.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.js.org/dist/html2canvas.min.js"></script>
+}
+<div class="p-6">
+    <!-- Order Details Card -->
+    <div class="main-card" data-aos="fade-up">
+        <div class="card-header">
+            <h3 class="text-2xl font-bold flex items-center">
+                <i class="fas fa-info-circle ml-3"></i>
+                معلومات الطلب والشحنة
+            </h3>
+        </div>
+        <div class="card-content">
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">رقم الطلب</div>
+                    <div class="detail-value">ORD-2025-005</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">اسم العميل</div>
+                    <div class="detail-value">شركة التقنيات المتطورة</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">موظف الاستيراد</div>
+                    <div class="detail-value">أحمد محمد سالم</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">نوع البضاعة</div>
+                    <div class="detail-value">أجهزة إلكترونية</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">الوزن الإجمالي</div>
+                    <div class="detail-value">2.5 طن</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">الأبعاد</div>
+                    <div class="detail-value">3m × 2m × 1.5m</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">بلد المنشأ</div>
+                    <div class="detail-value">الصين</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">ميناء الوصول</div>
+                    <div class="detail-value">ميناء العقبة</div>
+                </div>
+            </div>
+            <!-- Products Table from Import Section -->
+            <div class="mt-6">
+                <h4 class="text-lg font-bold text-primary-color mb-4">جدول المنتجات من قسم الاستيراد:</h4>
+                
+                <!-- Control Panel -->
+                <div class="control-panel mb-6">
+                    <div class="control-buttons">
+                        <button class="action-btn btn-success" onclick="addNewRow()">
+                            <i class="fas fa-plus"></i>
+                            إضافة منتج جديد
+                        </button>
+                        <button class="action-btn btn-info" onclick="addNewColumn()">
+                            <i class="fas fa-columns"></i>
+                            إضافة عمود
+                        </button>
+                        <button class="action-btn btn-primary" onclick="saveData()">
+                            <i class="fas fa-save"></i>
+                            حفظ
+                        </button>
+                    </div>
+                    <div class="export-buttons">
+                        <button class="action-btn btn-excel" onclick="exportToExcel()">
+                            <i class="fas fa-file-excel"></i>
+                            تصدير Excel
+                        </button>
+                        <button class="action-btn btn-pdf" onclick="exportToPDF()">
+                            <i class="fas fa-file-pdf"></i>
+                            تصدير PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Products Table -->
+                <div class="table-wrapper">
+                    <table class="products-table" id="productsTable">
+                        <thead>
+                            <tr>
+                                <th class="col-index">الرقم</th>
+                                <th class="col-factory-name">اسم المصنع</th>
+                                <th class="col-photo">الصورة</th>
+                                <th class="col-name">اسم المنتج</th>
+                                <th class="col-cartons">عدد الكراتين</th>
+                                <th class="col-pieces-carton">القطع/الكرتون</th>
+                                <th class="col-total-pieces">إجمالي القطع</th>
+                                <th class="col-sets">عدد الأطقم</th>
+                                <th class="col-unit-price">سعر الوحدة</th>
+                                <th class="col-total-price">السعر الإجمالي</th>
+                                <th class="col-cbm">CBM/CTN</th>
+                                <th class="col-total-cbm">إجمالي CBM</th>
+                                <th class="col-weight">الوزن</th>
+                                <th class="col-cost-price">سعر التكلفة</th>
+                                <th class="col-profit">الربح</th>
+                                <th class="col-notes">ملاحظات</th>
+                                <th class="col-actions">الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Sample Data Row 1 -->
+                            <tr class="product-row" data-category="C2">
+                                <td class="cell-index">C2-11</td>
+                                <td class="cell-factory-name" contenteditable="true">مصنع شنزن التقني</td>
+                                <td class="cell-photo">
+                                    <div class="photo-cell">
+                                        <img src="https://via.placeholder.com/60x60/87CEEB/000000?text=كرسي" alt="كرسي أطفال" class="product-image">
+                                        <button class="btn-change-photo" onclick="changePhoto(this)">
+                                            <i class="fas fa-camera"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="cell-name" contenteditable="true">كرسي أطفال</td>
+                                <td class="cell-cartons" contenteditable="true">10</td>
+                                <td class="cell-pieces-carton" contenteditable="true">30</td>
+                                <td class="cell-total-pieces calculated">300</td>
+                                <td class="cell-sets" contenteditable="true">1</td>
+                                <td class="cell-unit-price" contenteditable="true">16.50</td>
+                                <td class="cell-total-price calculated">4,950.00</td>
+                                <td class="cell-cbm" contenteditable="true">0.08</td>
+                                <td class="cell-total-cbm calculated">0.8</td>
+                                <td class="cell-weight" contenteditable="true">19.00</td>
+                                <td class="cell-cost-price" contenteditable="true">3,500.00</td>
+                                <td class="cell-profit calculated">1,450.00</td>
+                                <td class="cell-notes" contenteditable="true">مراجع، جودة ممتازة</td>
+                                <td class="cell-actions">
+                                    <button class="btn-delete" onclick="deleteRow(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-duplicate" onclick="duplicateRow(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            
+                            <!-- Sample Data Row 2 -->
+                            <tr class="product-row" data-category="C2">
+                                <td class="cell-index">C2-12</td>
+                                <td class="cell-factory-name" contenteditable="true">مصنع التقنيات المتقدمة</td>
+                                <td class="cell-photo">
+                                    <div class="photo-cell">
+                                        <img src="https://via.placeholder.com/60x60/98FB98/000000?text=USB" alt="كرسي USB" class="product-image">
+                                        <button class="btn-change-photo" onclick="changePhoto(this)">
+                                            <i class="fas fa-camera"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="cell-name" contenteditable="true">كرسي USB</td>
+                                <td class="cell-cartons" contenteditable="true">2</td>
+                                <td class="cell-pieces-carton" contenteditable="true">240</td>
+                                <td class="cell-total-pieces calculated">480</td>
+                                <td class="cell-sets" contenteditable="true">1</td>
+                                <td class="cell-unit-price" contenteditable="true">3.60</td>
+                                <td class="cell-total-price calculated">1,728.00</td>
+                                <td class="cell-cbm" contenteditable="true">0.047</td>
+                                <td class="cell-total-cbm calculated">0.094</td>
+                                <td class="cell-weight" contenteditable="true">4.30</td>
+                                <td class="cell-cost-price" contenteditable="true">1,200.00</td>
+                                <td class="cell-profit calculated">528.00</td>
+                                <td class="cell-notes" contenteditable="true">منتج جديد، يحتاج تقييم</td>
+                                <td class="cell-actions">
+                                    <button class="btn-delete" onclick="deleteRow(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-duplicate" onclick="duplicateRow(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <!-- Sample Data Row 3 -->
+                            <tr class="product-row" data-category="B1">
+                                <td class="cell-index">B1-1</td>
+                                <td class="cell-factory-name" contenteditable="true">مصنع الأواني المنزلية</td>
+                                <td class="cell-photo">
+                                    <div class="photo-cell">
+                                        <img src="https://via.placeholder.com/60x60/FFB6C1/000000?text=كوب" alt="كوب" class="product-image">
+                                        <button class="btn-change-photo" onclick="changePhoto(this)">
+                                            <i class="fas fa-camera"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="cell-name" contenteditable="true">كوب 4*1</td>
+                                <td class="cell-cartons" contenteditable="true">8</td>
+                                <td class="cell-pieces-carton" contenteditable="true">130</td>
+                                <td class="cell-total-pieces calculated">1040</td>
+                                <td class="cell-sets" contenteditable="true">1</td>
+                                <td class="cell-unit-price" contenteditable="true">1.62</td>
+                                <td class="cell-total-price calculated">1,684.80</td>
+                                <td class="cell-cbm" contenteditable="true">0.024</td>
+                                <td class="cell-total-cbm calculated">0.192</td>
+                                <td class="cell-weight" contenteditable="true">1.70</td>
+                                <td class="cell-cost-price" contenteditable="true">1,000.00</td>
+                                <td class="cell-profit calculated">684.80</td>
+                                <td class="cell-notes" contenteditable="true">منتج شائع، طلب كبير</td>
+                                <td class="cell-actions">
+                                    <button class="btn-delete" onclick="deleteRow(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-duplicate" onclick="duplicateRow(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+
+                <!-- Summary Statistics -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
+                    <div class="stats-card">
+                        <div class="stats-icon bg-blue-100">
+                            <i class="fas fa-box-open text-blue-600"></i>
+                        </div>
+                        <div class="stats-content">
+                            <div class="stats-number" id="statsProducts">3</div>
+                            <div class="stats-label">إجمالي المنتجات</div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon bg-green-100">
+                            <i class="fas fa-coins text-green-600"></i>
+                        </div>
+                        <div class="stats-content">
+                            <div class="stats-number" id="statsValue">¥8,362</div>
+                            <div class="stats-label">القيمة الإجمالية</div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon bg-purple-100">
+                            <i class="fas fa-weight text-purple-600"></i>
+                        </div>
+                        <div class="stats-content">
+                            <div class="stats-number" id="statsWeight">25.00</div>
+                            <div class="stats-label">الوزن الإجمالي (كجم)</div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon bg-orange-100">
+                            <i class="fas fa-cube text-orange-600"></i>
+                        </div>
+                        <div class="stats-content">
+                            <div class="stats-number" id="statsCBM">1.086</div>
+                            <div class="stats-label">إجمالي CBM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Comments Section -->
+    <div class="main-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-header">
+            <h3 class="text-2xl font-bold flex items-center">
+                <i class="fas fa-comments ml-3"></i>
+                التواصل مع قسم الاستيراد
+            </h3>
+        </div>
+        <div class="card-content">
+            <div class="comments-section">
+                <h4 class="text-lg font-bold text-yellow-800 mb-4">
+                    <i class="fas fa-exclamation-triangle ml-2"></i>
+                    قسم حيوي للتنسيق - استخدم هذا القسم لإبلاغ قسم الاستيراد بالمستجدات
+                </h4>
+                <!-- Existing Comments -->
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <span class="comment-author">أحمد محمد (الاستيراد)</span>
+                        <span class="comment-date">21 يوليو 2025 - 16:30</span>
+                    </div>
+                    <div class="comment-text">تم إحالة الطلب لقسم الشحن. البضاعة جاهزة في المخزن ويمكن ترتيب الشحن.</div>
+                </div>
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <span class="comment-author">محمد العلي (الشحن)</span>
+                        <span class="comment-date">21 يوليو 2025 - 17:15</span>
+                    </div>
+                    <div class="comment-text">المواعيد المتاحة في المخزن هي 25/7 و 26/7. الرجاء تأكيد الموعد المناسب مع المصنع.</div>
+                </div>
+                <!-- Add New Comment -->
+                <div class="mt-6">
+                    <h5 class="font-bold text-primary-color mb-3">إضافة تعليق جديد:</h5>
+                    <textarea 
+                        class="comment-input" 
+                        id="newComment" 
+                        placeholder="اكتب تعليقك هنا... مثل: تم التواصل مع شركة النقل، أو تحديث المواعيد، أو أي استفسارات..."
+                    ></textarea>
+                    <button class="action-btn btn-primary mt-3" onclick="addComment()">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال التعليق
+                    </button>
+                </div>
+            </div>
+        </div>
+  
+    </div>
+    <!-- Shipping Actions -->
+    <div class="main-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-header">
+            <h3 class="text-2xl font-bold flex items-center">
+                <i class="fas fa-cogs ml-3"></i>
+                إجراءات الشحن
+            </h3>
+        </div>
+        <div class="card-content">
+            <form id="shippingInfoForm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="form-group mb-6">
+                            <label class="form-label">الموعد النهائي المقترح للشحن</label>
+                            <input type="date" class="form-input" id="shippingDeadline" name="shippingDeadline">
+                        </div>
+                        <div class="form-group mb-6">
+                            <label class="form-label">سعر الشحن (بالدولار  )</label>
+                            <input type="number" class="form-input" id="shippingPrice" name="shippingPrice" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group mb-6">
+                            <label class="form-label">عنوان المخزن</label>
+                            <input type="text" class="form-input" id="warehouseAddress" name="warehouseAddress" placeholder="أدخل عنوان المخزن بالتفصيل">
+                        </div>
+                        <div class="form-group mb-6">
+                            <label class="form-label">رقم التواصل للمخزن</label>
+                            <input type="text" class="form-input" id="warehousePhone" name="warehousePhone" placeholder="مثال: 059-XXXXXXX">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-8">
+                    <button type="submit" class="action-btn btn-success flex-1">
+                        <i class="fas fa-save"></i>
+                        حفظ بيانات الشحن
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Back Button -->
+    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+        <a href="/Shipping/Dashboard" class="action-btn btn-secondary">
+            <i class="fas fa-arrow-right"></i>
+            العودة للوحة التحكم
+        </a>
+    </div>
+</div>
+<!-- Final Report Modal -->
+<div id="finalReportModal" class="modal">
+    <div class="modal-content">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-file-upload text-2xl text-orange-500"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-primary-color mb-2">رفع تقرير الشحن النهائي</h3>
+            <p class="text-gray-600">أدخل البيانات النهائية وارفع التقرير لإكمال مهمة الشحن</p>
+        </div>
+        <div class="space-y-6">
+            <!-- File Upload -->
+            <div class="form-group">
+                <label class="form-label">رفع ملف التقرير (بوليصة الشحن PDF)</label>
+                <div class="upload-area" id="reportUploadArea" onclick="document.getElementById('reportFileInput').click()">
+                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                    <p class="text-gray-600 mb-2">اضغط هنا أو اسحب ملف التقرير</p>
+                    <p class="text-sm text-gray-400">PDF, DOC, DOCX (حتى 10MB)</p>
+                    <input type="file" id="reportFileInput" style="display: none;" accept=".pdf,.doc,.docx" onchange="handleReportUpload(this)">
+                </div>
+                <div id="uploadedReport" style="display: none;" class="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="fas fa-file-check text-green-500 ml-2"></i>
+                            <span id="reportFileName" class="text-green-800"></span>
+                        </div>
+                        <button onclick="removeReportFile()" class="text-red-500 hover:text-red-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional Notes -->
+            <div class="form-group">
+                <label class="form-label">ملاحظات إضافية</label>
+                <textarea class="comment-input" id="additionalNotes" placeholder="أي ملاحظات إضافية حول الشحنة..." rows="3"></textarea>
+            </div>
+        </div>
+        <div class="flex space-x-4 mt-8">
+            <button class="action-btn btn-success flex-1" onclick="completeShippingTask()">
+                <i class="fas fa-check-circle"></i>
+                إكمال مهمة الشحن
+            </button>
+            <button class="action-btn btn-secondary flex-1" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+                إلغاء
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Add Column Modal -->
+<div id="addColumnModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>إضافة عمود جديد</h3>
+            <button class="modal-close" onclick="closeModal('addColumnModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>اسم العمود:</label>
+                <input type="text" id="newColumnName" placeholder="مثال: المورد، التاريخ، إلخ...">
+            </div>
+            <div class="form-group">
+                <label>نوعdata
+                البيانات:</label>
+                <select id="columnType">
+                    <option value="text">نص</option>
+                    <option value="number">رقم</option>
+                    <option value="date">تاريخ</option>
+                    <option value="currency">عملة</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="action-btn btn-primary" onclick="confirmAddColumn()">إضافة</button>
+            <button class="action-btn btn-secondary" onclick="closeModal('addColumnModal')">إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden File Input for Image Upload -->
+<input type="file" id="imageFileInput" accept="image/*" style="display: none;" onchange="handleImageUpload(this)">

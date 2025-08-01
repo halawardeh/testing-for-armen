@@ -1,0 +1,491 @@
+﻿:root {
+    --primary-color: #0d2c4f;
+    --navbar-color: #0d2c4f;
+    --accent-color: #6672a0a3;
+    --light-bg: #f4f7fa;
+    --clearance-color: #0d2c4f;
+    --success-color: #2d29956a;
+    --warning-color: #0d2c4f;
+    --danger-color: #0d2c4f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    direction: rtl;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--light-bg);
+    overflow-x: hidden;
+    direction: rtl;
+    text-align: right;
+}
+
+/* Hide all notification elements */
+.notifications-toggle,
+.notification-container,
+.notification-badge,
+.notification {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* ????? ????? ??? mainContent ?? ???????? ?????? ??? sidebar */
+#mainContent {
+    width: calc(100% - 256px) !important; /* ??? ????? ??? sidebar */
+    max-width: calc(100vw - 256px) !important;
+    margin: 0 !important;
+    margin-right: 256px !important; /* ????? ??? sidebar */
+    padding: 0 20px !important;
+    overflow-x: visible !important;
+    direction: rtl;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+/* ????? ??????? ???????? ?? ???????? ???? sidebar */
+.flex-1.transition-all.duration-300 {
+    width: calc(100% - 256px) !important;
+    max-width: calc(100vw - 256px) !important;
+    margin-right: 256px !important;
+    overflow-x: visible !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    box-sizing: border-box;
+}
+
+/* ?????? ?? ?? ??? padding ????? ??? */
+.p-6 {
+    padding: 1.5rem;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Main Cards */
+.main-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px #0d2c4f;
+    overflow: hidden;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+    .main-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px #0d2c4f;
+    }
+
+.card-header {
+    background: linear-gradient(135deg, var(--clearance-color), #0d2c4f);
+    color: white;
+    padding: 25px;
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .card-header h1,
+    .card-header h2,
+    .card-header h3,
+    .card-header h4,
+    .card-header h5,
+    .card-header h6 {
+        text-align: right;
+        direction: rtl;
+        margin: 0;
+    }
+
+    .card-header .flex {
+        justify-content: flex-end;
+        text-align: right;
+        width: 100%;
+    }
+
+        .card-header .flex.justify-between {
+            justify-content: space-between;
+        }
+
+.card-content {
+    padding: 30px;
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Navigation Bar */
+nav {
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+    nav .flex {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+        nav .flex.justify-between .flex:first-child {
+            justify-content: flex-end;
+        }
+
+        nav .flex.justify-between .flex:last-child {
+            justify-content: flex-start;
+        }
+
+    nav h1 {
+        text-align: right;
+        direction: rtl;
+    }
+
+/* Order Details Grid */
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.detail-item {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    border-right: 4px solid var(--clearance-color);
+    border-left: none;
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: right;
+    direction: rtl;
+}
+
+.detail-value {
+    font-size: 16px;
+    color: #374151;
+    text-align: right;
+    direction: rtl;
+}
+
+/* Action Buttons */
+.action-btn {
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    font-size: 14px;
+    margin: 5px;
+    direction: rtl;
+    text-align: center;
+}
+
+    .action-btn i {
+        margin-left: 8px;
+        margin-right: 0;
+    }
+
+    .action-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.5s ease;
+    }
+
+    .action-btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--clearance-color), #7c3aed);
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-color),#0d2c4f);
+    color: white;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--warning-color), #0d2c4f);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--primary-color), var(--navbar-color));
+    color: white;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+}
+
+.btn-excel {
+    background: linear-gradient(135deg, rgb(42, 24, 172)f, #4e6278);
+    color: white;
+}
+
+.btn-pdf {
+    background: linear-gradient(135deg, #3771b4, #0d2c4f);
+    color: white;
+}
+
+/* Control Panel */
+.control-panel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    direction: rtl;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.control-buttons,
+.export-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    direction: rtl;
+}
+
+/* Button Groups RTL Fix */
+.flex.flex-wrap.justify-center {
+    justify-content: center;
+    direction: rtl;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.text-center {
+    text-align: center;
+    direction: rtl;
+    width: 100%;
+}
+
+/* Table RTL Support */
+.table-wrapper {
+    direction: rtl;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.products-table {
+    width: 100%;
+    direction: rtl;
+    text-align: right;
+    min-width: 2400px; /* تم زيادة العرض لاستيعاب العمود الجديد */
+    border-collapse: collapse;
+}
+
+    .products-table th,
+    .products-table td {
+        text-align: right;
+        direction: rtl;
+        padding: 12px;
+        border: 1px solid #e5e7eb;
+        vertical-align: middle;
+    }
+
+    .products-table thead tr {
+        background: linear-gradient(135deg, var(--clearance-color), #0d2c4f);
+        color: white;
+    }
+
+    /* تنسيق الأعمدة */
+    .products-table .col-index {
+        width: 80px;
+        min-width: 80px;
+    }
+
+    .products-table .col-factory-name {
+        width: 150px;
+        min-width: 150px;
+    }
+
+    .products-table .col-photo {
+        width: 80px;
+        min-width: 80px;
+        text-align: center;
+    }
+
+    .products-table .col-name {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .products-table .col-cartons,
+    .products-table .col-pieces-carton,
+    .products-table .col-total-pieces,
+    .products-table .col-sets {
+        width: 100px;
+        min-width: 100px;
+    }
+
+    .products-table .col-unit-price,
+    .products-table .col-total-price,
+    .products-table .col-cost-price,
+    .products-table .col-profit {
+        width: 120px;
+        min-width: 120px;
+    }
+
+    .products-table .col-cbm,
+    .products-table .col-total-cbm,
+    .products-table .col-weight {
+        width: 100px;
+        min-width: 100px;
+    }
+
+    .products-table .col-notes {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .products-table .col-actions {
+        width: 100px;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    /* تنسيق الخلايا */
+    .products-table .cell-factory-name {
+        background-color: #f8fafc;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .products-table .calculated {
+        background-color: #ecfdf5;
+        font-weight: 600;
+        color: var(--success-color);
+    }
+
+    .products-table [contenteditable="true"] {
+        cursor: text;
+        transition: background-color 0.3s ease;
+    }
+
+        .products-table [contenteditable="true"]:hover {
+            background-color: #f3f4f6;
+        }
+
+        .products-table [contenteditable="true"]:focus {
+            background-color: #fef3c7;
+            outline: 2px solid var(--clearance-color);
+        }
+
+    /* أزرار العمليات */
+    .products-table .btn-delete,
+    .products-table .btn-duplicate,
+    .products-table .btn-change-photo {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+.comments-section {
+    background: #fef3c7;
+    border: 2px solid #0f146a;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 20px 0;
+}
+
+.comment-item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--clearance-color);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.comment-text {
+    color: #374151;
+    line-height: 1.6;
+}
+
+.comment-input {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+    .comment-input:focus {
+        border-color: var(--clearance-color);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }

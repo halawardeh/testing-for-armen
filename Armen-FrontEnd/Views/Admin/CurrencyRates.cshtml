@@ -1,0 +1,424 @@
+﻿@{
+    ViewData["Title"] = "إدارة الفواتير وأسعار الصرف";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/js/Admin/CSS/CurrencyRates.css" asp-append-version="true" />
+}
+
+<div class="main-content" id="mainContent">
+    <!-- شريط التنقل العلوي -->
+    <div class="d-flex justify-content-between w-100 flex-row-reverse">
+        <div class="user-dropdown" id="userDropdown">
+    
+        </div>
+        <button class="btn btn-link text-dark p-0 d-lg-none sidebar-toggler">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <div class="container-fluid py-4">
+      
+
+        <!-- بطاقة تحديث أسعار الصرف اليومي -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card exchange-rates-card">
+                    <div class="card-header bg-gradient-primary">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-white">
+                                <i class="fas fa-coins me-2"></i>
+                                تحديث أسعار الصرف اليومي
+                            </h5>
+                            <span class="badge bg-light text-primary" style="color:black!important" id="lastUpdate">
+                                آخر تحديث: اليوم 09:30 صباحاً
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- دولار إلى شيكل -->
+                            <div class="col-md-4 mb-3">
+                                <div class="currency-input-group">
+                                    <label class="form-label">دولار أمريكي → شيكل </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </span>
+                                        <input type="number" step="0.0001" class="form-control exchange-input" 
+                                               id="usdToIls" placeholder="3.7000" value="3.7000">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-shekel-sign"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- دولار إلى يوان -->
+                            <div class="col-md-4 mb-3">
+                                <div class="currency-input-group">
+                                    <label class="form-label">دولار أمريكي → يوان صيني</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-success text-white">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </span>
+                                        <input type="number" step="0.0001" class="form-control exchange-input" 
+                                               id="usdToCny" placeholder="7.2500" value="7.2500">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-yen-sign"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <!-- شيكل إلى يوان -->
+                            <div class="col-md-4 mb-3">
+                                <div class="currency-input-group">
+                                    <label class="form-label">شيكل  → يوان صيني</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-warning text-white">
+                                            <i class="fas fa-shekel-sign"></i>
+                                        </span>
+                                        <input type="number" step="0.0001" class="form-control exchange-input" 
+                                               id="ilsToCny" placeholder="1.9600" value="1.9600">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-yen-sign"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <button class="btn btn-primary btn-lg" id="updateRatesBtn">
+                                <i class="fas fa-sync-alt me-2"></i>
+                                تحديث أسعار الصرف
+                            </button>
+                            <button class="btn btn-outline-secondary me-2" id="resetRatesBtn">
+                                <i class="fas fa-undo me-2"></i>
+                                استعادة القيم الافتراضية
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- عرض الفواتير مع أدوات الإدارة -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card invoices-management-card">
+                    <div class="card-header bg-white border-0">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <h5 class="mb-0">
+                                <i class="fas fa-file-invoice-dollar text-primary me-2"></i>
+                                إدارة الفواتير
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="alert alert-info mb-3" id="invoicesInfoAlert">
+                            تظهر هنا جميع الفواتير المسجلة في النظام ويمكنك تعديلها أو حذفها.
+                        </div>
+                        <!-- فلاتر أعلى الجدول -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 mb-2">
+                                <input type="text" class="form-control" placeholder="بحث برقم الفاتورة أو العميل..." id="searchInvoicesTable">
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <select class="form-select" id="filterCurrencyTable">
+                                    <option value="">كل العملات</option>
+                                    <option value="USD">دولار</option>
+                                    <option value="ILS">شيكل</option>
+                                    <option value="CNY">يوان</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <input type="date" class="form-control" id="filterFromDateTable" placeholder="من تاريخ">
+                            </div>
+                            <div class="col-md-2 mb-2">
+                                <input type="date" class="form-control" id="filterToDateTable" placeholder="إلى تاريخ">
+                            </div>
+                            <div class="col-md-3 mb-2 text-end">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInvoiceModal">
+                                    <i class="fas fa-plus-circle me-1"></i> إضافة فاتورة
+                                </button>
+                            </div>
+                        </div>
+                        <!-- جدول الفواتير -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover text-center" id="invoicesTable">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>رقم الفاتورة</th>
+                                        <th>العميل</th>
+                                        <th>التاريخ</th>
+                                        <th>المبلغ</th>
+                                        <th>العملة</th>
+                                        <th>الوصف</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- سيتم تعبئة الفواتير ديناميكياً -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- مودال إضافة فاتورة جديدة -->
+<div class="modal fade" id="addInvoiceModal" tabindex="-1" aria-labelledby="addInvoiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <div>
+                    <h5 class="modal-title mb-0" id="addInvoiceModalLabel">
+                        <i class="fas fa-plus-circle me-2"></i>إضافة فاتورة جديدة
+                    </h5>
+                    <small class="opacity-75">أدخل تفاصيل الفاتورة الجديدة</small>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addInvoiceForm">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control border-primary" id="invoiceNumber" readonly>
+                                <label for="invoiceNumber">
+                                    <i class="fas fa-hashtag text-primary me-2"></i>رقم الفاتورة
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="date" class="form-control border-primary" id="invoiceDate" required>
+                                <label for="invoiceDate">
+                                    <i class="fas fa-calendar text-primary me-2"></i>تاريخ الفاتورة
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="customerSelect" class="form-label">
+                                <i class="fas fa-building text-primary me-2"></i>العميل
+                            </label>
+                            <select class="form-select border-primary" id="customerSelect" required>
+                                <option value="" selected disabled>اختر العميل</option>
+                                <option value="1">شركة النور للتجارة</option>
+                                <option value="2">شركة التقنية المتطورة</option>
+                                <option value="3">مؤسسة الأمان للاستيراد</option>
+                                <option value="4">شركة الرائد للتجارة</option>
+                                <option value="5">مجموعة الشرق للاستثمار</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="invoiceAmount" class="form-label">
+                                <i class="fas fa-money-bill-wave text-primary me-2"></i>المبلغ والعملة
+                            </label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" min="0" class="form-control border-primary" 
+                                       id="invoiceAmount" required placeholder="أدخل المبلغ">
+                                <select class="form-select border-primary" id="invoiceCurrency" style="max-width: 120px;">
+                                    <option value="USD">دولار (USD)</option>
+                                    <option value="ILS">شيكل (ILS)</option>
+                                    <option value="CNY">يوان (CNY)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <label for="invoiceDescription" class="form-label">
+                                <i class="fas fa-file-alt text-primary me-2"></i>وصف الفاتورة
+                            </label>
+                            <textarea class="form-control border-primary" id="invoiceDescription" rows="3" 
+                                      placeholder="أدخل وصف تفصيلي للفاتورة..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- قسم تحويل العملة مع الأسعار المحدثة -->
+                    <div class="card border-0 bg-light">
+                        <div class="card-body">
+                            <h6 class="mb-3 text-primary">
+                                <i class="fas fa-exchange-alt me-2"></i>تحويل العملة (بالأسعار المحدثة)
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="targetCurrency" class="form-label">تحويل إلى عملة</label>
+                                    <select class="form-select border-primary" id="targetCurrency">
+                                        <option value="" selected disabled>اختر العملة</option>
+                                        <option value="USD">دولار (USD)</option>
+                                        <option value="ILS">شيكل (ILS)</option>
+                                        <option value="CNY">يوان (CNY)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="convertedAmount" class="form-label">القيمة بعد التحويل</label>
+                                    <input type="text" class="form-control border-primary bg-light" 
+                                           id="convertedAmount" readonly placeholder="سيتم الحساب تلقائياً">
+                                </div>
+                            </div>
+                            <div id="rateInfo" class="alert alert-info d-none mt-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <span>
+                                        سعر التحويل المستخدم: <strong><span id="currentRate">1</span></strong>
+                                        (<span id="fromCurrencyText">USD</span> إلى <span id="toCurrencyText">ILS</span>)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>إلغاء
+                </button>
+                <button type="button" class="btn btn-primary" id="saveInvoiceBtn">
+                    <span id="saveBtnText">
+                        <i class="fas fa-save me-2"></i>حفظ الفاتورة
+                    </span>
+                    <span id="saveSpinner" class="spinner-border spinner-border-sm d-none"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- مودال تعديل الفاتورة -->
+<div class="modal fade" id="editInvoiceModal" tabindex="-1" aria-labelledby="editInvoiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title" id="editInvoiceModalLabel">
+                    <i class="fas fa-edit me-2"></i>تعديل الفاتورة
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editInvoiceForm">
+                    <input type="hidden" id="editInvoiceId">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="editInvoiceNumber" class="form-label">رقم الفاتورة</label>
+                            <input type="text" class="form-control" id="editInvoiceNumber" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editInvoiceDate" class="form-label">تاريخ الفاتورة</label>
+                            <input type="date" class="form-control" id="editInvoiceDate" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="editCustomerSelect" class="form-label">العميل</label>
+                            <select class="form-select" id="editCustomerSelect" required>
+                                <option value="" selected disabled>اختر العميل</option>
+                                <option value="1">شركة النور للتجارة</option>
+                                <option value="2">شركة التقنية المتطورة</option>
+                                <option value="3">مؤسسة الأمان للاستيراد</option>
+                                <option value="4">شركة الرائد للتجارة</option>
+                                <option value="5">مجموعة الشرق للاستثمار</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editInvoiceAmount" class="form-label">المبلغ</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" min="0" class="form-control" id="editInvoiceAmount" required>
+                                <select class="form-select" id="editInvoiceCurrency" style="max-width: 120px;">
+                                    <option value="USD">دولار (USD)</option>
+                                    <option value="ILS">شيكل (ILS)</option>
+                                    <option value="CNY">يوان (CNY)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="editInvoiceDescription" class="form-label">وصف الفاتورة</label>
+                            <textarea class="form-control" id="editInvoiceDescription" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-warning" id="updateInvoiceBtn">
+                    <span id="updateBtnText">حفظ التعديلات</span>
+                    <span id="updateSpinner" class="spinner-border spinner-border-sm" style="display: none;"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Admin/js/CurrencyRates.js" asp-append-version="true"></script>
+    <script>
+// دالة عرض الفواتير في جدول
+function renderInvoicesTable(filteredInvoices = null) {
+    const tbody = document.querySelector('#invoicesTable tbody');
+    const data = filteredInvoices || invoices;
+    tbody.innerHTML = '';
+    if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan='7' class='text-center text-muted'>لا توجد فواتير للعرض</td></tr>`;
+        return;
+    }
+    data.forEach(inv => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${inv.id}</td>
+                <td>${inv.customer}</td>
+                <td>${inv.date}</td>
+                <td>${formatCurrency(inv.amount, inv.currency)}</td>
+                <td>${inv.currency}</td>
+                <td>${inv.description}</td>
+                <td>
+                    <button class='btn btn-sm btn-outline-primary' onclick="editInvoice('${inv.id}')"><i class='fas fa-edit'></i></button>
+                    <button class='btn btn-sm btn-outline-danger' onclick="deleteInvoice('${inv.id}')"><i class='fas fa-trash'></i></button>
+                </td>
+            </tr>
+        `;
+    });
+}
+// فلترة الفواتير في الجدول
+function filterInvoicesTable() {
+    const search = document.getElementById('searchInvoicesTable').value.toLowerCase();
+    const currency = document.getElementById('filterCurrencyTable').value;
+    const fromDate = document.getElementById('filterFromDateTable').value;
+    const toDate = document.getElementById('filterToDateTable').value;
+    let filtered = invoices;
+    if (search) {
+        filtered = filtered.filter(inv => inv.id.toLowerCase().includes(search) || inv.customer.toLowerCase().includes(search));
+    }
+    if (currency) {
+        filtered = filtered.filter(inv => inv.currency === currency);
+    }
+    if (fromDate) {
+        filtered = filtered.filter(inv => inv.date >= fromDate);
+    }
+    if (toDate) {
+        filtered = filtered.filter(inv => inv.date <= toDate);
+    }
+    renderInvoicesTable(filtered);
+}
+document.getElementById('searchInvoicesTable').addEventListener('input', filterInvoicesTable);
+document.getElementById('filterCurrencyTable').addEventListener('change', filterInvoicesTable);
+document.getElementById('filterFromDateTable').addEventListener('change', filterInvoicesTable);
+document.getElementById('filterToDateTable').addEventListener('change', filterInvoicesTable);
+document.addEventListener('DOMContentLoaded', function() {
+    renderInvoicesTable();
+});
+    </script>
+}

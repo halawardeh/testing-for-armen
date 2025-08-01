@@ -1,0 +1,241 @@
+﻿@{
+    Layout = "~/Views/Shared/_shippingLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Shipping/Dashboard.css" asp-append-version="true" />
+}
+@section Scripts {
+    <script src="~/js/Shipping/Dashboard.js" asp-append-version="true"></script>
+}
+<div class="p-6">
+    <!-- Welcome Section -->
+    <div class="welcome-section" data-aos="fade-up">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">أهلاً بك، محمد العلي</h2>
+            <p class="text-xl opacity-90">مختص الخدمات اللوجستية وتنسيق الشحن</p>
+        </div>
+    </div>
+    <!-- Stats Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" data-aos="fade-up" data-aos-delay="100">
+        <div class="stats-card">
+            <div class="stats-number">12</div>
+            <div class="stats-label">مهام بانتظار ترتيبات الشحن</div>
+        </div>
+        <div class="stats-card">
+            <div class="stats-number">8</div>
+            <div class="stats-label">شحنات قيد النقل حالياً</div>
+        </div>
+        <div class="stats-card">
+            <div class="stats-number">45</div>
+            <div class="stats-label">تقرير شحن مسلم هذا الشهر</div>
+        </div>
+    </div>
+    <!-- Task Tabs -->
+    <div class="tab-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="tab-header">
+            <button class="tab-button active" onclick="switchTab(event, 'new-tasks')">
+                <i class="fas fa-clock ml-2"></i>
+                مهام جديدة بانتظار التنسيق
+                <span class="badge new mr-2">12</span>
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'progress-tasks')">
+                <i class="fas fa-cog ml-2"></i>
+                مهام قيد التنفيذ
+                <span class="badge progress mr-2">8</span>
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'completed-tasks')">
+                <i class="fas fa-check-circle ml-2"></i>
+                المهام المكتملة
+                <span class="badge completed mr-2">45</span>
+            </button>
+        </div>
+        <!-- New Tasks Tab -->
+        <div id="new-tasks" class="tab-content active">
+            <h3 class="text-xl font-bold text-primary-color mb-4">
+                <i class="fas fa-plus-circle ml-2"></i>
+                المهام الواردة من قسم الاستيراد
+            </h3>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>رقم الطلب</th>
+                        <th>اسم الزبون</th>
+                        <th>موظف الاستيراد المسؤول</th>
+                        <th>تاريخ الإحالة</th>
+                        <th>الوزن/الحجم</th>
+                        <th>الإجراء</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-005</strong>
+                            <div class="text-sm text-gray-500">أجهزة إلكترونية</div>
+                        </td>
+                        <td>شركة التقنيات المتطورة</td>
+                        <td>أحمد محمد سالم</td>
+                        <td>21 يوليو 2025 - 16:30</td>
+                        <td>2.5 طن</td>
+                        <td>
+                            <a href="/Shipping/TaskDetails?order=ORD-2025-005" class="action-btn btn-primary">
+                                <i class="fas fa-play"></i>
+                                فتح وبدء التنسيق
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-004</strong>
+                            <div class="text-sm text-gray-500">مواد خام صناعية</div>
+                        </td>
+                        <td>مجموعة الإبداع التجاري</td>
+                        <td>أحمد محمد سالم</td>
+                        <td>21 يوليو 2025 - 15:45</td>
+                        <td>5.2 طن</td>
+                        <td>
+                            <a href="/Shipping/TaskDetails?order=ORD-2025-004" class="action-btn btn-primary">
+                                <i class="fas fa-play"></i>
+                                فتح وبدء التنسيق
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-003</strong>
+                            <div class="text-sm text-gray-500">معدات طبية</div>
+                        </td>
+                        <td>الشركة العربية للتجارة</td>
+                        <td>أحمد محمد سالم</td>
+                        <td>20 يوليو 2025 - 17:20</td>
+                        <td>1.8 طن</td>
+                        <td>
+                            <a href="/Shipping/TaskDetails?order=ORD-2025-003" class="action-btn btn-primary">
+                                <i class="fas fa-play"></i>
+                                فتح وبدء التنسيق
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Progress Tasks Tab -->
+        <div id="progress-tasks" class="tab-content">
+            <h3 class="text-xl font-bold text-primary-color mb-4">
+                <i class="fas fa-cogs ml-2"></i>
+                المهام التي يتم العمل عليها حالياً
+            </h3>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>رقم الطلب</th>
+                        <th>اسم الزبون</th>
+                        <th>الحالة الحالية</th>
+                        <th>تاريخ البداية</th>
+                        <th>الإجراء</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-002</strong>
+                            <div class="text-sm text-gray-500">قطع غيار سيارات</div>
+                        </td>
+                        <td>مؤسسة الأمل الصناعية</td>
+                        <td><span class="badge coordinating">التواصل مع المخازن</span></td>
+                        <td>20 يوليو 2025</td>
+                        <td>
+                            <a href="/Shipping/TaskDetails?order=ORD-2025-002" class="action-btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                                فتح
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-001</strong>
+                            <div class="text-sm text-gray-500">مواد كيميائية</div>
+                        </td>
+                        <td>شركة النور للاستيراد</td>
+                        <td><span class="badge booked">تم الحجز</span></td>
+                        <td>19 يوليو 2025</td>
+                        <td>
+                            <a href="/Shipping/TaskDetails?order=ORD-2025-001" class="action-btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                                فتح
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2024-150</strong>
+                            <div class="text-sm text-gray-500">آلات صناعية</div>
+                        </td>
+                        <td>شركة المستقبل التقنية</td>
+                        <td><span class="badge transit">قيد النقل</span></td>
+                        <td>18 يوليو 2025</td>
+                        <td>
+                            <a href="/Shipping/TaskDetails?order=ORD-2024-150" class="action-btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                                فتح
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Completed Tasks Tab -->
+        <div id="completed-tasks" class="tab-content">
+            <h3 class="text-xl font-bold text-primary-color mb-4">
+                <i class="fas fa-archive ml-2"></i>
+                أرشيف المهام المكتملة
+            </h3>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>رقم الطلب</th>
+                        <th>اسم الزبون</th>
+                        <th>شركة النقل</th>
+                        <th>تاريخ الإكمال</th>
+                        <th>التكلفة النهائية</th>
+                        <th>الإجراء</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>ORD-2024-149</strong>
+                            <div class="text-sm text-gray-500">منتجات استهلاكية</div>
+                        </td>
+                        <td>مجموعة الخليج التجارية</td>
+                        <td>شركة الشحن الدولي</td>
+                        <td>20 يوليو 2025</td>
+                        <td>1,250 دينار</td>
+                        <td>
+                            <a href="/Shipping/TaskDetails?order=ORD-2024-149&view=archive" class="action-btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                                عرض التفاصيل
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2024-148</strong>
+                            <div class="text-sm text-gray-500">مواد بناء</div>
+                        </td>
+                        <td>الشركة الوطنية للصناعات</td>
+                        <td>النقل البحري المتحد</td>
+                        <td>19 يوليو 2025</td>
+                        <td>2,800 دينار</td>
+                        <td>
+                            <a href="/Shipping/TaskDetails?order=ORD-2024-148&view=archive" class="action-btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                                عرض التفاصيل
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

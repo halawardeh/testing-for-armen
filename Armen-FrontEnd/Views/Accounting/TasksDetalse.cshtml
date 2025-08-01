@@ -1,0 +1,510 @@
+﻿@{
+    ViewData["Title"] = "تفاصيل المهام المالية";
+    Layout = "~/Views/Shared/_AccountingLayout.cshtml";
+}
+
+@section Styles {
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Accounting/TasksDetalse.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Clearance/Dashboard.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Shipping/Dashboard.css" asp-append-version="true">
+}
+
+<!-- Top Navigation -->
+<nav class="bg-white shadow-sm p-4 mb-8" data-aos="fade-down">
+    <div class="flex justify-between items-center">
+        <div class="flex items-center">
+            <a asp-controller="Accounting" asp-action="Dashboard" class="action-btn btn-back ml-4">
+                <i class="fas fa-arrow-right"></i>
+                العودة للوحة التحكم
+            </a>
+            <h1 class="text-2xl font-bold text-primary-color flex items-center">
+                <i class="fas fa-file-invoice-dollar text-yellow-500 ml-3"></i>
+                تفاصيل المهمة المالية
+            </h1>
+        </div>
+    </div>
+</nav>
+
+<div class="p-6">
+    <!-- Task Header -->
+    <div class="task-details-container" data-aos="fade-up">
+        <div class="task-header">
+            <div class="relative z-10">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">طلب رقم #ORD-2025-001</h2>
+                        <p class="text-lg opacity-90 mb-4">شركة النخبة التجارية</p>
+                        <div class="flex items-center space-x-4">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Alert -->
+    <div class="success-alert" id="successAlert">
+        <i class="fas fa-check-circle text-xl"></i>
+        <span id="alertMessage">تم حفظ البيانات بنجاح!</span>
+    </div>
+
+    <!-- Order Information -->
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-primary-color mb-4 flex items-center">
+            <i class="fas fa-info-circle text-yellow-500 ml-2"></i>
+            معلومات الطلب
+        </h3>
+
+        <div class="order-info-grid">
+            <div class="info-card">
+                <h4>
+                    <i class="fas fa-user text-blue-500"></i>
+                    معلومات العميل
+                </h4>
+                <p>الاسم: <span class="value">شركة النخبة التجارية</span></p>
+                <p>الهاتف: <span class="value">+962 79 123 4567</span></p>
+                <p>البريد: <span class="value">ahmed@elite-trade.com</span></p>
+            </div>
+
+            <div class="info-card">
+                <h4>
+                    <i class="fas fa-box text-green-500"></i>
+                    تفاصيل البضاعة
+                </h4>
+                <p>نوع البضاعة: <span class="value">إلكترونيات</span></p>
+                <p>الكمية: <span class="value">150 قطعة</span></p>
+                <p>الوزن: <span class="value">850 كجم</span></p>
+            </div>
+
+            <div class="info-card">
+                <h4>
+                    <i class="fas fa-ship text-purple-500"></i>
+                    معلومات الشحن
+                </h4>
+                <p>ميناء المنشأ: <span class="value">شنغهاي، الصين</span></p>
+                <p>ميناء الوصول: <span class="value">ميناء العقبة</span></p>
+                <p>تاريخ الوصول: <span class="value">2025-07-18</span></p>
+                <p>رقم الحاوية: <span class="value">MSKU123456</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- جدول محاسبة الاستيراد -->
+    <div class="import-calc-section" data-aos="fade-up" data-aos-delay="130">
+        <h3>جدول محاسبة الاستيراد</h3>
+        <form onsubmit="event.preventDefault();calcImportProfit();">
+            <table class="import-calc-table">
+                <thead>
+                    <tr>
+                        <th>الخدمة</th>
+                        <th>مطلوب من الزبون</th>
+                        <th>المدفوعات</th>
+                        <th>الربح</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-label">ثمن المصانع</td>
+                        <td><input type="number" id="req-import-factory" min="0" step="0.01" placeholder="0"> <span class="currency-label">¥</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">19,738.19</div></td>
+                        <td id="profit-import-factory">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">تكاليف أخرى</td>
+                        <td><input type="number" id="req-import-other" min="0" step="0.01" placeholder="0"> <span class="currency-label">¥</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">0.00</div></td>
+                        <td id="profit-import-other">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">نسبة الربح</td>
+                        <td colspan="2"><input type="number" id="profit-percent" min="0" max="100" step="0.01" placeholder="أدخل نسبة الربح (%)" class="w-full p-2 border border-gray-300 rounded"></td>
+                        <td id="profit-import-percent">-</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="service-label">المجموع</td>
+                        <td id="total-req-import">-</td>
+                        <td id="total-paid-import">-</td>
+                        <td id="total-profit-import">-</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button type="submit" class="import-calc-btn">حفظ</button>
+        </form>
+    </div>
+
+    <!-- جدول أرباح الخدمات اللوجستية -->
+    <div class="import-calc-section" data-aos="fade-up" data-aos-delay="120">
+        <h3>حساب أرباح الخدمات اللوجستية</h3>
+        <form onsubmit="event.preventDefault();calcShippingProfit2();">
+            <table class="import-calc-table">
+                <thead>
+                    <tr>
+                        <th>الخدمة</th>
+                        <th>مطلوب من الزبون</th>
+                        <th>المدفوعات</th>
+                        <th>الربح</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-label">مخازن</td>
+                        <td><input type="number" id="req2-warehouse" min="0" step="0.01" placeholder="0" class="currency-rmb"> <span class="currency-label">¥</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">1,000.00</div></td>
+                        <td id="profit2-warehouse">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">عمال</td>
+                        <td><input type="number" id="req2-workers" min="0" step="0.01" placeholder="0" class="currency-rmb"> <span class="currency-label">¥</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">500.00</div></td>
+                        <td id="profit2-workers">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">نقل داخلي</td>
+                        <td><input type="number" id="req2-internal" min="0" step="0.01" placeholder="0" class="currency-rmb"> <span class="currency-label">¥</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">300.00</div></td>
+                        <td id="profit2-internal">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">شحن بحري</td>
+                        <td><input type="number" id="req2-sea" min="0" step="0.01" placeholder="0" class="currency-usd"> <span class="currency-label">$</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">2,000.00</div></td>
+                        <td id="profit2-sea">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">تكاليف أخرى</td>
+                        <td><input type="number" id="req2-other" min="0" step="0.01" placeholder="0" class="currency-rmb"> <span class="currency-label">¥</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">0.00</div></td>
+                        <td id="profit2-other">-</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="service-label">المجموع (رينمبي)</td>
+                        <td id="total-req2-rmb">-</td>
+                        <td id="total-paid2-rmb">-</td>
+                        <td id="total-profit2-rmb">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">المجموع (دولار)</td>
+                        <td id="total-req2-usd">-</td>
+                        <td id="total-paid2-usd">-</td>
+                        <td id="total-profit2-usd">-</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button type="submit" class="import-calc-btn">حفظ</button>
+        </form>
+    </div>
+
+
+    <!-- جدول أرباح خدمات التخليص -->
+    <div class="import-calc-section" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="mb-4">حساب أرباح خدمات التخليص</h3>
+        <form onsubmit="event.preventDefault();calcClearanceProfit();">
+            <table class="import-calc-table">
+                <thead>
+                    <tr>
+                        <th>الخدمة</th>
+                        <th>مطلوب من الزبون</th>
+                        <th>المدفوعات</th>
+                        <th>الربح</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-label">مخلص</td>
+                        <td><input type="number" id="req-clearance-clearer" min="0" step="0.01" placeholder="0"> <span class="currency-label">₪</span></td>
+                        <td><input type="number" id="paid-clearance-clearer" min="0" step="0.01" placeholder="0"> <span class="currency-label">₪</span></td>
+                        <td id="profit-clearance-clearer">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">فحص</td>
+                        <td><input type="number" id="req-clearance-inspection" min="0" step="0.01" placeholder="0"> <span class="currency-label">₪</span></td>
+                        <td><input type="number" id="paid-clearance-inspection" min="0" step="0.01" placeholder="0"> <span class="currency-label">₪</span></td>
+                        <td id="profit-clearance-inspection">-</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="service-label">المجموع</td>
+                        <td id="total-req-clearance">-</td>
+                        <td id="total-paid-clearance">-</td>
+                        <td id="total-profit-clearance">-</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button type="submit" class="import-calc-btn">حفظ</button>
+        </form>
+    </div>
+
+
+    <!-- محاسبة الاستيراد والشحن (static, custom columns) -->
+    <div class="mb-8 mt-10 bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
+        <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
+            <i class="fas fa-cash-register text-yellow-500 ml-2"></i>
+            حساب الفاتورة النهائية
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div>
+                <label class="block font-semibold text-gray-700 mb-1">مطلوب من الزبون (¥)</label>
+                <div class="w-full p-2 border border-gray-300 rounded bg-gray-100">23,664.78</div>
+            </div>
+            <div>
+                <label class="block font-semibold text-gray-700 mb-1">المدفوعات (¥)</label>
+                <div class="w-full p-2 border border-gray-300 rounded bg-gray-100">19,738.19</div>
+            </div>
+            <div>
+                <label class="block font-semibold text-gray-700 mb-1">الربح (¥)</label>
+                <div class="w-full p-2 border border-gray-300 rounded bg-gray-100">3,926.59</div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- Confirmation Modal -->
+<div class="modal-overlay" id="confirmModal">
+    <div class="modal-content">
+        <div class="text-center">
+            <div class="text-6xl text-green-500 mb-4">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-primary-color mb-4">تأكيد إغلاق الطلب ماليًا</h3>
+            <div class="text-right bg-gray-50 p-4 rounded-lg mb-6">
+                <p class="mb-2"><strong>رقم الطلب:</strong> <span id="confirmOrderId">#ORD-2025-001</span></p>
+                <p class="mb-2"><strong>العميل:</strong> <span id="confirmCustomer">شركة النخبة التجارية</span></p>
+                <p class="mb-2"><strong>التكلفة الإجمالية:</strong> <span id="confirmTotalCost">$ 0.00</span></p>
+                <p class="mb-2"><strong>مبلغ الأرباح:</strong> <span id="confirmProfitAmount">$ 0.00</span></p>
+            </div>
+            <p class="text-gray-600 mb-6">بعد التأكيد، سيتم إغلاق الطلب ماليًا وحفظ البيانات في سجلات الإحصائيات. لا يمكن التراجع عن هذا الإجراء.</p>
+            <div class="flex space-x-4">
+                <button class="action-btn btn-close-order flex-1" onclick="confirmCloseOrder()">
+                    <i class="fas fa-check"></i>
+                    تأكيد الإغلاق
+                </button>
+                <button class="action-btn btn-back flex-1" onclick="closeModal()">
+                    إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/js/Accounting/TasksDetalse.js" asp-append-version="true"></script>
+    <script>
+        function calcClearanceProfit() {
+            var services = [
+                { id: 'clearer', name: 'مخلص' },
+                { id: 'inspection', name: 'فحص' }
+            ];
+            var totalReq = 0, totalPaid = 0, totalProfit = 0;
+            services.forEach(function(s) {
+                var req = parseFloat(document.getElementById('req-clearance-' + s.id).value) || 0;
+                var paid = parseFloat(document.getElementById('paid-clearance-' + s.id).value) || 0;
+                var profit = req - paid;
+                totalReq += req;
+                totalPaid += paid;
+                totalProfit += profit;
+                document.getElementById('profit-clearance-' + s.id).textContent = (req || paid) ? (profit.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₪') : '-';
+            });
+            document.getElementById('total-req-clearance').textContent = totalReq ? totalReq.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₪' : '-';
+            document.getElementById('total-paid-clearance').textContent = totalPaid ? totalPaid.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₪' : '-';
+            document.getElementById('total-profit-clearance').textContent = totalProfit ? totalProfit.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₪' : '-';
+        }
+        function calcShippingProfit2() {
+            var services = [
+                { id: 'warehouse', name: 'مخازن', currency: '¥' },
+                { id: 'workers', name: 'عمال', currency: '¥' },
+                { id: 'internal', name: 'نقل داخلي', currency: '¥' },
+                { id: 'sea', name: 'شحن بحري', currency: '$' },
+                { id: 'other', name: 'تكاليف أخرى', currency: '¥' }
+            ];
+            var totalRmbReq = 0, totalRmbPaid = 0, totalRmbProfit = 0;
+            var totalUsdReq = 0, totalUsdPaid = 0, totalUsdProfit = 0;
+            services.forEach(function(s) {
+                var req = parseFloat(document.getElementById('req2-' + s.id).value) || 0;
+                var paid = parseFloat(document.getElementById('paid2-' + s.id).value) || 0;
+                var profit = req - paid;
+                if(s.currency === '¥') {
+                    totalRmbReq += req;
+                    totalRmbPaid += paid;
+                    totalRmbProfit += profit;
+                } else {
+                    totalUsdReq += req;
+                    totalUsdPaid += paid;
+                    totalUsdProfit += profit;
+                }
+                document.getElementById('profit2-' + s.id).textContent = (req || paid) ? (profit.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ' + s.currency) : '-';
+            });
+            document.getElementById('total-req2-rmb').textContent = totalRmbReq ? totalRmbReq.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ¥' : '-';
+            document.getElementById('total-paid2-rmb').textContent = totalRmbPaid ? totalRmbPaid.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ¥' : '-';
+            document.getElementById('total-profit2-rmb').textContent = totalRmbProfit ? totalRmbProfit.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ¥' : '-';
+            document.getElementById('total-req2-usd').textContent = totalUsdReq ? totalUsdReq.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' $' : '-';
+            document.getElementById('total-paid2-usd').textContent = totalUsdPaid ? totalUsdPaid.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' $' : '-';
+            document.getElementById('total-profit2-usd').textContent = totalUsdProfit ? totalUsdProfit.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' $' : '-';
+        }
+        function calcImportProfit() {
+            var services = [
+                { id: 'factory', name: 'ثمن المصانع' },
+                { id: 'other', name: 'تكاليف أخرى' }
+            ];
+            var totalReq = 0, totalPaid = 0, totalProfit = 0;
+            services.forEach(function(s) {
+                var req = parseFloat(document.getElementById('req-import-' + s.id).value) || 0;
+                var paid = parseFloat(document.getElementById('paid-import-' + s.id).value) || 0;
+                var profit = req - paid;
+                totalReq += req;
+                totalPaid += paid;
+                totalProfit += profit;
+                document.getElementById('profit-import-' + s.id).textContent = (req || paid) ? (profit.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ¥') : '-';
+            });
+            document.getElementById('total-req-import').textContent = totalReq ? totalReq.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ¥' : '-';
+            document.getElementById('total-paid-import').textContent = totalPaid ? totalPaid.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ¥' : '-';
+            document.getElementById('total-profit-import').textContent = totalProfit ? totalProfit.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ¥' : '-';
+        }
+    </script>
+}
+
+<!-- جدول دفعات الفاتورة -->
+<div class="import-calc-section" data-aos="fade-up" data-aos-delay="140">
+    <h3>دفعات الفاتورة</h3>
+    <table class="import-calc-table">
+        <thead>
+            <tr>
+                <th>رقم الدفعة</th>
+                <th>قيمة الدفعة</th>
+                <th>الباقي</th>
+                <th>الحالة / الإجراء</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>13,833.91 <span class="currency-label">¥</span></td>
+                <td>20,750.87 <span class="currency-label">¥</span></td>
+                <td>
+                    <select class="payment-status-select">
+                        <option value="paid" selected>تم الدفع</option>
+                        <option value="unpaid">غير مدفوع</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>10,000.00 <span class="currency-label">¥</span></td>
+                <td>10,750.87 <span class="currency-label">¥</span></td>
+                <td>
+                    <select class="payment-status-select">
+                        <option value="paid">تم الدفع</option>
+                        <option value="unpaid" selected>غير مدفوع</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>5,500.00 <span class="currency-label">¥</span></td>
+                <td>5,250.87 <span class="currency-label">¥</span></td>
+                <td>
+                    <select class="payment-status-select">
+                        <option value="paid">تم الدفع</option>
+                        <option value="unpaid" selected>غير مدفوع</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5,250.87 <span class="currency-label">¥</span></td>
+                <td>0.00 <span class="currency-label">¥</span></td>
+                <td>
+                    <select class="payment-status-select">
+                        <option value="paid">تم الدفع</option>
+                        <option value="unpaid" selected>غير مدفوع</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="service-label" style="text-align: right;">القيمة المدفوعة: 13,833.00 ¥<br>الباقي: 20,750.00 ¥</td>
+                <td colspan="2"></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<!-- Financial Input Form -->
+<div class="financial-form">
+    <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
+        <i class="fas fa-edit text-green-500 ml-2"></i>
+        إدخال البيانات المالية للإحصائيات
+    </h4>
+
+    <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+        <p class="text-sm text-blue-700 flex items-center">
+            <i class="fas fa-info-circle ml-2"></i>
+            هذه البيانات لأغراض الإحصائيات الداخلية فقط
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="form-group">
+            <label class="form-label">
+                <i class="fas fa-money-bill-wave text-blue-500 ml-1"></i>
+                التكلفة الإجمالية ($) *
+            </label>
+            <input type="number"
+                   id="totalCost"
+                   class="form-input currency-input"
+                   placeholder="0.00"
+                   step="0.01"
+                   min="0"
+                   oninput="updateStatistics()">
+            <p class="text-xs text-gray-500 mt-1">إجمالي ما تم دفعه للطلب</p>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">
+                <i class="fas fa-chart-line text-green-500 ml-1"></i>
+                مبلغ الأرباح ($) *
+            </label>
+            <input type="number"
+                   id="profitAmount"
+                   class="form-input currency-input"
+                   placeholder="0.00"
+                   step="0.01"
+                   min="0"
+                   oninput="updateStatistics()">
+            <p class="text-xs text-gray-500 mt-1">صافي الربح المحقق من الطلب</p>
+        </div>
+    </div>
+
+    <!-- Additional Notes -->
+    <div class="form-group mt-6">
+        <label class="form-label">
+            <i class="fas fa-sticky-note text-yellow-500 ml-1"></i>
+            ملاحظات إضافية (اختيارية)
+        </label>
+        <textarea id="financialNotes"
+                  class="form-input"
+                  rows="3"
+                  placeholder="أي ملاحظات مالية إضافية حول هذا الطلب..."></textarea>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex space-x-4 mt-8">
+        <button class="action-btn btn-close-order flex-1" onclick="closeOrderFinancially()" id="closeOrderBtn" disabled>
+            <i class="fas fa-check-circle"></i>
+            إغلاق الطلب ماليًا
+        </button>
+    </div>
+</div>

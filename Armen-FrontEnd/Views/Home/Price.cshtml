@@ -1,0 +1,304 @@
+﻿@{
+    ViewData["Title"] = "طلب عرض سعر";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/price.css" />
+}
+@section Scripts {
+    <script src="~/js/price.js"></script>
+}
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <h1>طلب عرض سعر</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item active">طلب عرض سعر</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Main Form -->
+<div class="container">
+    <div class="form-card">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <form id="quoteForm">
+            <!-- Product Information -->
+            <div class="form-section" data-section="1">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    معلومات البضاعة
+                </h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="productType">نوع البضاعة *</label>
+                        <select id="productType" class="form-input" required>
+                            <option value="" disabled selected>اختر نوع البضاعة</option>
+                            <option value="electronics">إلكترونيات ومعدات</option>
+                            <option value="clothing">ملابس وأقمشة</option>
+                            <option value="furniture">أثاث ومفروشات</option>
+                            <option value="machinery">آلات ومعدات صناعية</option>
+                            <option value="food">مواد غذائية</option>
+                            <option value="toys">ألعاب وهدايا</option>
+                            <option value="cosmetics">مستحضرات تجميل</option>
+                            <option value="auto">قطع سيارات</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="weight">الوزن الإجمالي (كيلوغرام) *</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="weight" class="form-input"
+                                   placeholder="مثال: 500" min="1" required>
+                            <span class="unit">كجم</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" for="description">وصف البضاعة بالتفصيل *</label>
+                        <textarea id="description" rows="4" class="form-input"
+                                  placeholder="اكتب وصف تفصيلي للبضاعة، نوعها، استخدامها، مواصفاتها..."
+                                  required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dimensions -->
+            <div class="form-section" data-section="2">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    أبعاد الشحنة (سنتمتر)
+                </h2>
+
+                <div class="form-grid dimensions-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="length">الطول *</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="length" class="form-input"
+                                   placeholder="مثال: 120" min="1" required>
+                            <span class="unit">سم</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="width">العرض *</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="width" class="form-input"
+                                   placeholder="مثال: 80" min="1" required>
+                            <span class="unit">سم</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="height">الارتفاع *</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="height" class="form-input"
+                                   placeholder="مثال: 60" min="1" required>
+                            <span class="unit">سم</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Route -->
+            <div class="form-section" data-section="3">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    مسار الشحن
+                </h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="originCity">المدينة في الصين *</label>
+                        <select id="originCity" class="form-input" required>
+                            <option value="" disabled selected>اختر المدينة</option>
+                            <option value="guangzhou">غوانغتشو (Guangzhou)</option>
+                            <option value="shanghai">شنغهاي (Shanghai)</option>
+                            <option value="beijing">بكين (Beijing)</option>
+                            <option value="shenzhen">شينزين (Shenzhen)</option>
+                            <option value="yiwu">يوو (Yiwu)</option>
+                            <option value="ningbo">نينغبو (Ningbo)</option>
+                            <option value="tianjin">تيانجين (Tianjin)</option>
+                            <option value="other">مدينة أخرى</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="destinationCity">المدينة في فلسطين *</label>
+                        <select id="destinationCity" class="form-input" required>
+                            <option value="" disabled selected>اختر المدينة</option>
+                            <option value="ramallah">رام الله والبيرة</option>
+                            <option value="gaza">غزة</option>
+                            <option value="nablus">نابلس</option>
+                            <option value="hebron">الخليل</option>
+                            <option value="jerusalem">القدس</option>
+                            <option value="jenin">جنين</option>
+                            <option value="tulkarm">طولكرم</option>
+                            <option value="bethlehem">بيت لحم</option>
+                            <option value="other">مدينة أخرى</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Type -->
+            <div class="form-section" data-section="4">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    نوع الشحن المطلوب *
+                </h2>
+
+                <div class="shipping-options">
+                    <div class="shipping-option" data-type="sea">
+                        <input type="radio" id="seaShipping" name="shippingType" value="sea" class="hidden">
+                        <div class="shipping-icon">
+                            <i class="fas fa-ship"></i>
+                        </div>
+                        <div class="shipping-title">شحن بحري</div>
+                        <div class="shipping-desc">اقتصادي - 25-35 يوم</div>
+                    </div>
+
+                    <div class="shipping-option" data-type="air">
+                        <input type="radio" id="airShipping" name="shippingType" value="air" class="hidden">
+                        <div class="shipping-icon">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="shipping-title">شحن جوي</div>
+                        <div class="shipping-desc">سريع - 7-12 يوم</div>
+                    </div>
+
+                    <div class="shipping-option" data-type="express">
+                        <input type="radio" id="expressShipping" name="shippingType" value="express" class="hidden">
+                        <div class="shipping-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="shipping-title">شحن عاجل</div>
+                        <div class="shipping-desc">فائق السرعة - 3-5 أيام</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Options -->
+            <div class="form-section" data-section="5">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    خيارات إضافية
+                </h2>
+
+                <div class="form-grid">
+                    <div class="checkbox-options">
+                        <div class="checkbox-wrapper" data-checkbox="insurance">
+                            <div class="custom-checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checkbox-content">
+                                <div class="checkbox-title">تأمين الشحنة</div>
+                                <div class="checkbox-desc">حماية شاملة ضد التلف والفقدان</div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-wrapper" data-checkbox="packaging">
+                            <div class="custom-checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="checkbox-content">
+                                <div class="checkbox-title">تغليف إضافي</div>
+                                <div class="checkbox-desc">تغليف مقوى لحماية أفضل</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" for="preferredDate">تاريخ الاستلام المفضل</label>
+                        <input type="date" id="preferredDate" class="form-input">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" for="specialNotes">ملاحظات وتعليمات خاصة</label>
+                        <textarea id="specialNotes" rows="3" class="form-input"
+                                  placeholder="أي تعليمات خاصة للتعامل مع البضاعة، مواعيد محددة، أو متطلبات خاصة..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="form-section" data-section="6">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    معلومات التواصل
+                </h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">الاسم الكامل *</label>
+                        <input type="text" id="fullName" class="form-input"
+                               placeholder="مثال: أحمد محمد العلي" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="phone">رقم الهاتف *</label>
+                        <div class="phone-input">
+                            <span class="country-code">+970</span>
+                            <input type="tel" id="phone" class="form-input"
+                                   placeholder="591234567" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">البريد الإلكتروني *</label>
+                        <input type="email" id="email" class="form-input"
+                               placeholder="example@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="company">اسم الشركة</label>
+                        <input type="text" id="company" class="form-input"
+                               placeholder="اختياري">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">
+                    إرسال طلب عرض السعر
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="success-modal" id="successModal">
+    <div class="success-content">
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <h3>تم إرسال طلبك بنجاح!</h3>
+        <p>سنقوم بمراجعة طلبك وإرسال عرض السعر المفصل خلال 24 ساعة عمل</p>
+        <button onclick="closeSuccessModal()" class="close-modal-btn">
+اغلاق        </button>
+    </div>
+</div> 

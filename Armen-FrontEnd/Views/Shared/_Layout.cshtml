@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ارمين للشحن والتخليص الجمركي</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/navbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <a href="mailto:armin.jenin@gmail.com">armin.jenin@gmail.com <i class="fas fa-envelope"></i></a>
+                    <a href="tel:+972594335839"><i class="fas fa-phone"></i> +972594335839</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/NewLogo.png" alt="ارمين" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">الرئيسية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="About">من نحن</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                خدماتنا
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Services" asp-action="Map">طلب الشحن</a></li>
+                                <li><a class="dropdown-item" asp-controller="Services" asp-action="HSSearch">بحث الأكواد الجمركية</a></li>
+                                @* <li><a class="dropdown-item" asp-controller="Home" asp-action="Price">طلب عرض السعر</a></li> *@
+                                <li><a class="dropdown-item" asp-controller="Services" asp-action="Calculator">حاسبة الشحن</a></li>
+                                <li><a class="dropdown-item" asp-controller="Services" asp-action="TrackShipment">تتبع الشحنة</a></li>
+                                <li><a class="dropdown-item" asp-controller="Services" asp-action="Index">خدمات السفر</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Blog">المدونة</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Contact">تواصل معنا</a>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-primary get-quote">تسجيل الدخول</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <!-- Footer Start -->
+    <footer class="footer-section">
+        <!-- Top Footer -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <!-- About Column -->
+                    <div class="col-lg-4 col-md-6 footer-column">
+                        <div class="footer-about">
+                            <div class="footer-logo">
+                                <h1>آرمن</h1>
+                                <p>حلول لوجستية متكاملة</p>
+                            </div>
+                            <p class="about-text">
+                                شركة آرمن للشحن والتخليص الجمركي هي شريكك الموثوق في عالم اللوجستيات. نقدم خدمات شاملة للشحن البحري والجوي والبري والتخليص الجمركي بخبرة تمتد لأكثر من 15 عامًا.
+                            </p>
+                            <div class="footer-social">
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links Column -->
+                    <div class="col-lg-2 col-md-6 footer-column">
+                        <div class="footer-links">
+                            <h3 class="footer-title">روابط سريعة</h3>
+                            <ul class="footer-menu">
+                                <li><a asp-controller="Home" asp-action="Index"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                                <li><a asp-controller="Home" asp-action="About"><i class="fas fa-chevron-left"></i> من نحن</a></li>
+                                <li><a asp-controller="Home" asp-action="Services"><i class="fas fa-chevron-left"></i> خدماتنا</a></li>
+                                <li><a asp-controller="Home" asp-action="Price"><i class="fas fa-chevron-left"></i> الأسعار</a></li>
+                                <li><a asp-controller="Home" asp-action="Blog"><i class="fas fa-chevron-left"></i> المدونة</a></li>
+                                <li><a asp-controller="Home" asp-action="Contact"><i class="fas fa-chevron-left"></i> تواصل معنا</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Services Column -->
+                    <div class="col-lg-3 col-md-6 footer-column">
+                        <div class="footer-links">
+                            <h3 class="footer-title">خدماتنا</h3>
+                            <ul class="footer-menu">
+                                <li><a href="#"><i class="fas fa-ship"></i> الشحن البحري</a></li>
+                                <li><a href="#"><i class="fas fa-plane"></i> الشحن الجوي</a></li>
+                                <li><a href="#"><i class="fas fa-plane"></i> تتبع الشحنة</a></li>
+                                <li><a href="#"><i class="fas fa-file-alt"></i> بحث الاكواد الجمركية </a></li>
+                                <li><a href="#"><i class="fas fa-plane"></i> طلب عرض السعر</a></li>
+                                <li><a href="#"><i class="fas fa-file-alt"></i> خدمات السفر </a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Contact Column -->
+                    <div class="col-lg-3 col-md-6 footer-column">
+                        <div class="footer-contact">
+                            <h3 class="footer-title">تواصل معنا</h3>
+                            <ul class="contact-info">
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>جنين - شارع حيفا، فلسطين</p>
+                                </li>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <p><a href="tel:+972594335839">+972 594 335 839</a></p>
+                                </li>
+                                <li>
+                                    <i class="fas fa-envelope"></i>
+                                    <p><a href="mailto:armin.jenin@gmail.com">armin.jenin@gmail.com</a></p>
+                                </li>
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright">
+                            &copy; @DateTime.Now.Year - <span>آرمن للشحن والتخليص الجمركي</span> - جميع الحقوق محفوظة
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="footer-links-bottom">
+                            <a href="#">سياسة الخصوصية</a>
+                            <a href="#">الشروط والأحكام</a>
+                            <a href="#">سياسة الإرجاع</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Pattern -->
+        <div class="footer-pattern"></div>
+        
+        <!-- Go To Top Button -->
+        <button id="scrollToTop" class="scroll-top-btn">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </footer>
+    <!-- Footer End -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/navbar.js" asp-append-version="true"></script>
+    <script src="~/js/footer.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

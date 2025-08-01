@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "الملف الشخصي - سارة محمود";
+    Layout = "~/Views/Shared/_AccountingLayout.cshtml";
+}
+
+@section Styles {
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Accounting/Profile.css" asp-append-version="true">
+}
+
+<div class="p-6">
+    <!-- Profile Header -->
+    <div class="profile-header" data-aos="fade-up">
+        <div class="relative z-10">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="avatar-container relative">
+                        <img class="profile-avatar" src="https://i.pravatar.cc/200?img=8" alt="سارة محمود">
+                        <label for="avatarUpload" class="avatar-upload-btn">
+                            <i class="fas fa-camera"></i>
+                            <input type="file" id="avatarUpload" accept="image/*" class="hidden">
+                        </label>
+                    </div>
+                    <div class="mr-6">
+                        <h2 class="text-3xl font-bold mb-2">سارة محمود علي</h2>
+                        <p class="text-xl opacity-90 mb-3">محاسبة رئيسية - قسم المحاسبة</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="action-btn btn-primary edit-btn" onclick="toggleEditMode()">
+                        <i class="fas fa-edit"></i>
+                        تحرير الملف الشخصي
+                    </button>
+                    <button class="action-btn btn-success save-btn" onclick="saveChanges()" style="display: none;">
+                        <i class="fas fa-save"></i>
+                        حفظ التغييرات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column -->
+        <div class="lg:col-span-2">
+            <!-- Personal Information -->
+            <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-header">
+                    <h3 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-user ml-2"></i>
+                        المعلومات الشخصية
+                    </h3>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label class="form-label">الاسم الكامل</label>
+                            <input type="text" name="fullname" class="form-input" value="سارة محمود علي" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المنصب</label>
+                            <input type="text" name="position" class="form-input" value="محاسبة رئيسية" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الموظف</label>
+                            <input type="text" name="employeeId" class="form-input" value="EMP-ACC-008" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">القسم</label>
+                            <input type="text" name="department" class="form-input" value="المحاسبة والمالية" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" name="email" class="form-input" value="sara.mahmoud@armen-shipping.com" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الهاتف</label>
+                            <input type="tel" name="phone" class="form-input" value="+962 79 555 1234" disabled>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 mt-6">
+                        <button class="action-btn btn-secondary" onclick="changePassword()">
+                            <i class="fas fa-key"></i>
+                            تغيير كلمة المرور
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/js/Accounting/Profile.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,395 @@
+﻿:root {
+    --primary: #025F70;
+    --secondary: #025F70;
+    --accent: #025F70;
+    --light: #F8F9FA;
+    --dark: #1A252F;
+    --success: #27AE60;
+    --warning: #F39C12;
+    --danger: #E74C3C;
+    --border-radius: 0.5rem;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f5f7fa !important;
+    color: var(--dark);
+}
+
+.nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+    .nav-link:hover, .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    .nav-link i {
+        margin-left: 0.75rem;
+        font-size: 1.1rem;
+        width: 24px;
+        text-align: center;
+    }
+
+/* المحتوى الرئيسي */
+.main-content {
+    margin-right:5px;
+    transition: all 0.3s;
+}
+
+/* شريط التنقل العلوي */
+.topbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* تعديلات صورة الأدمن */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0; /* ضعي left: 0; إذا أردتِها بمحاذاة اليسار */
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    min-width: 160px;
+    z-index: 999;
+    display: none; /* اخفيها افتراضياً */
+}
+
+.user-dropdown img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+}
+
+.user-dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0; /* أو استخدمي left: 50%; مع transform للمنتصف */
+    right: auto;
+    margin-top: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: var(--border-radius);
+    min-width: 200px;
+    text-align: right;
+    display: none;
+}
+
+
+.user-dropdown .dropdown-item {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+    .user-dropdown .dropdown-item i {
+        margin-right: 10px;
+        margin-left: 0;
+        width: 20px;
+        text-align: center;
+    }
+
+.user-dropdown:hover .dropdown-menu {
+    display: block;
+}
+/* بطاقات الإحصائيات */
+.stat-card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    overflow: hidden;
+    height: 100%;
+}
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+/* الجداول */
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+    .data-table thead th {
+        background-color: var(--light);
+        padding: 1rem;
+        font-weight: 600;
+        border-bottom: 2px solid #eee;
+    }
+
+    .data-table tbody td {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    .data-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+/* الحالة */
+.status-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+    .status-badge.success {
+        background-color: rgba(39, 174, 96, 0.1);
+        color: var(--success);
+    }
+
+    .status-badge.warning {
+        background-color: rgba(243, 156, 18, 0.1);
+        color: var(--warning);
+    }
+
+    .status-badge.danger {
+        background-color: rgba(231, 76, 60, 0.1);
+        color: var(--danger);
+    }
+
+    .status-badge.info {
+        background-color: rgba(52, 152, 219, 0.1);
+        color: var(--accent);
+    }
+
+/* الأزرار */
+.btn {
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #034a5b 100%) !important;
+    border: none !important;
+    color: white !important;
+    box-shadow: 0 3px 10px rgba(2, 95, 112, 0.3);
+}
+
+    .btn-primary:hover, .btn-primary:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(2, 95, 112, 0.4) !important;
+        color: white !important;
+    }
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success) 0%, #1e8449 100%) !important;
+    border: none !important;
+    color: white !important;
+    box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+}
+
+    .btn-success:hover, .btn-success:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(39, 174, 96, 0.4) !important;
+        color: white !important;
+    }
+
+.btn-outline-primary {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    background-color: transparent !important;
+}
+
+    .btn-outline-primary:hover, .btn-outline-primary:focus {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+        color: white !important;
+        transform: translateY(-1px);
+    }
+
+/* جدول جميل مع شادو وتأثيرات حديثة */
+.data-table, .table {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: white;
+    margin-bottom: 0;
+}
+
+    .data-table thead th, .table thead th {
+        background: linear-gradient(135deg, var(--primary) 0%, #034a5b 100%);
+        border: none;
+        font-weight: 600;
+        color: white;
+        padding: 15px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-align: center;
+    }
+
+    .data-table tbody td, .table tbody td {
+        padding: 15px;
+        border: none;
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: middle;
+        font-size: 0.95rem;
+        text-align: center;
+    }
+
+    .data-table tbody tr, .table tbody tr {
+        transition: all 0.3s ease;
+    }
+
+        .data-table tbody tr:hover, .table tbody tr:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table tbody tr:last-child td, .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+/* تحسين container الجدول */
+.table-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 2px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+    .action-btn:hover {
+        transform: translateY(-1px);
+    }
+
+/* التكيف مع الشاشات الصغيرة */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(100%);
+    }
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+    .main-content {
+        margin-right: 0;
+    }
+
+    .sidebar-toggler {
+        display: block !important;
+    }
+}
+
+/* تصاميم إضافية لإدارة المستخدمين */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-weight: bold;
+}
+
+.action-btn {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 3px;
+}
+
+.add-user-btn {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+
+    .add-user-btn:hover {
+        background-color: #16a085;
+    }
+
+.rating-stars {
+    color: var(--warning);
+    font-size: 0.9rem;
+}
+
+/* مودال إضافة مستخدم */
+.modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+/* كلمة المرور المشفرة */
+.password-field {
+    font-family: monospace;
+    letter-spacing: 2px;
+    color: #666;
+}
+
+/* الترقيم الصفحي */
+.pagination .page-item.active .page-link {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.pagination .page-link {
+    color: var(--primary);
+}

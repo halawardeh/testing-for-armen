@@ -1,0 +1,291 @@
+:root {
+    --primary-color: #1A252F;
+    --navbar-color: #025F70;
+    --accent-color: #00a878;
+    --light-bg: #f4f7fa;
+    --clearance-color: #8b5cf6;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--light-bg);
+    overflow-x: hidden;
+}
+
+.bg-navbar {
+    background-color: var(--navbar-color);
+}
+
+.welcome-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--navbar-color));
+    color: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .welcome-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+        animation: rotate 15s linear infinite;
+    }
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.stats-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #1A252F;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    }
+
+.stats-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #1A252F;
+    margin-bottom: 10px;
+}
+
+.stats-label {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.tab-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.tab-header {
+    display: flex;
+    background: linear-gradient(135deg, var(--primary-color), var(--navbar-color));
+}
+
+.tab-button {
+    flex: 1;
+    padding: 20px;
+    color: white;
+    border: none;
+    background: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+    .tab-button.active {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #1A252F;
+        }
+
+.tab-content {
+    display: none;
+    padding: 30px;
+}
+
+    .tab-content.active {
+        display: block;
+    }
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .task-table th {
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        padding: 15px;
+        text-align: right;
+        font-weight: 700;
+        color: var(--primary-color);
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .task-table td {
+        padding: 15px;
+        border-bottom: 1px solid #f1f5f9;
+        color: var(--primary-color);
+    }
+
+    .task-table tbody tr {
+        transition: all 0.3s ease;
+    }
+
+        .task-table tbody tr:hover {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.05), transparent);
+            transform: scale(1.02);
+        }
+
+.action-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #1A252F;
+    color: white;
+}
+
+    .btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    }
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--primary-color), var(--navbar-color));
+    color: white;
+}
+
+.badge {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+    .badge.new {
+        background: #334b61;
+    }
+
+    .badge.progress {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    .badge.completed {
+        background: linear-gradient(135deg, var(--success-color), #059669);
+    }
+
+    .badge.coordinating {
+        background: linear-gradient(135deg, var(--warning-color), #d97706);
+    }
+
+    .badge.booked {
+        background: linear-gradient(135deg, var(--success-color), #059669);
+    }
+
+    .badge.transit {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+}
+
+    .empty-state i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        color: #d1d5db;
+    }
+
+.sidebar {
+    background: linear-gradient(180deg, var(--primary-color) 0%, var(--navbar-color) 100%);
+    transition: all 0.3s ease;
+    transform: translateX(0);
+}
+
+    .sidebar.hidden {
+        transform: translateX(100%);
+    }
+
+.sidebar-item {
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    margin: 5px 10px;
+}
+
+    .sidebar-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(-5px);
+    }
+
+    .sidebar-item.active {
+        background-color: var(--accent-color);
+        transform: translateX(-5px);
+    }
+
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 60;
+    background: linear-gradient(135deg, var(--accent-color), #00c896);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 168, 120, 0.3);
+    transition: all 0.3s ease;
+}
+
+    .sidebar-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px #1A252F;
+    }
+
+@media (max-width: 768px) {
+    .welcome-section {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .tab-content {
+        padding: 20px;
+    }
+
+    .task-table {
+        font-size: 14px;
+    }
+}

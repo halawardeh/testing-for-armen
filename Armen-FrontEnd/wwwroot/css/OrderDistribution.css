@@ -1,0 +1,314 @@
+﻿:root {
+    --primary: #025F70;
+    --secondary: #025F70;
+    --accent: #025F70;
+    --light: #F8F9FA;
+    --dark: #1A252F;
+    --success: #27AE60;
+    --warning: #F39C12;
+    --danger: #E74C3C;
+    --border-radius: 0.5rem;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f5f7fa !important;
+    color: var(--dark);
+}
+
+/* الشريط الجانبي */
+.sidebar {
+    background: linear-gradient(180deg, var(--primary), var(--dark));
+    color: white;
+    width: 280px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.sidebar-brand {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+    .sidebar-brand .logo {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: white;
+    }
+
+.sidebar-nav {
+    padding: 1rem;
+}
+
+.nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+    .nav-link:hover, .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    .nav-link i {
+        margin-left: 0.75rem;
+        font-size: 1.1rem;
+        width: 24px;
+        text-align: center;
+    }
+
+/* المحتوى الرئيسي */
+.main-content {
+    margin-right:5px;
+    transition: all 0.3s;
+}
+
+/* شريط التنقل العلوي */
+.topbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* تعديلات صورة الأدمن */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+    .user-dropdown img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-left: 10px;
+    }
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    min-width: 160px;
+    z-index: 999;
+    display: none;
+}
+
+.user-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.user-dropdown .dropdown-item {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+    .user-dropdown .dropdown-item i {
+        margin-right: 10px;
+        margin-left: 0;
+        width: 20px;
+        text-align: center;
+    }
+
+/* بطاقات الإحصائيات */
+.stat-card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    overflow: hidden;
+    height: 100%;
+}
+
+/* الجداول */
+.data-table-container {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+    .data-table thead th {
+        background: linear-gradient(135deg, #025F70 0%, #027a8f 100%);
+        color: white;
+        padding: 1rem;
+        font-weight: 600;
+        border-bottom: 2px solid #025F70;
+    }
+
+    .data-table tbody td {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    .data-table tbody tr {
+        transition: all 0.3s ease;
+    }
+
+        .data-table tbody tr:hover {
+            background-color: rgba(2, 95, 112, 0.05);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+/* الحالة */
+.status-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+    .status-badge.success {
+        background-color: rgba(39, 174, 96, 0.1);
+        color: var(--success);
+    }
+
+    .status-badge.warning {
+        background-color: rgba(243, 156, 18, 0.1);
+        color: var(--warning);
+    }
+
+    .status-badge.danger {
+        background-color: rgba(231, 76, 60, 0.1);
+        color: var(--danger);
+    }
+
+    .status-badge.info {
+        background-color: rgba(52, 152, 219, 0.1);
+        color: var(--accent);
+    }
+
+/* الأزرار */
+.btn {
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: white !important;
+}
+
+.btn-outline-success {
+    border-color: var(--success);
+    color: var(--success);
+    transition: all 0.3s ease;
+}
+
+    .btn-outline-success:hover {
+        background-color: var(--success);
+        border-color: var(--success);
+        color: white;
+    }
+
+/* التكيف مع الشاشات الصغيرة */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(100%);
+    }
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+    .main-content {
+        margin-right: 0;
+    }
+
+    .sidebar-toggler {
+        display: block !important;
+    }
+}
+
+/* تصميم جديد للجدول */
+.table-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.table-header {
+    background: linear-gradient(135deg, #025F70 0%, #027a8f 100%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-title {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.table-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.table-responsive {
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+}
+
+/* تحسينات للجدول */
+.table-row {
+    transition: all 0.3s ease;
+}
+
+    .table-row:hover {
+        background-color: rgba(2, 95, 112, 0.05) !important;
+    }
+
+.department-select {
+    min-width: 180px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

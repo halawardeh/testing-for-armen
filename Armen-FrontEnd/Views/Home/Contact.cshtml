@@ -1,0 +1,162 @@
+@{
+    ViewData["Title"] = "تواصل معنا";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/contact.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/contact.js" asp-append-version="true"></script>
+}
+
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <h1>تواصل معنا</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item active">تواصل معنا</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Methods Section -->
+<section class="contact-methods">
+    <div class="container">
+        <div class="methods-grid">
+            <!-- Email -->
+            <div class="method-card">
+                <div class="method-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>راسلنا عبر البريد</h3>
+                <p>نرد على رسائلكم خلال 24 ساعة</p>
+                <a href="mailto:info@arman.com">info@arman.com</a>
+            </div>
+
+            <!-- Phone -->
+            <div class="method-card">
+                <div class="method-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>اتصل بنا</h3>
+                <p>متاحون للرد من 9 صباحاً - 6 مساءً</p>
+                <a href="tel:+96265555555">+962 6 555 5555</a>
+            </div>
+
+            <!-- Address -->
+            <div class="method-card">
+                <div class="method-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>زورنا</h3>
+                <p>مكتبنا الرئيسي</p>
+                <span>عمان، الأردن</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form and Map Section -->
+<section class="contact-form-section">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="form-card">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>الموضوع</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>الرسالة</label>
+                        <textarea rows="5" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        إرسال 
+                    </button>
+                </form>
+            </div>
+
+            <!-- Map -->
+            <div class="map-card">
+                <h2>موقعنا</h2>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108261.95920337515!2d35.8374213!3d31.9539494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151b5fb85d7981af%3A0x631c30c0f8dc65e8!2sAmman!5e0!3m2!1sen!2sjo!4v1689865674547!5m2!1sen!2sjo" 
+                            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <h2>الأسئلة الشائعة</h2>
+        <div class="faq-grid">
+            <div class="faq-card">
+                <div class="faq-question">
+                    كيف يمكنني تتبع شحنتي؟
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        يمكنك تتبع شحنتك من خلال رقم التتبع الخاص بك عبر موقعنا الإلكتروني أو الاتصال بخدمة العملاء.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    ما هي مواعيد العمل لديكم؟
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        نعمل من الأحد إلى الخميس، من الساعة 9 صباحاً حتى 6 مساءً.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    هل تقدمون خدمات التخليص الجمركي؟
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        نعم، نقدم خدمات التخليص الجمركي الكاملة لجميع أنواع الشحنات.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    كم تستغرق عملية الشحن؟
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        تختلف مدة الشحن حسب الوجهة وطريقة الشحن المختارة. يمكنك الاستفسار عن التفاصيل من خلال الاتصال بنا.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 

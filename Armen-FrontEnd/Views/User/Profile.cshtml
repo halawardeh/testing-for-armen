@@ -1,0 +1,558 @@
+﻿@{
+    ViewData["Title"] = "الملف الشخصي";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+}
+
+<!-- Inner Hero Section -->
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <div class="profile-hero-info">
+                <div class="profile-hero-avatar">
+                    <img src="https://i.pravatar.cc/150?img=32" alt="الصورة الشخصية" class="hero-avatar-img">
+                    <div class="avatar-status-indicator"></div>
+                </div>
+                <div class="profile-hero-details">
+                    <h1 class="profile-hero-name">أحمد محمد العلي</h1>
+                    <p class="profile-hero-subtitle">عضو فعال منذ يناير 2024</p>
+                   
+                </div>
+            </div>
+            <div class="profile-hero-actions">
+                <button class="hero-action-btn primary">
+                    <i class="fas fa-edit"></i>
+                    تعديل الملف الشخصي
+                </button>
+                <button class="hero-action-btn secondary">
+                    <i class="fas fa-share-alt"></i>
+                    مشاركة الملف
+                </button>
+            </div>
+            <nav aria-label="breadcrumb" class="profile-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item"><a href="#">حسابي</a></li>
+                    <li class="breadcrumb-item active">الملف الشخصي</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<!-- Main Profile Content -->
+<section class="profile-content-section">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3">
+                <div class="profile-sidebar">
+                    <div class="sidebar-menu">
+                        <button class="menu-item active" data-tab="dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>لوحة التحكم</span>
+                        </button>
+                        <button class="menu-item" data-tab="shipments">
+                            <i class="fas fa-box-open"></i>
+                            <span>الشحنات النشطة</span>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <button class="menu-item" data-tab="history">
+                            <i class="fas fa-history"></i>
+                            <span>سجل الشحنات</span>
+                        </button>
+                        <button class="menu-item" data-tab="addresses">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>العناوين المحفوظة</span>
+                        </button>
+                        <button class="menu-item" data-tab="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>إعدادات الحساب</span>
+                        </button>
+                        <button class="menu-item" data-tab="loyalty">
+                            <i class="fas fa-gift"></i>
+                            <span>نقاط الولاء</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-lg-9">
+                <!-- Dashboard Section -->
+                <div class="profile-section active" id="dashboard">
+                    <div class="section-header">
+                        <h2 class="section-title">لوحة التحكم</h2>
+                        <p class="section-subtitle">نظرة عامة على نشاط حسابك</p>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="activity-card">
+                        <h3 class="card-title">
+                            <i class="fas fa-clock"></i>
+                            النشاط الأخير
+                        </h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon shipping">
+                                    <i class="fas fa-ship"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>تحديث حالة الشحنة SHP-2025-001</h4>
+                                    <p>الشحنة في الطريق - البحر الأبيض المتوسط</p>
+                                    <span class="activity-time">منذ ساعتين</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon customs">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>بدء التخليص الجمركي للشحنة SHP-2025-002</h4>
+                                    <p>الشحنة وصلت للجمارك في ميناء حيفا</p>
+                                    <span class="activity-time">منذ 4 ساعات</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon delivered">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>تم تسليم الشحنة SHP-2025-003</h4>
+                                    <p>تم التسليم بنجاح في نيويورك، الولايات المتحدة</p>
+                                    <span class="activity-time">منذ يوم واحد</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions-card">
+                        <h3 class="card-title">
+                            <i class="fas fa-lightning-bolt"></i>
+                            إجراءات سريعة
+                        </h3>
+                        <div class="quick-actions-grid">
+                            <button class="quick-action-btn">
+                                <i class="fas fa-plus"></i>
+                                شحنة جديدة
+                            </button>
+                            <button class="quick-action-btn">
+                                <i class="fas fa-search"></i>
+                                تتبع شحنة
+                            </button>
+                            <button class="quick-action-btn">
+                                <i class="fas fa-calculator"></i>
+                                حاسبة التكلفة
+                            </button>
+                            <button class="quick-action-btn">
+                                <i class="fas fa-headset"></i>
+                                الدعم الفني
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Shipments Section -->
+                <div class="profile-section" id="shipments">
+                    <div class="section-header">
+                        <h2 class="section-title">الشحنات النشطة</h2>
+                        <p class="section-subtitle">متابعة حية لشحناتك الجارية</p>
+                    </div>
+                    
+                    <!-- Shipment Card 1 -->
+                    <div class="shipment-card">
+                        <div class="shipment-header">
+                            <div class="shipment-info">
+                                <div class="shipment-icon">
+                                    <i class="fas fa-ship"></i>
+                                </div>
+                                <div class="shipment-details">
+                                    <h3>SHP-2025-001</h3>
+                                    <p>شحن بحري - من شنغهاي إلى جنين</p>
+                                </div>
+                            </div>
+                            <div class="shipment-status">
+                                <span class="status-badge shipping">في الطريق</span>
+                                <span class="progress-percentage">75%</span>
+                            </div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="shipment-footer">
+                            <div class="shipment-dates">
+                                <span><i class="fas fa-calendar-alt"></i> تاريخ الشحن: 15 يوليو 2025</span>
+                                <span><i class="fas fa-clock"></i> التسليم المتوقع: 22 يوليو 2025</span>
+                            </div>
+                            <button class="track-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                تتبع مفصل
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Shipment Card 2 -->
+                    <div class="shipment-card">
+                        <div class="shipment-header">
+                            <div class="shipment-info">
+                                <div class="shipment-icon">
+                                    <i class="fas fa-plane"></i>
+                                </div>
+                                <div class="shipment-details">
+                                    <h3>SHP-2025-002</h3>
+                                    <p>شحن جوي - من بكين إلى رام الله</p>
+                                </div>
+                            </div>
+                            <div class="shipment-status">
+                                <span class="status-badge customs">في الجمارك</span>
+                                <span class="progress-percentage">45%</span>
+                            </div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <div class="shipment-footer">
+                            <div class="shipment-dates">
+                                <span><i class="fas fa-calendar-alt"></i> تاريخ الشحن: 18 يوليو 2025</span>
+                                <span><i class="fas fa-clock"></i> التسليم المتوقع: 25 يوليو 2025</span>
+                            </div>
+                            <button class="track-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                تتبع مفصل
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Section -->
+                <div class="profile-section" id="history">
+                    <div class="section-header">
+                        <h2 class="section-title">سجل الشحنات</h2>
+                        <p class="section-subtitle">تاريخ جميع شحناتك السابقة</p>
+                    </div>
+                    
+                    <div class="timeline-container">
+                        <div class="timeline">
+                            <!-- Timeline Item 1 -->
+                            <div class="timeline-item">
+                                <div class="timeline-marker delivered">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">10 يوليو 2025</div>
+                                    <h4 class="timeline-title">SHP-2025-003</h4>
+                                    <p class="timeline-description">شحن بحري - نيويورك، الولايات المتحدة</p>
+                                    <span class="status-badge delivered">تم التسليم</span>
+                                    <div class="timeline-actions">
+                                        <button class="action-btn">عرض التفاصيل</button>
+                                        <button class="action-btn">تقييم الخدمة</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Timeline Item 2 -->
+                            <div class="timeline-item">
+                                <div class="timeline-marker delivered">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">5 يوليو 2025</div>
+                                    <h4 class="timeline-title">SHP-2025-004</h4>
+                                    <p class="timeline-description">شحن جوي - باريس، فرنسا</p>
+                                    <span class="status-badge delivered">تم التسليم</span>
+                                    <div class="timeline-actions">
+                                        <button class="action-btn">عرض التفاصيل</button>
+                                        <button class="action-btn">تقييم الخدمة</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Addresses Section -->
+                <div class="profile-section" id="addresses">
+                    <div class="section-header">
+                        <div class="header-content">
+                            <h2 class="section-title">العناوين المحفوظة</h2>
+                            <p class="section-subtitle">إدارة عناوين الشحن والاستلام</p>
+                        </div>
+                        <button class="add-address-btn">
+                            <i class="fas fa-plus"></i>
+                            إضافة عنوان جديد
+                        </button>
+                    </div>
+                    
+                    <div class="addresses-grid">
+                        <!-- Address Card 1 -->
+                        <div class="address-card">
+                            <div class="address-header">
+                                <div class="address-type home">المنزل</div>
+                                <div class="address-actions">
+                                    <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="address-content">
+                                <h4 class="address-name">أحمد محمد العلي</h4>
+                                <div class="address-details">
+                                    <p><i class="fas fa-map-marker-alt"></i> شارع الملك حسين، عمان، الأردن</p>
+                                    <p><i class="fas fa-phone"></i> +962 123 456 789</p>
+                                </div>
+                            </div>
+                            <div class="address-footer">
+                                <span class="default-badge">العنوان الافتراضي</span>
+                            </div>
+                        </div>
+
+                        <!-- Address Card 2 -->
+                        <div class="address-card">
+                            <div class="address-header">
+                                <div class="address-type office">المكتب</div>
+                                <div class="address-actions">
+                                    <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="address-content">
+                                <h4 class="address-name">شركة آرمن للشحن</h4>
+                                <div class="address-details">
+                                    <p><i class="fas fa-map-marker-alt"></i> شارع الشهيد محمد، جنين، فلسطين</p>
+                                    <p><i class="fas fa-phone"></i> +962 123 456 789</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="profile-section" id="settings">
+                    <div class="section-header">
+                        <h2 class="section-title">إعدادات الحساب</h2>
+                        <p class="section-subtitle">إدارة معلوماتك الشخصية وتفضيلات الحساب</p>
+                    </div>
+                    
+                    <div class="settings-tabs">
+                        <button class="settings-tab active" data-settings-tab="personal">
+                            <i class="fas fa-user"></i>
+                            المعلومات الشخصية
+                        </button>
+                        <button class="settings-tab" data-settings-tab="security">
+                            <i class="fas fa-shield-alt"></i>
+                            الأمان
+                        </button>
+                        <button class="settings-tab" data-settings-tab="notifications">
+                            <i class="fas fa-bell"></i>
+                            الإشعارات
+                        </button>
+                    </div>
+
+                    <!-- Personal Info Tab -->
+                    <div class="settings-content active" id="personal">
+                        <div class="settings-card">
+                            <h3 class="card-title">المعلومات الأساسية</h3>
+                            <form class="settings-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">الاسم الأول</label>
+                                        <input type="text" value="أحمد" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">الاسم الأخير</label>
+                                        <input type="text" value="محمد العلي" class="form-input">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">البريد الإلكتروني</label>
+                                        <input type="email" value="ahmed@example.com" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">رقم الهاتف</label>
+                                        <input type="tel" value="+962 123 456 789" class="form-input">
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="save-btn">
+                                        <i class="fas fa-save"></i>
+                                        حفظ التغييرات
+                                    </button>
+                                    <button type="button" class="cancel-btn">إلغاء</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Security Tab -->
+                    <div class="settings-content" id="security">
+                        <div class="settings-card">
+                            <h3 class="card-title">كلمة المرور</h3>
+                            <form class="settings-form">
+                                <div class="form-group">
+                                    <label class="form-label">كلمة المرور الحالية</label>
+                                    <input type="password" class="form-input">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">كلمة المرور الجديدة</label>
+                                        <input type="password" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">تأكيد كلمة المرور</label>
+                                        <input type="password" class="form-input">
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="save-btn">
+                                        <i class="fas fa-lock"></i>
+                                        تحديث كلمة المرور
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Tab -->
+                    <div class="settings-content" id="notifications">
+                        <div class="settings-card">
+                            <h3 class="card-title">تفضيلات الإشعارات</h3>
+                            <div class="notification-settings">
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <h4>إشعارات الشحنات</h4>
+                                        <p>تلقي إشعارات عن تحديثات الشحنات</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <h4>إشعارات البريد الإلكتروني</h4>
+                                        <p>تلقي إشعارات عبر البريد الإلكتروني</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <h4>الرسائل التسويقية</h4>
+                                        <p>تلقي عروض وأخبار الشركة</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Section -->
+                <div class="profile-section" id="notifications">
+                    <div class="section-header">
+                        <h2 class="section-title">الإشعارات</h2>
+                        <p class="section-subtitle">آخر الإشعارات والتحديثات</p>
+                        <button class="mark-all-read">وضع علامة قراءة على الكل</button>
+                    </div>
+                    
+                    <div class="notifications-list">
+                        <div class="notification-item unread">
+                            <div class="notification-icon shipping">
+                                <i class="fas fa-ship"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>تحديث حالة الشحنة</h4>
+                                <p>الشحنة SHP-2025-001 في الطريق عبر البحر الأبيض المتوسط</p>
+                                <span class="notification-time">منذ ساعتين</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="mark-read"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="notification-item unread">
+                            <div class="notification-icon customs">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>بدء التخليص الجمركي</h4>
+                                <p>تم بدء عملية التخليص الجمركي للشحنة SHP-2025-002</p>
+                                <span class="notification-time">منذ 4 ساعات</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="mark-read"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon delivered">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>تم التسليم بنجاح</h4>
+                                <p>تم تسليم الشحنة SHP-2025-003 في نيويورك</p>
+                                <span class="notification-time">منذ يوم واحد</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Loyalty Points Section -->
+                <div class="profile-section" id="loyalty">
+                    <div class="section-header" style="margin-bottom:0px">
+                        <h2 class="section-title">نقاط الولاء</h2>
+                        <p class="section-subtitle">رصيد نقاطك ومزايا الولاء</p>
+                    </div>
+                    <div class="loyalty-card" style="background:#f8fafc; border-radius:18px; box-shadow:0 2px 8px #0001; padding:32px; text-align:center; margin-bottom:22px;">
+                        <div class="loyalty-points" style="font-size:2.5rem; font-weight:900; color:var(--primary-color);">200</div>
+                        <div class="loyalty-label" style="font-size:1.2rem; color:#555; margin-bottom:24px;">رصيد نقاط الولاء</div>
+                        <div class="loyalty-info" style="background:#fff; border-radius:12px; border:1px solid #e5e7eb; padding:20px 16px; margin-bottom:14px; text-align:right; direction:rtl;">
+                            <!-- إضافة شريط التقدم والمكافآت -->
+                            <div class="loyalty-progress" style="margin: 20px 0; background: white; height: 10px; border-radius: 10px;">
+                                <div style="width: 60%; background:linear-gradient(135deg, rgba(2, 95, 112, 0.9) 0%, rgba(200, 100, 4, 0.8) 100%); height: 100%; border-radius: 10px;"></div>
+                            </div>
+                            <p style="color:var(--primary-color); font-weight: 600;">50 نقطة تفصلك عن المستوى الذهبي!</p>
+
+                            <!-- إضافة قائمة المكافآت -->
+                            <div style="background: #fff; border-radius: 12px; padding: 15px; margin: 15px 0; text-align: right;">
+                                <h3 style="color: var(--primary-color); font-size: 1.1rem;">🎁 مكافآت يمكنك الحصول عليها:</h3>
+                                <ul style="padding-right: 15px; color: rgba(200, 100, 4, 0.8);">
+                                    <li>100 نقطة = خصم 50 شيكل</li>
+                                </ul>
+                            </div>
+
+                            <div style="font-size:1.1rem; color:var(--primary-color); font-weight:700; margin-bottom:10px;">🎁 كيفية استخدام النقاط:</div>
+                            <ul style="list-style:none; padding:0; margin:0 0 10px 0; color:#444;">
+                                <li>يمكنك استبدال النقاط بخصومات على الطلبات</li>
+                                <li>أو الحصول على منتجات مجانية.</li>
+                            </ul>
+                            <button class="action-btn btn-primary" style="margin-top:10px; font-size:1.1em; border-radius:10px; padding:10px 32px; background:linear-gradient(135deg, rgba(2, 95, 112, 0.9) 0%, rgba(200, 100, 4, 0.8) 100%); color:#fff; font-weight:700;">
+                                استبدال النقاط
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+              
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/profile.js" asp-append-version="true"></script>
+}

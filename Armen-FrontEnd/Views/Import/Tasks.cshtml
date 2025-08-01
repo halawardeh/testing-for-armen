@@ -1,0 +1,238 @@
+﻿@{
+    Layout = "~/Views/Shared/_ImportLayout.cshtml";
+    ViewData["Title"] = "جميع المهام";
+}
+<html dir="rtl" lang="ar">
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Import/ImportTasks.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+}
+
+@section Scripts {
+    <script src="~/js/Import/ImportTasks.js" asp-append-version="true"></script>
+}
+
+<!-- Main Content -->
+<div class="p-6">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-sm p-4 mb-8" data-aos="fade-down">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-primary-color">جميع المهام والطلبات</h1>
+            <div class="flex items-center space-x-4">
+                <button class="action-btn btn-primary" onclick="openAddTaskModal()">
+                    <i class="fas fa-plus ml-2"></i>
+                    إضافة مهمة جديدة
+                </button>
+                <div class="relative">
+                    <button class="p-2 text-gray-600 hover:text-accent-color transition-colors">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">7</span>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <img class="w-10 h-10 rounded-full border-2 border-accent-color" src="https://i.pravatar.cc/100?img=4" alt="صورة الموظف">
+                    <span class="font-semibold text-primary-color">أحمد محمد</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-lg font-semibold opacity-90">إجمالي المهام</p>
+                    <p class="text-3xl font-bold counter" data-target="24">0</p>
+                </div>
+                <div class="text-4xl opacity-80">
+                    <i class="fas fa-tasks"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-lg font-semibold opacity-90">مهام جديدة</p>
+                    <p class="text-3xl font-bold counter" data-target="7">0</p>
+                </div>
+                <div class="text-4xl opacity-80">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-lg font-semibold opacity-90">قيد التنفيذ</p>
+                    <p class="text-3xl font-bold counter" data-target="12">0</p>
+                </div>
+                <div class="text-4xl opacity-80">
+                    <i class="fas fa-cog fa-spin"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-lg font-semibold opacity-90">مكتملة</p>
+                    <p class="text-3xl font-bold counter" data-target="5">0</p>
+                </div>
+                <div class="text-4xl opacity-80">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="search-filter-bar p-6 mb-8" data-aos="fade-up">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Search Input -->
+            <div class="relative">
+                <input type="text"
+                       id="searchInput"
+                       class="search-input w-full"
+                       placeholder="البحث في المهام..."
+                       oninput="filterTasks()">
+                <i class="search-icon fas fa-search"></i>
+            </div>
+
+            <!-- Status Filter -->
+            <div>
+                <select id="statusFilter" class="form-input" onchange="filterTasks()">
+                    <option value="">جميع الحالات</option>
+                    <option value="new">جديدة</option>
+                    <option value="in-progress">قيد التنفيذ</option>
+                    <option value="review">قيد المراجعة</option>
+                    <option value="completed">مكتملة</option>
+                    <option value="cancelled">ملغية</option>
+                </select>
+            </div>
+
+            <!-- Priority Filter -->
+            <div>
+                <select id="priorityFilter" class="form-input" onchange="filterTasks()">
+                    <option value="">جميع الأولويات</option>
+                    <option value="high">عالية</option>
+                    <option value="medium">متوسطة</option>
+                    <option value="low">منخفضة</option>
+                </select>
+            </div>
+
+            <!-- Export Button -->
+            <div>
+                <button class="action-btn btn-secondary w-full" onclick="exportTasks()">
+                    <i class="fas fa-download ml-2"></i>
+                    تصدير البيانات
+                </button>
+            </div>
+        </div>
+
+        <!-- Active Filters Display -->
+        <div id="activeFilters" class="mt-4 hidden">
+            <p class="text-sm text-gray-600 mb-2">الفلاتر النشطة:</p>
+            <div id="filterTags" class="flex flex-wrap"></div>
+        </div>
+    </div>
+
+    <!-- Tasks Table -->
+    <div class="tasks-table" data-aos="fade-up" data-aos-delay="200">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead>
+                    <tr class="text-white">
+                        <th class="p-4 text-right">رقم الطلب</th>
+                        <th class="p-4 text-right">العميل</th>
+                        <th class="p-4 text-right">موظف الاستيراد</th>
+                        <th class="p-4 text-right">الحالة</th>
+                        <th class="p-4 text-right">الأولوية</th>
+                        <th class="p-4 text-right">تاريخ الإنشاء</th>
+                        <th class="p-4 text-right">نوع البضاعة</th>
+                        <th class="p-4 text-right">الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="tasksTableBody">
+                    <tr data-status="review" data-priority="high">
+                        <td class="p-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center ml-3">
+                                    <i class="fas fa-file-alt text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <span class="font-semibold block">ORD-2025-005</span>
+                                    <span class="text-sm text-gray-600">2.5 طن</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <div>
+                                <span class="font-semibold block">شركة التقنيات المتطورة</span>
+                                <span class="text-sm text-gray-600">ميناء العقبة</span>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex items-center">
+                                <img class="w-8 h-8 rounded-full ml-2" src="https://i.pravatar.cc/100?img=1" alt="موظف">
+                                <span class="font-semibold">أحمد محمد سالم</span>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <span class="status-badge status-review">قيد المراجعة</span>
+                        </td>
+                        <td class="p-4">
+                            <span class="priority-badge priority-high">عالية</span>
+                        </td>
+                        <td class="p-4">20 يوليو 2025</td>
+                        <td class="p-4">
+                            <span class="category-badge category-electronics">أجهزة إلكترونية</span>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700 p-1" onclick="viewTask('ORD-2025-005')" title="عرض التفاصيل">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="text-green-500 hover:text-green-700 p-1" onclick="editTask('ORD-2025-005')" title="تعديل">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-purple-500 hover:text-purple-700 p-1" onclick="commentTask('ORD-2025-005')" title="تعليق">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-status="new" data-priority="medium">
+                        <td class="p-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center ml-3">
+                                    <i class="fas fa-file-alt text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <span class="font-semibold block">ORD-2025-006</span>
+                                    <span class="text-sm text-gray-600">500 كجم</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <div>
+                                <span class="font-semibold block">شركة الأدوات الطبية</span>
+                                <span class="text-sm text-gray-600">مطار الملكة علياء</span>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex items-center">
+                                <img class="w-8 h-8 rounded-full ml-2" src="https://i.pravatar.cc/100?img=2" alt="موظف">
+                                <span class="font-semibold">سارة أحمد</span>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <span class="status-badge status-new">جديدة</span>
+                        </td>
+                        <td class="p-4">
+                            <span class="priority-badge priority-medium">متوسطة</span>
+   

@@ -1,0 +1,302 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - لوحة تحكم شركة آرمن للاستيراد والتصدير</title>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css"
+          integrity="sha384-PJsj/BTMqILvmcej7ulplguok8ag4xFTPryRq8xevL7eBYSmpXKcbNVuy+P0RMgq"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @await RenderSectionAsync("Styles", required: false)
+    <style>
+        :root {
+            --primary: #025F70;
+            --dark: #1A252F;
+            --border-radius: 0.5rem;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8f9fa;
+            padding-right: var(--sidebar-width);
+        }
+
+        /* الشريط الجانبي */
+        .sidebar {
+            background: linear-gradient(180deg, var(--primary), var(--dark));
+            color: white;
+            width: var(--sidebar-width);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar-brand {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+            .sidebar-brand .logo {
+                font-weight: 700;
+                font-size: 1.25rem;
+                color: white;
+            }
+
+        .sidebar-nav {
+            padding: 1rem;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+            .nav-link:hover,
+            .nav-link.active {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: white;
+                transform: translateX(-5px);
+            }
+
+            .nav-link i {
+                margin-left: 0.75rem;
+                font-size: 1.1rem;
+                width: 24px;
+                text-align: center;
+            }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            padding: 2rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        /* تكيف الشاشات الصغيرة */
+        @@media (max-width: 992px) {
+            body {
+                padding-right: 0;
+            }
+
+            .sidebar {
+                transform: translateX(var(--sidebar-width));
+            }
+
+                .sidebar.show {
+                    transform: translateX(0);
+                }
+
+            .sidebar-toggler {
+                display: block !important;
+            }
+        }
+
+        /* زر تبديل الشريط الجانبي للجوال */
+        .mobile-sidebar-toggler {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, var(--primary), var(--dark));
+            color: white;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @@media (max-width: 992px) {
+            .mobile-sidebar-toggler {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط الجانبي -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="logo">آرمن للاستيراد والتصدير</span>
+            <button class="btn btn-link text-white p-0 d-none d-lg-block sidebar-toggler" id="desktopToggler">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-nav">
+            <ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Admin" asp-action="Profile">
+            <i class="fas fa-user-circle me-2"></i>
+            <span>الصفحة الشخصية</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Admin" asp-action="ControlPanel">
+            <i class="fas fa-tools me-2"></i>
+            <span>لوحة التحكم</span>
+        </a>
+    </li>
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="UserManagement">
+            <i class="fas fa-users me-2"></i>
+            <span>إدارة الموظفين</span>
+        </a>
+    </li>
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="CustomerManagement">
+            <i class="fas fa-user-tie me-2"></i>
+            <span>إدارة العملاء</span>
+        </a>
+    </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="services">
+                        <i class="fas fa-cogs me-2"></i>
+                        <span> الخدمات</span>
+                    </a>
+                </li>
+
+
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="CurrencyRates">
+            <i class="fas fa-money-bill-wave me-2"></i>
+            <span>أسعار العملات</span>
+        </a>
+    </li>
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="ShippingOrders">
+            <i class="fas fa-shipping-fast me-2"></i>
+            <span>طلبات الشحن</span>
+        </a>
+    </li>
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="ExternalOrders">
+            <i class="fas fa-edit me-2"></i>
+            <span>الطلبات الخارجية</span>
+        </a>
+    </li>
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="BlogAdmin">
+            <i class="fas fa-newspaper me-2"></i>
+            <span>المدونة</span>
+        </a>
+    </li>
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Partners">
+            <i class="fas fa-handshake me-2"></i>
+            <span>الشركاء</span>
+        </a>
+    </li>
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="OrderDistribution">
+            <i class="fas fa-tasks me-2"></i>
+            <span>توزيع الطلبات</span>
+        </a>
+    </li>
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Factory">
+                        <i class="fas fa-industry w-6"></i>
+                        <span class="font-semibold">إدارة المصانع</span>
+                    </a>
+    </li>
+
+    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Suppliers">
+                        <i class="fas fa-truck w-6"></i>
+                        <span class="font-semibold">إدارة الموردين</span>
+                    </a>
+     </li>
+
+
+
+
+</ul>
+
+        </div>
+    </div>
+
+    <!-- زر تبديل الشريط الجانبي للجوال -->
+    <button class="mobile-sidebar-toggler" id="mobileToggler">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+        @RenderBody()
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+
+    <!-- Script لإدارة الشريط الجانبي -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const desktopToggler = document.getElementById('desktopToggler');
+            const mobileToggler = document.getElementById('mobileToggler');
+
+            // تبديل الشريط الجانبي على أجهزة الكمبيوتر
+            desktopToggler.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                document.body.style.paddingRight = sidebar.classList.contains('collapsed') ? '0' : '280px';
+            });
+
+            // تبديل الشريط الجانبي على الجوال
+            mobileToggler.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
+
+            // إغلاق الشريط الجانبي عند النقر خارجها على الجوال
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 992 && !sidebar.contains(event.target) && event.target !== mobileToggler) {
+                    sidebar.classList.remove('show');
+                }
+            });
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

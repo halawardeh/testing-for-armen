@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Tracking";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/js/Admin/CSS/Tracking.css" asp-append-version="true" />
+}
+@section Scripts {
+    <script src="~/js/Admin/js/Tracking.js" asp-append-version="true"></script>
+}
+
+<script src="~/js/Tracking.js" asp-append-version="true" defer></script>
+
+<!-- المحتوى الرئيسي -->
+<div class="container-fluid py-4">
+    <!-- عنوان الصفحة -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">قائمة الموظفين</h4>
+    </div>
+    <div class="card">
+        <div class="table-responsive">
+            <table class="data-table table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>الاسم</th>
+                        <th>الوظيفة</th>
+                        <th>القسم</th>
+                        <th>تاريخ التعيين</th>
+                        <th>التقييم الحالي</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTable">
+                    <!-- سيتم ملؤه بالبيانات عبر JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        <!-- الترقيم الصفحي (يمكن إضافته لاحقاً إذا كان مطلوباً) -->
+    </div>
+</div>
+
+<!-- Modal إضافة/تعديل موظف -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">إضافة موظف جديد</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm">
+                    <input type="hidden" id="userId">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">الاسم الكامل</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jobTitle" class="form-label">الوظيفة</label>
+                        <input type="text" class="form-control" id="jobTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="department" class="form-label">القسم</label>
+                        <select class="form-select" id="department" required>
+                            <option value="">اختر القسم</option>
+                            <option value="المبيعات">المبيعات</option>
+                            <option value="التسويق">التسويق</option>
+                            <option value="الخدمة العملاء">الخدمة العملاء</option>
+                            <option value="الشحن والتخليص">الشحن والتخليص</option>
+                            <option value="المالية">المالية</option>
+                            <option value="التطوير">التطوير</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="hireDate" class="form-label">تاريخ التعيين</label>
+                        <input type="date" class="form-control" id="hireDate" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary" id="saveUserBtn">حفظ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal تقييم الأداء -->
+<div class="modal fade" id="performanceModal" tabindex="-1" aria-labelledby="performanceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="performanceModalLabel">تقييم أداء الموظف</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 id="employeeName"></h4>
+                        <p id="employeeJob" class="text-muted"></p>
+
+                        <form id="performanceForm">
+                            <input type="hidden" id="performanceUserId">
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">التقييم (من 1 إلى 10)</label>
+                                <input type="number" class="form-control" id="rating" min="1" max="10" step="0.1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="evaluationDate" class="form-label">تاريخ التقييم</label>
+                                <input type="date" class="form-control" id="evaluationDate" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="notes" class="form-label">ملاحظات</label>
+                                <textarea class="form-control" id="notes" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">حفظ التقييم</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>سجل التقييمات السابقة</h5>
+                        <div class="performance-history" id="performanceHistory">
+                            <!-- سيتم ملؤه بالبيانات عبر JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,253 @@
+﻿@{
+    ViewData["Title"] = "ControlPanel";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/js/Admin/CSS/ControlPanel.css" asp-append-version="true" />
+}
+@section Scripts {
+    <script src="~/js/Admin/js/ControlPanel.js" asp-append-version="true"></script>
+}
+
+
+
+    <!-- الشريط العلوي -->
+    <div class="topbar">
+        <div class="d-flex justify-content-between w-100 flex-row-reverse">
+            <div class="user-dropdown" id="userDropdown">
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a class="dropdown-item" href="#" id="logoutBtn">تسجيل الخروج</a>
+                </div>
+            </div>
+            <button class="btn btn-link text-dark p-0 d-lg-none sidebar-toggler">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- البطاقات -->
+    <div class="container-fluid py-4">
+
+        <div class="row mb-4">
+            @* بطاقة واردات الشهر *@
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card stat-card">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <h6 class="mb-2 text-muted">واردات الشهر</h6>
+                            <h3 class="mb-0">150 حاوية</h3>
+                        </div>
+                        <div class="card-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* بطاقة صادرات الشهر *@
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card stat-card">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <h6 class="mb-2 text-muted">صادرات الشهر</h6>
+                            <h3 class="mb-0">96 شحنة</h3>
+                        </div>
+                        <div class="card-icon primary">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* معاملات جمركية *@
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card stat-card">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <h6 class="mb-2 text-muted">معاملات جمركية</h6>
+                            <h3 class="mb-0">320 معاملة</h3>
+                        </div>
+                        <div class="card-icon warning">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* الإيرادات *@
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card stat-card">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <h6 class="mb-2 text-muted">الإيرادات الشهرية</h6>
+                            <h3 class="mb-0">$215,000</h3>
+                        </div>
+                        <div class="card-icon danger">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- الأداء السنوي + حالة الشحنات -->
+    <div class="row mb-4">
+        <div class="col-lg-8 d-flex">
+            <div class="card flex-grow-1">
+                <div class="card-header bg-white border-0">
+                    <h6 class="mb-0">أداء الشحن السنوي</h6>
+                </div>
+                <div class="card-body">
+                    <canvas id="annualChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 d-flex">
+            <div class="card flex-grow-1 h-100">
+                <div class="card-header bg-white border-0">
+                    <h6 class="mb-0">حالة الشحنات</h6>
+                </div>
+                <div class="card-body">
+                    @* حالة الشحنات برسوم بيانية *@
+                    @{
+                        var statuses = new[] {
+                                        new { Label = "تم التسليم", Value = 75, Class = "bg-success" },
+                                        new { Label = "قيد النقل", Value = 15, Class = "bg-warning" },
+                                        new { Label = "متأخرة", Value = 7, Class = "bg-danger" },
+                                        new { Label = "قيد التجهيز", Value = 3, Class = "bg-info" }
+                                        };
+                    }
+                    @foreach (var status in statuses)
+                    {
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>@status.Label</span>
+                                <span>@status.Value%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar @status.Class" role="progressbar" style="width: @status.Value%"></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- تتبع الشاحنات + الخريطة -->
+    <div class="row">
+
+        <!-- تتبع الشاحنات -->
+        <div class="col-lg-6 mb-4 d-flex">
+            <div class="card tracking flex-grow-1" style="background-color: #b8cff2;">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between mb-4">
+                        <h5 class="text-white mb-0">تتبع الشاحنات</h5>
+                        <button class="btn btn-sm btn-outline-light">
+                            <i class="fas fa-plus me-1"></i> إضافة
+                        </button>
+                    </div>
+                    <div class="table-responsive flex-grow-1">
+                        <table class="table text-black">
+                            <thead>
+                                <tr>
+                                    <th>رقم الشاحنة</th>
+                                    <th>الموقع</th>
+                                    <th>الوجهة</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>TRK-001</td>
+                                    <td>الخليل</td>
+                                    <td>رام الله</td>
+                                    <td><span class="badge bg-warning">قيد النقل</span></td>
+                                </tr>
+                                <tr>
+                                    <td>TRK-002</td>
+                                    <td>بكين</td>
+                                    <td>شانغهاي</td>
+                                    <td><span class="badge bg-success">تم التوصيل</span></td>
+                                </tr>
+                                <tr>
+                                    <td>TRK-003</td>
+                                    <td>نابلس</td>
+                                    <td>جنين</td>
+                                    <td><span class="badge bg-danger">تأخير</span></td>
+                                </tr>
+                                <tr>
+                                    <td>TRK-004</td>
+                                    <td>غوانزو</td>
+                                    <td>هونغ كونغ</td>
+                                    <td><span class="badge bg-info">قيد التحميل</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- خريطة تتبع الشحنات الحية -->
+        <div class="col-lg-6 mb-4 d-flex">
+            <div class="card flex-grow-1">
+                <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">خريطة تتبع الشحنات الحية</h5>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary" id="refreshMap">
+                            <i class="fas fa-sync-alt"></i> تحديث الخريطة
+                        </button>
+                        <div class="btn-group btn-group-sm ms-2">
+                            <button class="btn btn-outline-primary active" data-filter="all">الكل</button>
+                            <button class="btn btn-outline-primary" data-filter="moving">قيد الحركة</button>
+                            <button class="btn btn-outline-primary" data-filter="stopped">متوقفة</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0" style="height: 500px;">
+                    <!-- عنصر الخريطة -->
+                    <div id="liveShipmentMap" style="height: 100%; width: 100%;"></div>
+
+                    <!-- لوحة المعلومات عند النقر على النقطة -->
+                    <div id="mapPopup" class="map-popup card shadow d-none">
+                        <div class="card-header py-2">
+                            <h6 class="mb-0">تفاصيل الشحنة</h6>
+                            <button class="btn-close-popup">&times;</button>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="mb-1"><strong>رقم الشحنة:</strong> <span id="popup-shipment-id">SH-78945</span></p>
+                                    <p class="mb-1"><strong>السائق:</strong> <span id="popup-driver">أحمد محمد</span></p>
+                                    <p class="mb-1"><strong>المركبة:</strong> <span id="popup-vehicle">TRK-005</span></p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="mb-1"><strong>الحالة:</strong> <span id="popup-status" class="badge bg-success">قيد النقل</span></p>
+                                    <p class="mb-1"><strong>السرعة:</strong> <span id="popup-speed">65 كم/س</span></p>
+                                    <p class="mb-1"><strong>الوجهة:</strong> <span id="popup-destination">جدة</span></p>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-sm btn-outline-primary">تفاصيل كاملة</button>
+                                <button class="btn btn-sm btn-outline-success">اتصال بالسائق</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="map-legend">
+                            <span class="legend-item"><i class="fas fa-circle text-success"></i> قيد النقل</span>
+                            <span class="legend-item"><i class="fas fa-circle text-danger"></i> متوقفة</span>
+                            <span class="legend-item"><i class="fas fa-circle text-warning"></i> بها تأخير</span>
+                            <span class="fas fa-circle text-info"></i> قيد التحميل</span>
+                        </div>
+                        <small class="text-muted">آخر تحديث: <span id="last-update-time">اليوم 10:45 ص</span></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

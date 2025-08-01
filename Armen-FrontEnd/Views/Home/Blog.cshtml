@@ -1,0 +1,160 @@
+@{
+    ViewData["Title"] = "المدونة";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/blog.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/blog.js" asp-append-version="true"></script>
+}
+
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <h1>مدونة آرمن للشحن</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item active">المدونة</li>
+                </ol>
+            </nav>
+            <div class="search-container">
+                <input type="search" placeholder="ابحث في المدونة..." class="search-input">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Categories Section -->
+<section class="categories-section">
+    <div class="container">
+        <div class="categories-list">
+            <a href="#" class="category-btn active">الكل</a>
+            <a href="#" class="category-btn">الشحن البحري</a>
+            <a href="#" class="category-btn">الشحن الجوي</a>
+            <a href="#" class="category-btn">التخليص الجمركي</a>
+            <a href="#" class="category-btn">سلاسل التوريد</a>
+            <a href="#" class="category-btn">التكنولوجيا</a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Article -->
+<section class="featured-article">
+    <div class="container">
+        <div class="featured-content">
+            <div class="featured-text">
+                <span class="featured-tag">مقال مميز</span>
+                <h2>مستقبل الشحن: كيف تغير التكنولوجيا صناعة اللوجستيات</h2>
+                <p>اكتشف كيف تقوم التقنيات الحديثة مثل الذكاء الاصطناعي وإنترنت الأشياء بتحويل صناعة الشحن واللوجستيات، وكيف يمكن للشركات الاستفادة من هذه التطورات.</p>
+                <div class="author-info">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBRW6kw4PvewS5EGHKY7nNsJiWvrbsVIzZA&s">
+                    <div>
+                        <h4>أحمد الأحمد</h4>
+                        <span>15 يوليو 2025</span>
+                    </div>
+                </div>
+                <a href="#" class="read-more-btn">
+                    اقرأ المزيد
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+            <div class="featured-image">
+                <img src="https://images.pexels.com/photos/1117210/pexels-photo-1117210.jpeg"
+                     alt="مستقبل الشحن">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Articles -->
+<section class="latest-articles">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-tag">أحدث المقالات</span>
+            <h2>تابع آخر مقالاتنا وتحديثاتنا</h2>
+        </div>
+
+        <div class="articles-grid">
+            <!-- Article 1 -->
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="https://images.pexels.com/photos/1554646/pexels-photo-1554646.jpeg" alt="الشحن الجوي">
+                    <div class="hover-arrow">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+                <div class="article-content">
+                    <span class="article-tag">الشحن الجوي</span>
+                    <h3>خدمات الشحن الجوي المباشر من الصين إلى فلسطين</h3>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 20 يوليو 2025</span>
+                        <span><i class="far fa-comments"></i> 0 تعليقات</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg" alt="تتبع الشحنات">
+                    <div class="hover-arrow">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+                <div class="article-content">
+                    <span class="article-tag">خدمات التوصيل</span>
+                    <h3>نظام جديد لتتبع الشحنات بتقنيات متطورة</h3>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 20 يوليو 2025</span>
+                        <span><i class="far fa-comments"></i> 1 تعليقات</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="https://images.pexels.com/photos/1554646/pexels-photo-1554646.jpeg" alt="الشحن البحري">
+                    <div class="hover-arrow">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+                <div class="article-content">
+                    <span class="article-tag">الشحن البحري</span>
+                    <h3>توسيع خدمات الشحن البحري لتشمل موانئ جديدة</h3>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 20 يوليو 2025</span>
+                        <span><i class="far fa-comments"></i> 0 تعليقات</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="load-more">
+            <button class="load-more-btn">
+                تحميل المزيد
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>اشترك في نشرتنا البريدية</h2>
+            <p>احصل على آخر الأخبار والمستجدات في عالم الشحن واللوجستيات مباشرة إلى بريدك الإلكتروني</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="أدخل بريدك الإلكتروني">
+                <button type="submit">اشترك الآن</button>
+            </form>
+        </div>
+    </div>
+</section> 

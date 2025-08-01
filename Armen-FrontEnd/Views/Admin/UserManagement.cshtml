@@ -1,0 +1,164 @@
+﻿@{
+    ViewData["Title"] = "UserManagement";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/js/Admin/CSS/UserManagement.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+}
+
+@section Scripts {
+    <script src="~/js/Admin/js/UserManagement.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">إدارة الموظفين</h4>
+        <button class="btn add-user-btn" data-bs-toggle="modal" data-bs-target="#addUserModal">
+            <i class="fas fa-plus me-2"></i>إضافة موظف
+        </button>
+    </div>
+
+    <div class="card">
+        <div class="table-responsive">
+            <table class="data-table table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>الموظف</th>
+                        <th>الرقم الوطني</th>
+                        <th>رقم الهاتف</th>
+                        <th>البريد الإلكتروني</th>
+                        <th>كلمة المرور</th>
+                        <th>الوظيفة</th>
+                        <th>تقييم هذا الأسبوع</th>
+                        <th>سجل التقييمات</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <!-- سيتم ملؤه بالبيانات من الجافاسكريبت -->
+                </tbody>
+            </table>
+        </div>
+
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center" id="pagination">
+                <!-- سيتم ملؤه بالجافاسكريبت -->
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- مودال إضافة/تعديل مستخدم -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">إضافة موظف جديد</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm">
+                    <input type="hidden" id="userId">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">الاسم الكامل</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nationalId" class="form-label">الرقم الوطني</label>
+                        <input type="text" class="form-control" id="nationalId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">رقم الهاتف</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">كلمة المرور</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jobTitle" class="form-label">الوظيفة</label>
+                        <select class="form-select" id="jobTitle" required>
+                            <option value="" selected disabled>اختر الوظيفة</option>
+                            <option value="accountant">محاسب</option>
+                            <option value="customs_agent">مخلص جمركي</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">تقييم الأداء هذا الأسبوع (من 1 إلى 10)</label>
+                        <input type="number" class="form-control" id="rating" min="1" max="10" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary" id="saveUserBtn">حفظ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- مودال عرض سجل التقييمات -->
+<div class="modal fade" id="ratingsHistoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">سجل التقييمات الأسبوعية</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="ratingsChart"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>الأسبوع</th>
+                                        <th>التاريخ</th>
+                                        <th>التقييم</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ratingsHistoryBody">
+                                    <!-- سيتم ملؤه بالبيانات من الجافاسكريبت -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- مودال تأكيد الحذف -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">تأكيد الحذف</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>هل أنت متأكد أنك تريد حذف هذا الموظف؟</p>
+                <input type="hidden" id="deleteUserId">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">حذف</button>
+            </div>
+        </div>
+    </div>
+</div>

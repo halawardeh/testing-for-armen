@@ -1,0 +1,124 @@
+﻿
+:root {
+    --primary: #025F70;
+    --dark: #1A252F;
+    --border-radius: 0.5rem;
+    --sidebar-width: 280px;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f8f9fa;
+    padding-right: var(--sidebar-width);
+}
+
+/* الشريط الجانبي */
+.sidebar {
+    background: linear-gradient(180deg, var(--primary), var(--dark));
+    color: white;
+    width: var(--sidebar-width);
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar-brand {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+    .sidebar-brand .logo {
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: white;
+    }
+
+.sidebar-nav {
+    padding: 1rem;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}
+
+.nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+    .nav-link:hover,
+    .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        transform: translateX(-5px);
+    }
+
+    .nav-link i {
+        margin-left: 0.75rem;
+        font-size: 1.1rem;
+        width: 24px;
+        text-align: center;
+    }
+
+/* المحتوى الرئيسي */
+.main-content {
+    padding: 2rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* تكيف الشاشات الصغيرة */
+@@media (max-width: 992px) {
+    body {
+        padding-right: 0;
+    }
+
+    .sidebar {
+        transform: translateX(var(--sidebar-width));
+    }
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+    .sidebar-toggler {
+        display: block !important;
+    }
+}
+
+/* زر تبديل الشريط الجانبي للجوال */
+.mobile-sidebar-toggler {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    display: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--primary), var(--dark));
+    color: white;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+@@media (max-width: 992px) {
+    .mobile-sidebar-toggler {
+        display: flex;
+    }
+}
+

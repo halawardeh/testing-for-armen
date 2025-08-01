@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "~/Views/Shared/_clearanceLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Clearance/Profile.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/Clearance/Profile.js" asp-append-version="true"></script>
+}
+
+<div class="p-6">
+    <!-- Profile Header -->
+    <div class="profile-header" data-aos="fade-up">
+        <div class="relative z-10">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img class="profile-avatar" src="https://i.pravatar.cc/200?img=7" alt="سامر أحمد">
+                    <div class="mr-6">
+                        <h2 class="text-3xl font-bold mb-2">سامر أحمد خالد</h2>
+                        <p class="text-xl opacity-90 mb-3">مخلص جمركي معتمد - قسم التخليص</p>
+                        <div class="flex items-center space-x-4">
+                            <span class="badge success">نشط</span>
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
+                                <i class="fas fa-calendar-alt ml-1"></i>
+                                انضم في يناير 2020
+                            </span>
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
+                                <i class="fas fa-star ml-1"></i>
+                                تقييم ممتاز
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="action-btn btn-primary" onclick="editProfile()">
+                        <i class="fas fa-edit"></i>
+                        تحرير الملف الشخصي
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column -->
+        <div class="lg:col-span-2">
+            <!-- Personal Information -->
+            <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-header">
+                    <h3 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-user ml-2"></i>
+                        المعلومات الشخصية
+                    </h3>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-input" value="سامر أحمد خالد" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المنصب</label>
+                            <input type="text" class="form-input" value="مخلص جمركي معتمد" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الموظف</label>
+                            <input type="text" class="form-input" value="EMP-CLR-002" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">القسم</label>
+                            <input type="text" class="form-input" value="قسم التخليص الجمركي" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-input" value="samer.ahmed@armen-shipping.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الهاتف</label>
+                            <input type="tel" class="form-input" value="+962 77 987 6543">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الترخيص</label>
+                            <input type="text" class="form-input" value="CL-2024-0087" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">تاريخ انتهاء الترخيص</label>
+                            <input type="text" class="form-input" value="15 ديسمبر 2026" disabled>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 mt-6">
+                        <button class="action-btn btn-success" onclick="saveChanges()">
+                            <i class="fas fa-save"></i>
+                            حفظ التغييرات
+                        </button>
+                        <button class="action-btn btn-secondary" onclick="changePassword()">
+                            <i class="fas fa-key"></i>
+                            تغيير كلمة المرور
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

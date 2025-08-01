@@ -1,0 +1,465 @@
+﻿@{
+    Layout = "~/Views/Shared/_ImportLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Import/ImportDashbord.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/Import/ImportDashbord.js" asp-append-version="true"></script>
+}
+
+<!-- Main Content -->
+<main class="transition-all duration-300" id="mainContent">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-sm p-4 mb-8" data-aos="fade-down">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-primary-color">لوحة التحكم الرئيسية</h1>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button class="p-2 text-gray-600 hover:text-accent-color transition-colors">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <img class="w-10 h-10 rounded-full border-2 border-accent-color" src="https://i.pravatar.cc/100?img=4" alt="صورة الموظف">
+                    <span class="font-semibold text-primary-color">أحمد محمد</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="p-6">
+        <!-- Welcome Section -->
+        <div class="welcome-section p-8 mb-8" data-aos="zoom-in">
+            <div class="relative z-10">
+                <h2 class="text-3xl font-bold mb-2">أهلاً بك، أحمد محمد 👋</h2>
+                <p class="text-lg opacity-90">لديك مهام جديدة تتطلب انتباهك اليوم</p>
+
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-lg font-semibold opacity-90">مهام جديدة</p>
+                        <p class="text-3xl font-bold counter" data-target="7">0</p>
+                    </div>
+                    <div class="text-4xl opacity-80">
+                        <i class="fas fa-inbox"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-lg font-semibold opacity-90">قيد التنفيذ</p>
+                        <p class="text-3xl font-bold counter" data-target="12">0</p>
+                    </div>
+                    <div class="text-4xl opacity-80">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-lg font-semibold opacity-90">مكتملة هذا الشهر</p>
+                        <p class="text-3xl font-bold counter" data-target="45">0</p>
+                    </div>
+                    <div class="text-4xl opacity-80">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Section -->
+        <div class="dashboard-card p-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-primary-color">إدارة المهام</h3>
+                <button onclick="showAssignTaskModal()" class="bg-accent-color text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <i class="fas fa-plus ml-2"></i>
+                    تعيين مهمة جديدة
+                </button>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-nav mb-6">
+                <button class="tab-button active" data-tab="new-tasks">
+                    مهام جديدة في القسم
+                    <span class="notification-badge">7</span>
+                </button>
+                <button class="tab-button" data-tab="my-tasks">
+                    مهامي قيد التنفيذ
+                    <span class="notification-badge">12</span>
+                </button>
+                <button class="tab-button" data-tab="completed-tasks">
+                    مهامي المكتملة
+                </button>
+                <button class="tab-button" data-tab="assigned-tasks">
+                    المهام المعينة بواسطتي
+                    <span class="notification-badge">5</span>
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="new-tasks" class="tab-content">
+                <div class="task-table">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-white">
+                                <th class="p-4 text-right">رقم الطلب</th>
+                                <th class="p-4 text-right">مصدر الطلب</th>
+                                <th class="p-4 text-right">تاريخ الإنشاء</th>
+                                <th class="p-4 text-right">نوع الخدمة</th>
+                                <th class="p-4 text-right">الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="new-tasks-body">
+                            <tr>
+                                <td class="p-4 font-semibold">#SH-2025-001</td>
+                                <td class="p-4">الموقع الإلكتروني</td>
+                                <td class="p-4">2025-01-21 09:30</td>
+                                <td class="p-4">شحن بحري</td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-receive" onclick="receiveTask('SH-2025-001')">
+                                        <i class="fas fa-hand-paper ml-2"></i>
+                                        استلام وبدء المهمة
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">#SH-2025-002</td>
+                                <td class="p-4">مدير المبيعات</td>
+                                <td class="p-4">2025-01-21 10:15</td>
+                                <td class="p-4">شحن جوي</td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-receive" onclick="receiveTask('SH-2025-002')">
+                                        <i class="fas fa-hand-paper ml-2"></i>
+                                        استلام وبدء المهمة
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">#SH-2025-003</td>
+                                <td class="p-4">الموقع الإلكتروني</td>
+                                <td class="p-4">2025-01-21 11:00</td>
+                                <td class="p-4">تخليص جمركي</td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-receive" onclick="receiveTask('SH-2025-003')">
+                                        <i class="fas fa-hand-paper ml-2"></i>
+                                        استلام وبدء المهمة
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="my-tasks" class="tab-content hidden">
+                <div class="task-table">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-white">
+                                <th class="p-4 text-right">رقم الطلب</th>
+                                <th class="p-4 text-right">اسم الزبون</th>
+                                <th class="p-4 text-right">تاريخ الاستلام</th>
+                                <th class="p-4 text-right">الحالة الحالية</th>
+                                <th class="p-4 text-right">الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-4 font-semibold">#SH-2024-998</td>
+                                <td class="p-4">شركة النخبة للتجارة</td>
+                                <td class="p-4">2025-01-20 14:30</td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800">قيد المعالجة</span>
+                                </td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-open" onclick="openTask('SH-2024-998')">
+                                        <i class="fas fa-external-link-alt ml-2"></i>
+                                        فتح
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">#SH-2024-999</td>
+                                <td class="p-4">مؤسسة الأفق</td>
+                                <td class="p-4">2025-01-20 16:00</td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">بانتظار مراجعة المخلص</span>
+                                </td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-open" onclick="openTask('SH-2024-999')">
+                                        <i class="fas fa-external-link-alt ml-2"></i>
+                                        فتح
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">#SH-2025-000</td>
+                                <td class="p-4">شركة الإبداع المحدودة</td>
+                                <td class="p-4">2025-01-21 08:00</td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800">جاهزة للتمرير</span>
+                                </td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-open" onclick="openTask('SH-2025-000')">
+                                        <i class="fas fa-external-link-alt ml-2"></i>
+                                        فتح
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="completed-tasks" class="tab-content hidden">
+                <div class="task-table">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-white">
+                                <th class="p-4 text-right">رقم الطلب</th>
+                                <th class="p-4 text-right">اسم الزبون</th>
+                                <th class="p-4 text-right">تاريخ الإكمال</th>
+                                <th class="p-4 text-right">التقييم</th>
+                                <th class="p-4 text-right">الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-4 font-semibold">#SH-2024-995</td>
+                                <td class="p-4">شركة التقدم</td>
+                                <td class="p-4">2025-01-19 17:30</td>
+                                <td class="p-4">
+                                    <div class="text-yellow-400">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-open" onclick="viewCompletedTask('SH-2024-995')">
+                                        <i class="fas fa-eye ml-2"></i>
+                                        عرض
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">#SH-2024-996</td>
+                                <td class="p-4">مجموعة الرائد</td>
+                                <td class="p-4">2025-01-18 15:45</td>
+                                <td class="p-4">
+                                    <div class="text-yellow-400">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-open" onclick="viewCompletedTask('SH-2024-996')">
+                                        <i class="fas fa-eye ml-2"></i>
+                                        عرض
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="assigned-tasks" class="tab-content hidden">
+                <div class="task-table">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-white">
+                                <th class="p-4 text-right">رقم المهمة</th>
+                                <th class="p-4 text-right">الموظف المعين</th>
+                                <th class="p-4 text-right">نوع المهمة</th>
+                                <th class="p-4 text-right">تاريخ التعيين</th>
+                                <th class="p-4 text-right">الحالة</th>
+                                <th class="p-4 text-right">الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assigned-tasks-body">
+                            <tr>
+                                <td class="p-4 font-semibold">#AT-2025-001</td>
+                                <td class="p-4">سارة أحمد</td>
+                                <td class="p-4">متابعة شحنة</td>
+                                <td class="p-4">2025-01-21 09:00</td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">قيد التنفيذ</span>
+                                </td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-open" onclick="viewAssignedTask('AT-2025-001')">
+                                        <i class="fas fa-eye ml-2"></i>
+                                        متابعة
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">#AT-2025-002</td>
+                                <td class="p-4">محمد خالد</td>
+                                <td class="p-4">تخليص جمركي</td>
+                                <td class="p-4">2025-01-21 10:30</td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800">مكتملة</span>
+                                </td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-open" onclick="viewAssignedTask('AT-2025-002')">
+                                        <i class="fas fa-eye ml-2"></i>
+                                        عرض
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">#AT-2025-003</td>
+                                <td class="p-4">فاطمة علي</td>
+                                <td class="p-4">تواصل مع العميل</td>
+                                <td class="p-4">2025-01-21 11:15</td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800">بانتظار الرد</span>
+                                </td>
+                                <td class="p-4">
+                                    <button class="action-btn btn-open" onclick="viewAssignedTask('AT-2025-003')">
+                                        <i class="fas fa-eye ml-2"></i>
+                                        متابعة
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+
+<!-- Loading Modal -->
+<div id="loadingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white p-8 rounded-lg text-center">
+        <div class="loading-spinner mx-auto mb-4"></div>
+        <p class="text-lg font-semibold text-primary-color">جاري معالجة الطلب...</p>
+    </div>
+</div>
+
+<!-- Success Toast -->
+<div id="successToast" class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+    <div class="flex items-center">
+        <i class="fas fa-check-circle ml-2"></i>
+        <span>تم استلام المهمة بنجاح!</span>
+    </div>
+</div>
+
+<!-- Assign Task Modal -->
+<div id="assignTaskModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 max-h-90vh overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-primary-color">تعيين مهمة جديدة</h2>
+            <button onclick="hideAssignTaskModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <form id="assignTaskForm" onsubmit="submitAssignTask(event)">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- نوع المهمة -->
+                <div class="form-group">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">نوع المهمة *</label>
+                    <select id="taskType" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-color focus:border-accent-color">
+                        <option value="">اختر نوع المهمة</option>
+                        <option value="shipping-follow">متابعة شحنة</option>
+                        <option value="customs-clearance">تخليص جمركي</option>
+                        <option value="customer-contact">التواصل مع العميل</option>
+                        <option value="documentation">إعداد الوثائق</option>
+                        <option value="inspection">فحص البضائع</option>
+                        <option value="delivery">التسليم</option>
+                    </select>
+                </div>
+
+                <!-- الأولوية -->
+                <div class="form-group">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">الأولوية *</label>
+                    <select id="taskPriority" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-color focus:border-accent-color">
+                        <option value="">اختر الأولوية</option>
+                        <option value="high" class="text-red-600">عالية</option>
+                        <option value="medium" class="text-yellow-600">متوسطة</option>
+                        <option value="low" class="text-green-600">منخفضة</option>
+                    </select>
+                </div>
+
+                <!-- الموظف المعين -->
+                <div class="form-group">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">الموظف المعين *</label>
+                    <select id="assignedEmployee" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-color focus:border-accent-color">
+                        <option value="">اختر الموظف</option>
+                        <option value="sarah-ahmed">سارة أحمد - قسم الشحن</option>
+                        <option value="mohamed-khalid">محمد خالد - التخليص الجمركي</option>
+                        <option value="fatima-ali">فاطمة علي - خدمة العملاء</option>
+                        <option value="ahmed-hassan">أحمد حسن - المخازن</option>
+                        <option value="nora-salem">نورا سالم - الوثائق</option>
+                        <option value="omar-abdullah">عمر عبدالله - المتابعة</option>
+                    </select>
+                </div>
+
+                <!-- تاريخ الاستحقاق -->
+                <div class="form-group">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">تاريخ الاستحقاق *</label>
+                    <input type="datetime-local" id="dueDate" required
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-color focus:border-accent-color">
+                </div>
+            </div>
+
+            <!-- رقم الطلب المرجعي -->
+            <div class="form-group mt-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">رقم الطلب المرجعي</label>
+                <input type="text" id="referenceOrder"
+                       placeholder="مثال: #SH-2025-001 (اختياري)"
+                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-color focus:border-accent-color">
+            </div>
+
+            <!-- عنوان المهمة -->
+            <div class="form-group mt-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">عنوان المهمة *</label>
+                <input type="text" id="taskTitle" required
+                       placeholder="مثال: متابعة شحنة العميل أحمد محمد"
+                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-color focus:border-accent-color">
+            </div>
+
+            <!-- وصف المهمة -->
+            <div class="form-group mt-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">وصف المهمة *</label>
+                <textarea id="taskDescription" required rows="4"
+                          placeholder="اكتب تفاصيل المهمة والتعليمات للموظف..."
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-color focus:border-accent-color resize-vertical"></textarea>
+            </div>
+
+            <!-- ملاحظات إضافية -->
+            <div class="form-group mt-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">ملاحظات إضافية</label>
+                <textarea id="taskNotes" rows="3"
+                          placeholder="أي ملاحظات إضافية أو تعليمات خاصة (اختياري)"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-color focus:border-accent-color resize-vertical"></textarea>
+            </div>
+
+            <!-- أزرار العمل -->
+            <div class="flex justify-end space-x-4 mt-8">
+                <button type="button" onclick="hideAssignTaskModal()"
+                        class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    إلغاء
+                </button>
+                <button type="submit"
+                        class="px-6 py-3 bg-accent-color text-white rounded-lg hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <i class="fas fa-paper-plane ml-2"></i>
+                    تعيين المهمة
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

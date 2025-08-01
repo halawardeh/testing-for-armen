@@ -1,0 +1,400 @@
+﻿
+@{
+    ViewData["Title"] = "FactoryDetails";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int factoryId = ViewBag.FactoryId ?? 1;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Import/FactoryDetails.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <script src="~/js/Import/FactoryDetails.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+}
+
+
+<!-- Main Content -->
+<main class="flex-1 transition-all duration-300" id="mainContent">
+   
+
+    <div class="p-6">
+        <!-- Factory Profile Card -->
+        <div class="main-card mb-8" data-aos="fade-up">
+            <div class="factory-header">
+                <div class="factory-avatar">
+                    <img src="https://via.placeholder.com/150x150/025f70/ffffff?text=ST" alt="شعار المصنع">
+                    <div class="status-badge status-active">نشط</div>
+                </div>
+                <div class="factory-info">
+                    <h2 class="factory-name">Shenzhen Tech Manufacturing</h2>
+                    <p class="factory-title">لي شين - مدير الإنتاج</p>
+                    <p class="company-name">متخصص في الإلكترونيات الدقيقة والتكنولوجيا المتطورة</p>
+                    <div class="factory-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>شنزن، الصين</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="factory-rating-overview">
+                    <div class="overall-rating">
+                        <div class="rating-number">4.9</div>
+                        <div class="rating-stars">
+                            <span class="text-yellow-500">★★★★★</span>
+                        </div>
+                        <div class="rating-count">(156 تقييم)</div>
+                    </div>
+                    <div class="rating-breakdown">
+                        <div class="rating-item">
+                            <span class="rating-label">جودة المنتج</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 98%"></div>
+                            </div>
+                            <span class="rating-value">4.9</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">الالتزام بالمواعيد</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 96%"></div>
+                            </div>
+                            <span class="rating-value">4.8</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">التواصل والخدمة</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="rating-value">5.0</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">الأسعار التنافسية</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 92%"></div>
+                            </div>
+                            <span class="rating-value">4.6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Factory Information -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-industry ml-3"></i>
+                            معلومات المصنع
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">اسم المصنع:</span>
+                                <span class="info-value">Shenzhen Tech Manufacturing Co., Ltd.</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">نوع الصناعة:</span>
+                                <span class="category-badge category-electronics">إلكترونيات ومعدات</span>
+                            </div>
+
+                        </div>
+
+                        <div class="company-description">
+                            <h4>نبذة عن المصنع:</h4>
+                            <p>مصنع متخصص في تصنيع وتطوير الأجهزة الإلكترونية المتطورة وحلول التكنولوجيا الذكية. تأسس المصنع في عام 2015 وأصبح من الرواد في مجال الإلكترونيات الدقيقة في منطقة شنزن. نحن نمتلك خطوط إنتاج حديثة ومعدات متطورة تمكننا من تقديم منتجات عالية الجودة تلبي المعايير الدولية.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Products & Manufacturing Capabilities -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-cogs ml-3"></i>
+                            المنتجات والقدرات التصنيعية
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="products-grid">
+                            <div class="product-item">
+                                <div class="product-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>الأجهزة الذكية</h4>
+                                    <p>هواتف ذكية وأجهزة لوحية متطورة</p>
+                                    <span class="production-capacity">10,000 قطعة/شهر</span>
+                                </div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-icon">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>الدوائر المتكاملة</h4>
+                                    <p>معالجات وشرائح إلكترونية</p>
+                                    <span class="production-capacity">50,000 قطعة/شهر</span>
+                                </div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-icon">
+                                    <i class="fas fa-wifi"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>أجهزة IoT</h4>
+                                    <p>أجهزة إنترنت الأشياء الذكية</p>
+                                    <span class="production-capacity">15,000 قطعة/شهر</span>
+                                </div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-icon">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>كاميرات المراقبة</h4>
+                                    <p>أنظمة مراقبة ذكية عالية الجودة</p>
+                                    <span class="production-capacity">8,000 قطعة/شهر</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reviews -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-comments ml-3"></i>
+                            أحدث التقييمات
+                        </h3>
+                        <button class="action-btn btn-outline" onclick="showAllReviews()">
+                            <i class="fas fa-eye ml-2"></i>
+                            عرض جميع التقييمات
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <div class="reviews-list">
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">عبدالله الشمري</span>
+                                        <span class="review-date">20 يناير 2025</span>
+                                    </div>
+                                    <div class="review-rating">
+                                        <span class="review-stars text-yellow-500">★★★★★</span>
+                                        <span class="rating-number">5</span>
+                                    </div>
+                                </div>
+                                <div class="review-text">مصنع ممتاز وجودة إنتاج عالية جداً. الالتزام بالمواعيد والمواصفات ممتاز. فريق العمل محترف ومتعاون.</div>
+                            </div>
+
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">نورة العتيبي</span>
+                                        <span class="review-date">18 يناير 2025</span>
+                                    </div>
+                                    <div class="review-rating">
+                                        <span class="review-stars text-yellow-500">★★★★★</span>
+                                        <span class="rating-number">5</span>
+                                    </div>
+                                </div>
+                                <div class="review-text">تعامل راقي وأسعار تنافسية. المنتجات وصلت بحالة ممتازة والتغليف احترافي. أنصح بالتعامل معهم.</div>
+                            </div>
+
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">خالد المطيري</span>
+                                        <span class="review-date">15 يناير 2025</span>
+                                    </div>
+                                    <div class="review-rating">
+                                        <span class="review-stars text-yellow-500">★★★★☆</span>
+                                        <span class="rating-number">4</span>
+                                    </div>
+                                </div>
+                                <div class="review-text">خدمة جيدة بشكل عام، جودة الإنتاج عالية ولكن كان هناك تأخير بسيط في التسليم. عدا ذلك كل شيء ممتاز.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-8">
+                <!-- Contact Information -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-address-book ml-3"></i>
+                            معلومات الاتصال
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="contact-list">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <span class="contact-label">البريد الإلكتروني</span>
+                                    <span class="contact-value">li.shin@shenzhentech.com</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <span class="contact-label">الهاتف</span>
+                                    <span class="contact-value">+86 755 2345 6789</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-fax"></i>
+                                <div>
+                                    <span class="contact-label">الفاكس</span>
+                                    <span class="contact-value">+86 755 2345 6790</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe"></i>
+                                <div>
+                                    <span class="contact-label">الموقع الإلكتروني</span>
+                                    <span class="contact-value">www.shenzhentech-manufacturing.com</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <span class="contact-label">العنوان</span>
+                                    <span class="contact-value">456 Industrial Zone, Shenzhen Technology Park, China</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Rating Modal -->
+<div id="ratingModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden flex items-center justify-center z-50">
+    <div class="modal-content max-w-2xl w-full mx-4 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color">إضافة تقييم للمصنع</h3>
+            <button onclick="closeRatingModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="text-center mb-6">
+            <img class="w-20 h-20 rounded-full mx-auto mb-4" src="https://via.placeholder.com/150x150/025f70/ffffff?text=ST" alt="شعار المصنع">
+            <h4 class="text-xl font-bold text-primary-color">Shenzhen Tech Manufacturing</h4>
+            <p class="text-gray-600">لي شين - مدير الإنتاج</p>
+        </div>
+
+        <form id="ratingForm" onsubmit="submitRating(event)">
+            <div class="mb-6">
+                <label class="form-label">التقييم العام *</label>
+                <div class="rating-input flex justify-center items-center space-x-2 mt-2">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="selectedRating" value="" required>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="form-label">جودة المنتج</label>
+                    <select class="form-input" id="productQuality">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الالتزام بالمواعيد</label>
+                    <select class="form-input" id="deliveryCommitment">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">التواصل والخدمة</label>
+                    <select class="form-input" id="communication">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الأسعار التنافسية</label>
+                    <select class="form-input" id="pricing">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="form-label">تعليق التقييم</label>
+                <textarea id="ratingComment" class="form-input" rows="4" placeholder="شارك تجربتك مع هذا المصنع..."></textarea>
+            </div>
+
+            <div class="flex space-x-4">
+                <button type="submit" class="action-btn btn-primary flex-1">
+                    <i class="fas fa-star ml-2"></i>
+                    إرسال التقييم
+                </button>
+                <button type="button" class="action-btn btn-secondary flex-1" onclick="closeRatingModal()">
+                    إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Success Toast -->
+<div id="successToast" class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+    <div class="flex items-center">
+        <i class="fas fa-check-circle ml-2"></i>
+        <span id="toastMessage">تم تنفيذ العملية بنجاح!</span>
+    </div>
+</div>
+
+<script>
+    // Initialize AOS animations
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+    });
+</script>

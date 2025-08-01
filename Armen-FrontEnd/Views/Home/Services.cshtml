@@ -1,0 +1,805 @@
+@{
+    ViewData["Title"] = "خدماتنا";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/services.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#visaModal') {
+                var visaModal = document.getElementById('visaModal');
+                if (visaModal) {
+                    visaModal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+}
+            }
+        });
+    </script>
+}
+
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <h1>خدماتنا</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item active">خدماتنا</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Services Grid Section -->
+<section class="services-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>اختر الخدمة التي تحتاجها واترك الباقي علينا</h2>
+            <p>خدمات السفر إلى الصين</p>
+
+        </div>
+        
+        <div class="services-grid">
+            <!-- Service Card 1 -->
+            <div class="service-card" data-service="invitation">
+                <div class="service-icon">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <h3>طلب خطاب دعوة</h3>
+                <p>احصل على خطاب دعوة رسمي لزيارة الصين بكل سهولة. الخدمة متاحة مجانًا لعملائنا الحاليين.</p>
+                <div class="service-footer">
+                    <span class="service-time"><i class="fas fa-clock"></i> 24-48 ساعة</span>
+                    <button class="service-btn">اطلب الآن <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </div>
+
+            <!-- Service Card 2 -->
+            <div class="service-card" data-service="visa">
+                <div class="service-icon">
+                    <i class="fas fa-passport"></i>
+                </div>
+                <h3>طلب تأشيرة دخول</h3>
+                <p>نساعدك في استخراج تأشيرة دخول للصين، سواء للسياحة أو العمل، ضمن خيارات عادية ومستعجلة.</p>
+                <div class="service-footer">
+                    <span class="service-time"><i class="fas fa-clock"></i> 3-7 أيام عمل</span>
+                    <button class="service-btn">اطلب الآن <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </div>
+
+            <!-- Service Card 3 -->
+            <div class="service-card" data-service="flight">
+                <div class="service-icon">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h3>حجز تذاكر طيران</h3>
+                <p>اطلب عرض سعر لرحلتك من الأردن إلى الصين على أفضل الخطوط الجوية.</p>
+                <div class="service-footer">
+                    <span class="service-time"><i class="fas fa-clock"></i> فوري</span>
+                    <button class="service-btn">اطلب الآن <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </div>
+
+            <!-- Service Card 4 -->
+            <div class="service-card" data-service="transfer">
+                <div class="service-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3>النقل من المطار</h3>
+                <p>احجز خدمة استقبال بالمطار ونقلك إلى وجهتك بأمان داخل الصين.</p>
+                <div class="service-footer">
+                    <span class="service-time"><i class="fas fa-clock"></i> حجز مسبق</span>
+                    <button class="service-btn">اطلب الآن <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </div>
+
+            <!-- Service Card 5 -->
+            <div class="service-card" data-service="hotel">
+                <div class="service-icon">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <h3>حجز فندق</h3>
+                <p>نوفر لك أفضل الفنادق في المدن الصينية الرئيسية بأسعار مناسبة.</p>
+                <div class="service-footer">
+                    <span class="service-time"><i class="fas fa-clock"></i> فوري</span>
+                    <button class="service-btn">اطلب الآن <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </div>
+
+            <!-- Service Card 6 -->
+            <div class="service-card" data-service="translator">
+                <div class="service-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>حجز مترجم شخصي</h3>
+                <p>استعن بمترجم محترف يرافقك في الأسواق أو الاجتماعات لتسهيل التواصل.</p>
+                <div class="service-footer">
+                    <span class="service-time"><i class="fas fa-clock"></i> حجز مسبق</span>
+                    <button class="service-btn">اطلب الآن <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="features-content">
+            <div class="features-text">
+                <h2>لماذا تختارنا لرحلتك إلى الصين؟</h2>
+                <p>نحن نقدم أكثر من مجرد خدمات سفر، نقدم لك تجربة متكاملة تمنحك الراحة والاطمئنان</p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="feature-info">
+                            <h4>خبرة أكثر من 10 سنوات</h4>
+                            <p>نحن نعرف الصين جيداً ونساعدك في تجنب المشاكل الشائعة.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="feature-info">
+                            <h4>فريق متحدث للصينية</h4>
+                            <p>فريقنا يتحدث الصينية بطلاقة لتسهيل جميع معاملاتك.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="feature-info">
+                            <h4>أسعار تنافسية</h4>
+                            <p>نقدم أفضل الأسعار مع الحفاظ على جودة الخدمة.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-image">
+                <img src="https://images.unsplash.com/photo-1538970272646-f61fabb3a8a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                     alt="الصين">
+                <div class="image-card">
+                    <h3>خدمة 24/7</h3>
+                    <p>فريق الدعم متاح على مدار الساعة لمساعدتك في أي وقت</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>آراء عملائنا</h2>
+            <p>قصص نجاح نرويها بفخر من عملاء استخدموا خدماتنا للسفر إلى الصين</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"ساعدوني في الحصول على تأشيرة الصين خلال 3 أيام فقط! فريق محترف يعرف كل التفاصيل الدقيقة."</p>
+                <div class="testimonial-author">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="صورة العميل">
+                    <div class="author-info">
+                        <strong>محمد عبد الرحمن</strong>
+                        <span>رجل أعمال</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"المترجم الذي وفّرته الشركة أنقذ رحلتي! ساعدني في التNegotiating على أسعار جيدة في أسواق جوانزو."</p>
+                <div class="testimonial-author">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="صورة العميلة">
+                    <div class="author-info">
+                        <strong>سارة أحمد</strong>
+                        <span>صاحبة متجر إلكتروني</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p>"الفندق الذي حجزته لي الشركة كان ممتازاً وبنصف السعر الذي وجدته على الإنترنت! أوصي بجميع خدماتهم."</p>
+                <div class="testimonial-author">
+                    <img src="https://i.pravatar.cc/150?img=8" alt="صورة العميل">
+                    <div class="author-info">
+                        <strong>خالد الزعبي</strong>
+                        <span>مدير شركة استيراد</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-content">
+            <div class="contact-info">
+                <div>
+                    <h2>استعد لرحلتك إلى الصين</h2>
+                    <p>اترك تفاصيل رحلتك وسيتواصل معك خبير الصين خلال 24 ساعة لتقديم الحلول المناسبة لك.</p>
+                </div>
+
+                <div class="contact-details">
+                    <p><i class="fas fa-phone"></i> +962 123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> china@arman-shipping.com</p>
+                    <p><i class="fas fa-clock"></i> خدمة العملاء متاحة 24/7</p>
+                </div>
+            </div>
+            
+            <div class="contact-form-container">
+                <form class="contact-form">
+                    <h3>تواصل معنا</h3>
+                    <div class="form-group">
+                        <input type="text" placeholder="الاسم الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="البريد الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="رقم الهاتف" required>
+                    </div>
+                    <div class="form-group">
+                        <select>
+                            <option value="">اختر الخدمة المطلوبة</option>
+                            <option value="visa">تأشيرة الصين</option>
+                            <option value="invitation">خطاب دعوة</option>
+                            <option value="flight">تذاكر طيران</option>
+                            <option value="hotel">حجز فندق</option>
+                            <option value="translator">مترجم شخصي</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="4" placeholder="أخبرنا عن احتياجاتك ومواعيد سفرك..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary book-btn">إرسال الطلب</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<!-- Service Modal: Invitation Letter -->
+<div class="service-modal" id="invitationModal">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h3 class="modal-title">طلب خطاب دعوة</h3>
+            <button type="button" class="modal-close" data-modal-close>&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-info">
+                <p>هذه الخدمة <strong>مجانية لعملائنا الحاليين</strong> في خدمات الشحن، وبتكلفة <strong>200 شيكل</strong> للعملاء الجدد.</p>
+            </div>
+            
+            <form class="service-form" id="invitationForm">
+                <div class="form-group">
+                    <label class="form-label">هل أنت من عملائنا الحاليين؟</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="customer_type" value="existing">
+                            نعم، أنا عميل حالي
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="customer_type" value="new" checked>
+                            لا، أنا عميل جديد
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">صورة جواز السفر (JPG, PNG, PDF)</label>
+                    <input type="file" class="file-input" name="passport_copy" >
+                </div>
+                <div class="form-group">
+                    <label class="form-label">الاسم الكامل</label>
+                    <input type="text" class="form-control" name="full_name" placeholder="اكتب اسمك الكامل" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">الجنسية</label>
+                    <input type="text" class="form-control" name="nationality" placeholder="مثال: أردني" >
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">تاريخ الميلاد</label>
+                    <input type="date" class="form-control" name="birthdate" >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">المهنة</label>
+                    <select class="form-control" name="profession" id="professionSelect" >
+                        <option value="">اختر المهنة</option>
+                        <option value="wholesale">تاجر جملة</option>
+                        <option value="chain_owner">صاحب سلسلة محلات</option>
+                        <option value="other">أخرى</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="otherProfessionGroup" style="display:none;">
+                    <label class="form-label">يرجى تحديد المهنة</label>
+                    <input type="text" class="form-control" name="other_profession" placeholder="اكتب مهنتك">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">تفاصيل الزيارة</label>
+                    <textarea class="form-control" name="visit_details" rows="3" placeholder="اكتب تفاصيل زيارتك للصين" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">نوع جواز السفر</label>
+                    <select class="form-control" name="passport_type" required>
+                        <option value="">اختر نوع الجواز</option>
+                        <option value="normal">عادي</option>
+                        <option value="special">خاص</option>
+                        <option value="diplomatic">دبلوماسي</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">تاريخ الوصول المتوقع</label>
+                    <input type="date" class="form-control" name="arrival_date" required>
+                </div>
+                
+               
+
+                <div class="price-section">
+                    <p class="price-amount">المبلغ المطلوب: <span id="invitationPrice">200</span> شيكل</p>
+                </div>
+                
+                <button type="submit" class="submit-btn">إرسال الطلب</button>
+
+                <div class="text-center mt-3">
+                    <a href="/Home/Services#visaModal" id="goToVisaModal" style="color:#007bff; text-decoration:underline; cursor:pointer;">تريد طلب تأشيرة دخول؟</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Visa Modal -->
+<div class="service-modal" id="visaModal">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h3 class="modal-title">طلب تأشيرة دخول</h3>
+            <button type="button" class="modal-close" data-modal-close>&times;</button>
+        </div>
+        <div class="modal-body">
+            <form class="service-form" id="visaForm">
+                <div class="form-group">
+                    <label class="form-label">صورة جواز السفر</label>
+                    <input type="file" class="file-input" name="passport_copy" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">صورة شخصية</label>
+                    <input type="file" class="file-input" name="personal_photo" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">الاسم الكامل</label>
+                    <input type="text" class="form-control" name="full_name" placeholder="اكتب اسمك الكامل" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">الجنسية</label>
+                    <input type="text" class="form-control" name="nationality" placeholder="مثال: أردني" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">تاريخ الميلاد</label>
+                    <input type="date" class="form-control" name="birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">رقم الهاتف</label>
+                    <input type="tel" class="form-control" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">هل سبق أن حصلت على تأشيرة للصين؟</label>
+                    <input type="checkbox" name="had_visa" id="hadVisaCheckbox">
+                    <label for="hadVisaCheckbox">نعم، حصلت على تأشيرة من قبل</label>
+                </div>
+                <div class="form-group" id="visaHistoryGroup" style="display:none;">
+                    <label class="form-label">متى وأين حصلت على آخر تأشيرة؟</label>
+                    <input type="text" class="form-control" name="visa_history" placeholder="مثال: بكين 2023">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">هل ستنتقل بين مدن؟</label>
+                    <input type="checkbox" name="has_route" id="hasRouteCheckbox">
+                    <label for="hasRouteCheckbox">نعم، سأنتقل بين مدن</label>
+                </div>
+                <div class="form-group" id="routeGroup" style="display:none;">
+                    <label class="form-label">اذكر المدن التي ستزورها بالترتيب</label>
+                    <input type="text" class="form-control" name="route" placeholder="مثال: بكين - شنغهاي - قوانزو">
+                </div>
+                <div class="form-group" id="visaInvitationField" style="display: none;">
+                    <label class="form-label">يرجى رفع خطاب الدعوة</label>
+                    <input type="file" class="file-input">
+                </div>
+                <div class="price-section">
+                    <p class="price-amount">المبلغ المطلوب: <span id="visaPrice">350</span> شيكل</p>
+                </div>
+                <button type="submit" class="submit-btn">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Translator Modal -->
+<div class="service-modal" id="translatorModal">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h3 class="modal-title">حجز مترجم شخصي</h3>
+            <button type="button" class="modal-close" data-modal-close>&times;</button>
+        </div>
+        <div class="modal-body">
+            <form class="service-form" id="translatorForm">
+                <div class="form-group">
+                    <label class="form-label">تاريخ بدء الخدمة</label>
+                    <input type="date" class="form-control" name="start_date" required>
+            </div>
+                <div class="form-group">
+                    <label class="form-label">عدد الأيام المطلوبة</label>
+                    <input type="number" class="form-control" name="days" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">المدينة أو السوق المطلوب</label>
+                    <select class="form-control" name="city" required>
+                        <option value="">اختر المدينة</option>
+                        <option value="beijing">بكين</option>
+                        <option value="shanghai">شنغهاي</option>
+                        <option value="guangzhou">قوانزو</option>
+                        <option value="shenzhen">شينزن</option>
+                        <option value="yiwu">ئي وو</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">الفترات المطلوبة</label>
+                    <input type="text" class="form-control" name="periods" placeholder="مثال: صباحاً، مساءً، كامل اليوم" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">اللغات المطلوبة</label>
+                    <input type="text" class="form-control" name="languages" placeholder="مثال: عربي، صيني، إنجليزي" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">نوع المهنة أو التخصص</label>
+                    <input type="text" class="form-control" name="profession" placeholder="مثال: تجارة، قانون، سياحة ..." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ملاحظات إضافية</label>
+                    <textarea class="form-control" name="notes" rows="2" placeholder="أي تفاصيل أو طلبات خاصة"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+</div>
+            
+<!-- Flight Modal -->
+<div class="service-modal" id="flightModal">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h3 class="modal-title">حجز تذاكر طيران</h3>
+            <button type="button" class="modal-close" data-modal-close>&times;</button>
+        </div>
+        <div class="modal-body">
+            <form class="service-form" id="flightForm">
+                <div class="form-group">
+                    <label class="form-label">صورة جواز السفر</label>
+                    <input type="file" class="file-input" name="passport_copy" required>
+                    </div>
+                <div class="form-group">
+                    <label class="form-label">من أين ستسافر؟</label>
+                    <input type="text" class="form-control" name="from_city" placeholder="مثال: عمان" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">إلى أين ستسافر؟</label>
+                    <input type="text" class="form-control" name="to_city" placeholder="مثال: بكين" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">تاريخ المغادرة</label>
+                    <input type="date" class="form-control" name="departure_date" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">درجة السفر</label>
+                    <select class="form-control" name="flight_class" required>
+                        <option value="">اختر الدرجة</option>
+                        <option value="economy">سياحية</option>
+                        <option value="business">رجال أعمال</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">عدد المسافرين</label>
+                    <input type="number" class="form-control" name="passenger_count" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">معلومات المسافرين</label>
+                    <textarea class="form-control" name="passenger_details" rows="3" placeholder="يرجى إدخال اسم كل مسافر وتاريخ ميلاده ورقم جوازه"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+</div>
+                
+<!-- Transfer Modal -->
+<div class="service-modal" id="transferModal">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h3 class="modal-title">طلب خدمة النقل من المطار</h3>
+            <button type="button" class="modal-close" data-modal-close>&times;</button>
+        </div>
+        <div class="modal-body">
+            <form class="service-form" id="transferForm">
+                <div class="form-group">
+                    <label class="form-label">اسم الم airport الذي أقلعت منه</label>
+                    <input type="text" class="form-control" name="departure_airport" placeholder="مثال: مطار الملكة علياء" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">رقم الرحلة</label>
+                    <input type="text" class="form-control" name="flight_number" placeholder="مثال: RJ182" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">تفاصيل الرحلة</label>
+                    <textarea class="form-control" name="flight_details" rows="2" placeholder="مثال: الوزن، عدد الركاب ..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">عدد الركاب</label>
+                    <input type="number" class="form-control" name="passenger_count" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">المدينة التي تريد الذهاب إليها</label>
+                    <select class="form-control" name="destination_city" id="destinationCitySelect" required>
+                        <option value="">اختر المدينة</option>
+                        <option value="beijing">بكين</option>
+                        <option value="shanghai">شنغهاي</option>
+                        <option value="guangzhou">قوانزو</option>
+                        <option value="shenzhen">شينزن</option>
+                        <option value="yiwu">ئي وو</option>
+                    </select>
+                </div>
+                <div class="form-group" id="hotelGroup" style="display:none;">
+                    <label class="form-label">اختر الفندق</label>
+                    <select class="form-control" name="hotel" id="hotelSelect">
+                        <option value="">اختر الفندق</option>
+                        <!-- سيتم تعبئة الفنادق ديناميكياً -->
+                    </select>
+                </div>
+                <div class="form-group" id="roomGroup" style="display:none;">
+                    <label class="form-label">اختر الغرفة</label>
+                    <select class="form-control" name="room" id="roomSelect">
+                        <option value="">اختر الغرفة</option>
+                        <!-- سيتم تعبئة الغرف ديناميكياً -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ملاحظات خاصة بالغرفة</label>
+                    <textarea class="form-control" name="room_notes" rows="2" placeholder="أي طلبات أو ملاحظات خاصة"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+                </div>
+                
+<!-- Hotel Modal -->
+<div class="service-modal" id="hotelModal">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h3 class="modal-title">حجز فندق</h3>
+            <button type="button" class="modal-close" data-modal-close>&times;</button>
+        </div>
+        <div class="modal-body">
+            <form class="service-form" id="hotelForm">
+                <div class="form-group">
+                    <label class="form-label">تاريخ الوصول المتوقع</label>
+                    <input type="date" class="form-control" name="arrival_date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">المدينة التي تريد الإقامة بها</label>
+                    <select class="form-control" name="hotel_city" id="hotelCitySelect" required>
+                        <option value="">اختر المدينة</option>
+                        <option value="beijing">بكين</option>
+                        <option value="shanghai">شنغهاي</option>
+                        <option value="guangzhou">قوانزو</option>
+                        <option value="shenzhen">شينزن</option>
+                        <option value="yiwu">ئي وو</option>
+                    </select>
+                </div>
+                <div class="form-group" id="hotelListGroup" style="display:none;">
+                    <label class="form-label">اختر الفندق</label>
+                    <select class="form-control" name="hotel" id="hotelListSelect">
+                        <option value="">اختر الفندق</option>
+                        <!-- سيتم تعبئة الفنادق ديناميكياً -->
+                    </select>
+                </div>
+                <div class="form-group" id="hotelRoomGroup" style="display:none;">
+                    <label class="form-label">اختر الغرفة</label>
+                    <select class="form-control" name="room" id="hotelRoomSelect">
+                        <option value="">اختر الغرفة</option>
+                        <!-- سيتم تعبئة الغرف ديناميكياً -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ملاحظات خاصة بالغرفة</label>
+                    <textarea class="form-control" name="room_notes" rows="2" placeholder="أي طلبات أو ملاحظات خاصة"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+</div> 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var hadVisaCheckbox = document.getElementById('hadVisaCheckbox');
+        var visaHistoryGroup = document.getElementById('visaHistoryGroup');
+        if(hadVisaCheckbox) {
+            hadVisaCheckbox.addEventListener('change', function() {
+                visaHistoryGroup.style.display = this.checked ? 'block' : 'none';
+            });
+        }
+        var hasRouteCheckbox = document.getElementById('hasRouteCheckbox');
+        var routeGroup = document.getElementById('routeGroup');
+        if(hasRouteCheckbox) {
+            hasRouteCheckbox.addEventListener('change', function() {
+                routeGroup.style.display = this.checked ? 'block' : 'none';
+            });
+        }
+        var destinationCitySelect = document.getElementById('destinationCitySelect');
+        var hotelGroup = document.getElementById('hotelGroup');
+        var roomGroup = document.getElementById('roomGroup');
+        var hotelSelect = document.getElementById('hotelSelect');
+        var roomSelect = document.getElementById('roomSelect');
+        if(destinationCitySelect) {
+            destinationCitySelect.addEventListener('change', function() {
+                var city = this.value;
+                // قم بعمل طلب للحصول على الفنادق بناءً على المدينة المحددة
+                // هنا نستخدم setTimeout لمحاكاة الطلب الخارجي
+                setTimeout(function() {
+                    // بيانات وهمية للفنادق
+                    var hotels = {
+                        beijing: [
+                            { id: 1, name: 'فندق بكين رويال كورت', price: 400 },
+                            { id: 2, name: 'فندق جينجيانج بكين', price: 300 }
+                        ],
+                        shanghai: [
+                            { id: 3, name: 'فندق شنجهاي رويال', price: 450 },
+                            { id: 4, name: 'فندق هيلتون شنجهاي', price: 350 }
+                        ],
+                        guangzhou: [
+                            { id: 5, name: 'فندق قوانزو المركزي', price: 300 },
+                            { id: 6, name: 'فندق الميادين قوانزو', price: 250 }
+                        ],
+                        shenzhen: [
+                            { id: 7, name: 'فندق شينزن الشامل', price: 500 },
+                            { id: 8, name: 'فندق تايمز شينزن', price: 400 }
+                        ],
+                        yiwu: [
+                            { id: 9, name: 'فندق ييوو الدولي', price: 350 },
+                            { id: 10, name: 'فندق السوق ييوو', price: 300 }
+                        ]
+                    };
+                    // إعادة تعيين خيارات الفندق
+                    hotelSelect.innerHTML = '<option value="">اختر الفندق</option>';
+                    roomSelect.innerHTML = '<option value="">اختر الغرفة</option>';
+                    if(city && hotels[city]) {
+                        // تفعيل مجموعة الفنادق
+                        hotelGroup.style.display = 'block';
+                        // إضافة خيارات الفنادق
+                        hotels[city].forEach(function(hotel) {
+                            var option = document.createElement('option');
+                            option.value = hotel.id;
+                            option.textContent = hotel.name + ' - ' + hotel.price + ' شيكل';
+                            hotelSelect.appendChild(option);
+                        });
+                    } else {
+                        hotelGroup.style.display = 'none';
+                    }
+                }, 500);
+            });
+        }
+
+        if(hotelSelect) {
+            hotelSelect.addEventListener('change', function() {
+                var hotelId = this.value;
+                // قم بعمل طلب للحصول على الغرف بناءً على الفندق المحدد
+                // هنا نستخدم setTimeout لمحاكاة الطلب الخارجي
+                setTimeout(function() {
+                    // بيانات وهمية للغرف
+                    var rooms = {
+                        1: [
+                            { id: 1, type: 'غرفة فردية', price: 400 },
+                            { id: 2, type: 'غرفة مزدوجة', price: 600 }
+                        ],
+                        2: [
+                            { id: 3, type: 'غرفة عائلية', price: 800 },
+                            { id: 4, type: 'جناح رجال أعمال', price: 1000 }
+                        ],
+                        3: [
+                            { id: 5, type: 'غرفة فردية', price: 450 },
+                            { id: 6, type: 'غرفة مزدوجة', price: 650 }
+                        ],
+                        4: [
+                            { id: 7, type: 'غرفة عائلية', price: 850 },
+                            { id: 8, type: 'جناح رجال أعمال', price: 1100 }
+                        ],
+                        5: [
+                            { id: 9, type: 'غرفة فردية', price: 350 },
+                            { id: 10, type: 'غرفة مزدوجة', price: 550 }
+                        ],
+                        6: [
+                            { id: 11, type: 'غرفة عائلية', price: 750 },
+                            { id: 12, type: 'جناح رجال أعمال', price: 950 }
+                        ],
+                        7: [
+                            { id: 13, type: 'غرفة فردية', price: 500 },
+                            { id: 14, type: 'غرفة مزدوجة', price: 700 }
+                        ],
+                        8: [
+                            { id: 15, type: 'غرفة عائلية', price: 900 },
+                            { id: 16, type: 'جناح رجال أعمال', price: 1200 }
+                        ],
+                        9: [
+                            { id: 17, type: 'غرفة فردية', price: 450 },
+                            { id: 18, type: 'غرفة مزدوجة', price: 650 }
+                        ],
+                        10: [
+                            { id: 19, type: 'غرفة عائلية', price: 850 },
+                            { id: 20, type: 'جناح رجال أعمال', price: 1150 }
+                        ]
+                    };
+                    // إعادة تعيين خيارات الغرف
+                    roomSelect.innerHTML = '<option value="">اختر الغرفة</option>';
+                    if(hotelId && rooms[hotelId]) {
+                        // تفعيل مجموعة الغرف
+                        roomGroup.style.display = 'block';
+                        // إضافة خيارات الغرف
+                        rooms[hotelId].forEach(function(room) {
+                            var option = document.createElement('option');
+                            option.value = room.id;
+                            option.textContent = room.type + ' - ' + room.price + ' شيكل';
+                            roomSelect.appendChild(option);
+                        });
+                    } else {
+                        roomGroup.style.display = 'none';
+                    }
+                }, 500);
+            });
+        }
+    });
+</script>

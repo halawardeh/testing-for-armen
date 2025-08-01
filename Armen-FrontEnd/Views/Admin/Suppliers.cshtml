@@ -1,0 +1,900 @@
+﻿
+@{
+    ViewData["Title"] = "Suppliers";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Import/ImportSuppliers.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+}
+
+@section Scripts {
+    <script src="~/js/Import/ImportSuppliers.js" asp-append-version="true"></script>
+}
+
+<style>
+    :root {
+        --primary-color: #025f70;
+        --secondary-color: #f5a623;
+        --accent-color: #45b7d1;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --danger-color: #dc3545;
+        --info-color: #17a2b8;
+        --light-color: #f8f9fa;
+        --dark-color: #343a40;
+        --text-color: #2c3e50;
+        --border-color: #e9ecef;
+        --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+        --shadow-medium: 0 5px 20px rgba(0, 0, 0, 0.15);
+        --shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Statistics Cards */
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .stats-card {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: white;
+        border-radius: 15px;
+        box-shadow: var(--shadow-medium);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        padding: 20px;
+    }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+            pointer-events: none;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .stats-card:nth-child(2) {
+            background: linear-gradient(135deg, var(--success-color), #20c997);
+        }
+
+        .stats-card:nth-child(3) {
+            background: linear-gradient(135deg, var(--warning-color), #fd7e14);
+        }
+
+        .stats-card:nth-child(4) {
+            background: linear-gradient(135deg, var(--info-color), var(--accent-color));
+        }
+
+    .stats-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .stats-text h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        opacity: 0.9;
+    }
+
+    .stats-text p {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .stats-icon {
+        font-size: 32px;
+        opacity: 0.8;
+    }
+    /* شريط البحث والفلتر */
+    .search-filter-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .search-box {
+        position: relative;
+        grid-column: 1 / -1;
+    }
+
+        .search-box input {
+            padding-left: 45px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            height: 48px;
+            font-size: 14px;
+        }
+
+            .search-box input:focus {
+                background-color: white;
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 3px rgba(2, 95, 112, 0.1);
+            }
+
+    .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-color);
+        z-index: 2;
+    }
+
+    .filter-item select {
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 15px;
+        border-radius: 8px;
+        height: 48px;
+        font-size: 14px;
+    }
+
+        .filter-item select:focus {
+            background-color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(2, 95, 112, 0.1);
+        }
+
+    .export-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        height: 48px;
+        font-size: 14px;
+    }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(2, 95, 112, 0.2);
+        }
+
+
+    /* جدول الموردين */
+    .supplier-table table {
+        border-collapse: separate;
+        border-spacing: 0;
+        background-color: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-medium);
+    }
+
+    .supplier-table thead {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    }
+
+        .supplier-table thead th {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 16px 12px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+    .supplier-table tbody tr {
+        border-bottom: 1px solid #f1f5f9;
+        transition: background 0.2s ease;
+    }
+
+        .supplier-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+    .supplier-table td {
+        padding: 16px 12px;
+        vertical-align: middle;
+        font-size: 14px;
+        color: var(--text-color);
+    }
+
+    .category-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        font-size: 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        color: white;
+    }
+
+    .category-electronics {
+        background-color: #0d6efd;
+    }
+
+    .category-textiles {
+        background-color: #6610f2;
+    }
+
+    .category-machinery {
+        background-color: #198754;
+    }
+
+    .category-food {
+        background-color: #fd7e14;
+    }
+
+    .category-chemicals {
+        background-color: #20c997;
+    }
+
+    .category-automotive {
+        background-color: #6c757d;
+    }
+
+    .rating-stars {
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 24px;
+        gap: 10px;
+    }
+
+        .pagination button {
+            background-color: #ffffff;
+            color: var(--primary-color);
+            border: 1px solid #e0e0e0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+            .pagination button:hover {
+                background-color: var(--primary-color);
+                color: white;
+            }
+
+            .pagination button.active {
+                background-color: var(--primary-color);
+                color: white;
+                font-weight: bold;
+            }
+
+    .supplier-table {
+
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .supplier-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .supplier-table th, .supplier-table td {
+            padding: 16px;
+            text-align: right;
+        }
+
+        .supplier-table th {
+            background-color: #34495e;
+            color: white;
+        }
+
+    .category-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        color: white;
+    }
+
+    .category-electronics {
+        background-color: #2980b9;
+    }
+
+    .category-textiles {
+        background-color: #27ae60;
+    }
+
+    .category-machinery {
+        background-color: #e67e22;
+    }
+
+    .category-food {
+        background-color: #c0392b;
+    }
+
+    .category-automotive {
+        background-color: #8e44ad;
+    }
+
+    .rating-stars {
+        display: flex;
+        align-items: center;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px;
+    }
+
+        .pagination button {
+            margin: 0 5px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+            .pagination button.active {
+                background-color: #2980b9;
+            }
+
+            .pagination button:hover {
+                background-color: #2980b9;
+            }
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.25rem;
+        transition: color 0.3s;
+    }
+
+        button:focus {
+            outline: none;
+        }
+
+        button.text-blue-600 {
+            color: #2563eb;
+        }
+
+            button.text-blue-600:hover {
+                color: #1d4ed8;
+            }
+
+        button.text-yellow-500 {
+            color: #eab308;
+        }
+
+            button.text-yellow-500:hover {
+                color: #ca8a04;
+            }
+
+        button.text-purple-600 {
+            color: #7c3aed;
+        }
+
+            button.text-purple-600:hover {
+                color: #6b21a8;
+            }
+
+</style>
+<!-- Main Content -->
+<main class="flex-1 transition-all duration-300" id="mainContent">
+    <div class="p-6">
+        <!-- Statistics Cards Section -->
+        <div class="stats-container">
+            <!-- Total Suppliers Card -->
+            <div class="stats-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="stats-content">
+                    <div class="stats-text">
+                        <h3>إجمالي الموردين</h3>
+                        <p class="counter" data-target="156">0</p>
+                    </div>
+                    <div class="stats-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Suppliers Card -->
+            <div class="stats-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stats-content">
+                    <div class="stats-text">
+                        <h3>موردين نشطين</h3>
+                        <p class="counter" data-target="142">0</p>
+                    </div>
+                    <div class="stats-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Rating Card -->
+            <div class="stats-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="stats-content">
+                    <div class="stats-text">
+                        <h3>متوسط التقييم</h3>
+                        <p class="counter" data-target="4.2">0</p>
+                        <div class="rating-stars">
+                            <span class="text-yellow-500">★★★★☆</span>
+                        </div>
+                    </div>
+                    <div class="stats-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Suppliers Card -->
+            <div class="stats-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="stats-content">
+                    <div class="stats-text">
+                        <h3>موردين جدد</h3>
+                        <p class="counter" data-target="8">0</p>
+                    </div>
+                    <div class="stats-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-filter-container">
+            <!-- مربع البحث -->
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" class="form-input w-full" placeholder="ابحث عن موردين..." oninput="filterSuppliers()">
+            </div>
+
+            <!-- فلاتر -->
+            <div class="filter-item">
+                <select id="categoryFilter" class="form-input w-full" onchange="filterSuppliers()">
+                    <option value="">جميع الفئات</option>
+                    <option value="electronics">إلكترونيات</option>
+                    <option value="textiles">منسوجات</option>
+                    <option value="machinery">آلات ومعدات</option>
+                    <option value="food">مواد غذائية</option>
+                    <option value="chemicals">مواد كيميائية</option>
+                    <option value="automotive">قطع سيارات</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <select id="ratingFilter" class="form-input w-full" onchange="filterSuppliers()">
+                    <option value="">جميع التقييمات</option>
+                    <option value="5">5 نجوم</option>
+                    <option value="4">4+ نجوم</option>
+                    <option value="3">3+ نجوم</option>
+                    <option value="2">2+ نجوم</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <select id="statusFilter" class="form-input w-full" onchange="filterSuppliers()">
+                    <option value="">جميع الحالات</option>
+                    <option value="active">نشط</option>
+                    <option value="inactive">غير نشط</option>
+                    <option value="new">جديد</option>
+                </select>
+            </div>
+
+            <button class="export-btn" onclick="exportSuppliers()">
+                <i class="fas fa-download"></i>
+                تصدير البيانات
+            </button>
+        </div>
+
+        <!-- Suppliers Table -->
+        <div class="supplier-table" data-aos="fade-up" data-aos-delay="200">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-right">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="p-4">المورد</th>
+                            <th class="p-4">الشركة</th>
+                            <th class="p-4">فئة المنتجات</th>
+                            <th class="p-4">التقييم</th>
+                            <th class="p-4">عدد الطلبات</th>
+                            <th class="p-4">آخر طلب</th>
+                            <th class="p-4">الإجراءات</th>
+                        </tr>
+                    </thead>
+                 <tbody id="suppliersTableBody" class="bg-white divide-y">
+
+    <!-- المورد 1 -->
+    <tr data-category="electronics" data-rating="5">
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">لي ويي</div>
+                <div class="text-xs text-gray-500">مدير المبيعات</div>
+            </div>
+        </td>
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">Shenzhen Electronics Co.</div>
+                <div class="text-xs text-gray-500">متخصصة في الإلكترونيات</div>
+            </div>
+        </td>
+        <td class="p-4"><span class="category-badge category-electronics">إلكترونيات</span></td>
+        <td class="p-4">
+            <div class="flex items-center">
+                <span class="text-yellow-500">★★★★★</span>
+                <span class="ml-2 font-semibold">5.0</span>
+                <span class="text-xs text-gray-500 ml-1">(42)</span>
+            </div>
+        </td>
+        <td class="p-4 font-semibold">87 طلب</td>
+        <td class="p-4 text-sm">2025-01-15</td>
+                            <td class="p-4">
+                                <div class="flex justify-start space-x-3 rtl:space-x-reverse">
+                                    <!-- عرض التفاصيل -->
+                                    <button onclick="window.location.href='/Admin/SupplierDetails/id'" class="text-blue-600 hover:text-blue-800 text-xl" title="عرض التفاصيل">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <!-- تقييم المورد -->
+                                    <button onclick="rateSupplier(1)" class="text-yellow-500 hover:text-yellow-700 text-xl" title="تقييم المورد">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <!-- تواصل مع المورد -->
+                                    <button onclick="contactSupplier(1)" class="text-purple-600 hover:text-purple-800 text-xl" title="تواصل مع المورد">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                </div>
+                            </td>
+
+    </tr>
+
+    <!-- المورد 2 -->
+    <tr data-category="automotive" data-rating="4">
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">راج باتيل</div>
+                <div class="text-xs text-gray-500">مدير الصيانة</div>
+            </div>
+        </td>
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">AutoTech India</div>
+                <div class="text-xs text-gray-500">قطع وصيانة سيارات</div>
+            </div>
+        </td>
+        <td class="p-4"><span class="category-badge category-automotive">قطع سيارات</span></td>
+        <td class="p-4">
+            <div class="flex items-center">
+                <span class="text-yellow-500">★★★★☆</span>
+                <span class="ml-2 font-semibold">4.2</span>
+                <span class="text-xs text-gray-500 ml-1">(25)</span>
+            </div>
+        </td>
+        <td class="p-4 font-semibold">59 طلب</td>
+        <td class="p-4 text-sm">2025-01-13</td>
+        <td class="p-4">
+            <div class="flex justify-start space-x-2 rtl:space-x-reverse">
+                                    <button onclick="window.location.href='/Admin/SupplierDetails/id'" title="عرض التفاصيل" class="text-blue-600 hover:text-blue-800"><i class="fas fa-eye"></i></button>
+                <button onclick="rateSupplier(2)" title="تقييم" class="text-yellow-500 hover:text-yellow-700"><i class="fas fa-star"></i></button>
+                <button onclick="contactSupplier(2)" title="تواصل" class="text-purple-600 hover:text-purple-800"><i class="fas fa-comment"></i></button>
+            </div>
+        </td>
+    </tr>
+
+    <!-- المورد 3 -->
+    <tr data-category="textiles" data-rating="5">
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">أحمد عبد الرازق</div>
+                <div class="text-xs text-gray-500">رئيس قسم الجودة</div>
+            </div>
+        </td>
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">Cairo Cotton Co.</div>
+                <div class="text-xs text-gray-500">منسوجات قطنية مصرية</div>
+            </div>
+        </td>
+        <td class="p-4"><span class="category-badge category-textiles">منسوجات</span></td>
+        <td class="p-4">
+            <div class="flex items-center">
+                <span class="text-yellow-500">★★★★★</span>
+                <span class="ml-2 font-semibold">5.0</span>
+                <span class="text-xs text-gray-500 ml-1">(18)</span>
+            </div>
+        </td>
+        <td class="p-4 font-semibold">40 طلب</td>
+        <td class="p-4 text-sm">2025-01-09</td>
+        <td class="p-4">
+            <div class="flex justify-start space-x-2 rtl:space-x-reverse">
+                                    <button onclick="window.location.href='/Admin/SupplierDetails/id'" title="عرض التفاصيل" class="text-blue-600 hover:text-blue-800"><i class="fas fa-eye"></i></button>
+                <button onclick="rateSupplier(3)" title="تقييم" class="text-yellow-500 hover:text-yellow-700"><i class="fas fa-star"></i></button>
+                <button onclick="contactSupplier(3)" title="تواصل" class="text-purple-600 hover:text-purple-800"><i class="fas fa-comment"></i></button>
+            </div>
+        </td>
+    </tr>
+
+    <!-- المورد 4 -->
+    <tr data-category="food" data-rating="3">
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">ماركو روسي</div>
+                <div class="text-xs text-gray-500">مدير التصدير</div>
+            </div>
+        </td>
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">Italia Food Export</div>
+                <div class="text-xs text-gray-500">منتجات غذائية متوسطية</div>
+            </div>
+        </td>
+        <td class="p-4"><span class="category-badge category-food">مواد غذائية</span></td>
+        <td class="p-4">
+            <div class="flex items-center">
+                <span class="text-yellow-500">★★★☆☆</span>
+                <span class="ml-2 font-semibold">3.7</span>
+                <span class="text-xs text-gray-500 ml-1">(12)</span>
+            </div>
+        </td>
+        <td class="p-4 font-semibold">33 طلب</td>
+        <td class="p-4 text-sm">2025-01-10</td>
+        <td class="p-4">
+            <div class="flex justify-start space-x-2 rtl:space-x-reverse">
+                                    <button onclick="window.location.href='/Admin/SupplierDetails/id'" title="عرض التفاصيل" class="text-blue-600 hover:text-blue-800"><i class="fas fa-eye"></i></button>
+                <button onclick="rateSupplier(4)" title="تقييم" class="text-yellow-500 hover:text-yellow-700"><i class="fas fa-star"></i></button>
+                <button onclick="contactSupplier(4)" title="تواصل" class="text-purple-600 hover:text-purple-800"><i class="fas fa-comment"></i></button>
+            </div>
+        </td>
+    </tr>
+
+    <!-- المورد 5 -->
+    <tr data-category="machinery" data-rating="4">
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">هانز مولر</div>
+                <div class="text-xs text-gray-500">مهندس صناعي</div>
+            </div>
+        </td>
+        <td class="p-4">
+            <div>
+                <div class="font-semibold">Berlin Machines GmbH</div>
+                <div class="text-xs text-gray-500">آلات تصنيع دقيقة</div>
+            </div>
+        </td>
+        <td class="p-4"><span class="category-badge category-machinery">آلات ومعدات</span></td>
+        <td class="p-4">
+            <div class="flex items-center">
+                <span class="text-yellow-500">★★★★☆</span>
+                <span class="ml-2 font-semibold">4.4</span>
+                <span class="text-xs text-gray-500 ml-1">(29)</span>
+            </div>
+        </td>
+        <td class="p-4 font-semibold">50 طلب</td>
+        <td class="p-4 text-sm">2025-01-11</td>
+        <td class="p-4">
+            <div class="flex justify-start space-x-2 rtl:space-x-reverse">
+                <button onclick="window.location.href='/Admin/SupplierDetails/id'" title="عرض التفاصيل" class="text-blue-600 hover:text-blue-800"><i class="fas fa-eye"></i></button>
+                <button onclick="rateSupplier(5)" title="تقييم" class="text-yellow-500 hover:text-yellow-700"><i class="fas fa-star"></i></button>
+                <button onclick="contactSupplier(5)" title="تواصل" class="text-purple-600 hover:text-purple-800"><i class="fas fa-comment"></i></button>
+            </div>
+        </td>
+    </tr>
+
+</tbody>
+
+                </table>
+            </div>
+
+            <!-- الترقيم -->
+            <div class="pagination mt-4 flex justify-center items-center space-x-2 rtl:space-x-reverse">
+                <button onclick="changePage(-1)" class="p-2 text-gray-600 hover:text-black">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="p-2 bg-primary text-white rounded-full">1</button>
+                <button class="p-2 hover:bg-gray-100 rounded-full">2</button>
+                <button class="p-2 hover:bg-gray-100 rounded-full">3</button>
+                <button onclick="changePage(1)" class="p-2 text-gray-600 hover:text-black">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+        </div>
+
+</main>
+
+<!-- Add/Edit Supplier Modal -->
+<div id="supplierModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden flex items-center justify-center z-50">
+    <div class="modal-content max-w-3xl w-full mx-4 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color" id="modalTitle">إضافة مورد جديد</h3>
+            <button onclick="closeSupplierModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <form id="supplierForm" onsubmit="saveSupplier(event)">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="form-label">اسم المورد *</label>
+                    <input type="text" id="supplierName" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">اسم الشركة *</label>
+                    <input type="text" id="companyName" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">البريد الإلكتروني *</label>
+                    <input type="email" id="supplierEmail" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">رقم الهاتف *</label>
+                    <input type="tel" id="supplierPhone" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">فئة المنتجات *</label>
+                    <select id="productCategory" class="form-input" required>
+                        <option value="">اختر الفئة</option>
+                        <option value="electronics">إلكترونيات</option>
+                        <option value="textiles">منسوجات</option>
+                        <option value="machinery">آلات ومعدات</option>
+                        <option value="food">مواد غذائية</option>
+                        <option value="chemicals">مواد كيميائية</option>
+                        <option value="automotive">قطع سيارات</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الموقع</label>
+                    <input type="text" id="supplierLocation" class="form-input" placeholder="المدينة، البلد">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label">وصف المنتجات</label>
+                    <textarea id="productDescription" class="form-input" rows="3" placeholder="اكتب وصفاً مختصراً للمنتجات التي يوردها..."></textarea>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label">العنوان</label>
+                    <textarea id="supplierAddress" class="form-input" rows="2"></textarea>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label">ملاحظات</label>
+                    <textarea id="supplierNotes" class="form-input" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="flex space-x-4 mt-8">
+                <button type="submit" class="action-btn btn-primary flex-1">
+                    <i class="fas fa-save ml-2"></i>
+                    <span id="saveButtonText">حفظ المورد</span>
+                </button>
+                <button type="button" class="action-btn btn-secondary flex-1" onclick="closeSupplierModal()">
+                    إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Rating Modal -->
+<div id="ratingModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden flex items-center justify-center z-50">
+    <div class="modal-content max-w-lg w-full mx-4 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color">تقييم المورد</h3>
+            <button onclick="closeRatingModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="text-center mb-6">
+            <img id="ratingSupplierImage" class="w-20 h-20 rounded-full mx-auto mb-4" src="" alt="صورة المورد">
+            <h4 class="text-xl font-bold text-primary-color" id="ratingSupplierName"></h4>
+            <p class="text-gray-600" id="ratingSupplierCompany"></p>
+        </div>
+
+        <form id="ratingForm" onsubmit="submitRating(event)">
+            <div class="mb-6">
+                <label class="form-label">التقييم العام *</label>
+                <div class="rating-input flex justify-center items-center space-x-2 mt-2">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="selectedRating" value="" required>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="form-label">جودة المنتج</label>
+                    <select class="form-input" id="productQuality">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">سرعة التسليم</label>
+                    <select class="form-input" id="deliverySpeed">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">التواصل</label>
+                    <select class="form-input" id="communication">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الأسعار</label>
+                    <select class="form-input" id="pricing">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="form-label">تعليق التقييم</label>
+                <textarea id="ratingComment" class="form-input" rows="4" placeholder="شارك تجربتك مع هذا المورد..."></textarea>
+            </div>
+
+            <div class="flex space-x-4">
+                <button type="submit" class="action-btn btn-primary flex-1">
+                    <i class="fas fa-star ml-2"></i>
+                    إرسال التقييم
+                </button>
+                <button type="button" class="action-btn btn-secondary flex-1" onclick="closeRatingModal()">
+                    إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

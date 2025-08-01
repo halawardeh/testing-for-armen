@@ -1,0 +1,739 @@
+﻿
+@{
+    ViewData["Title"] = "Factory";
+}
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="~/css/Import/ImportFactories.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Import/CustomsCodes.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        .modal {
+            display: grid !important;
+        }
+
+            .modal.hidden {
+                display: none !important;
+            }
+
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #025F70, #00a878);
+            color: white;
+        }
+
+            .btn-primary:hover {
+                background: linear-gradient(135deg, #003d47, #007d5a);
+                transform: translateY(-2px);
+            }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .factory-action-btn {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+    </style>
+}
+
+@section Scripts {
+    <script src="~/js/Import/ImportFactories.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+}
+
+<!-- Main Content -->
+    <!-- Top Navigation -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-lg font-semibold opacity-90">إجمالي المصانع</p>
+                <p class="text-3xl font-bold text-blue-600">89</p>
+            </div>
+            <div class="text-4xl opacity-80 text-blue-600">
+                <i class="fas fa-industry"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-lg font-semibold opacity-90">مصانع نشطة</p>
+                <p class="text-3xl font-bold text-green-600">76</p>
+            </div>
+            <div class="text-4xl opacity-80 text-green-600">
+                <i class="fas fa-check-circle"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-lg font-semibold opacity-90">متوسط التقييم</p>
+                <p class="text-3xl font-bold text-yellow-600">4.3</p>
+                <span class="text-yellow-500">★★★★☆</span>
+            </div>
+            <div class="text-4xl opacity-80 text-yellow-600">
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="400">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-lg font-semibold opacity-90">مصانع جديدة</p>
+                <p class="text-3xl font-bold text-purple-600">12</p>
+            </div>
+            <div class="text-4xl opacity-80 text-purple-600">
+                <i class="fas fa-building"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search and Filter Section -->
+<div class="search-filter-bar p-6 mb-8" data-aos="fade-up">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <!-- Search Input -->
+        <div class="relative">
+            <input type="text"
+                   id="searchInput"
+                   class="search-input w-full"
+                   placeholder="البحث في المصانع...">
+            <i class="search-icon fas fa-search"></i>
+        </div>
+
+        <!-- Industry Type Filter -->
+        <div>
+            <select id="industryFilter" class="form-input">
+                <option value="">جميع الصناعات</option>
+                <option value="electronics">إلكترونيات ومعدات</option>
+                <option value="textiles">المنسوجات والألبسة</option>
+                <option value="machinery">الآلات والمعدات الثقيلة</option>
+                <option value="food">الصناعات الغذائية</option>
+                <option value="chemicals">الصناعات الكيميائية</option>
+                <option value="automotive">صناعة السيارات</option>
+                <option value="furniture">الأثاث والديكور</option>
+                <option value="plastics">البلاستيك والمطاط</option>
+            </select>
+        </div>
+
+        <!-- Rating Filter -->
+        <div>
+            <select id="ratingFilter" class="form-input">
+                <option value="">جميع التقييمات</option>
+                <option value="5">5 نجوم</option>
+                <option value="4">4+ نجوم</option>
+                <option value="3">3+ نجوم</option>
+                <option value="2">2+ نجوم</option>
+            </select>
+        </div>
+
+        <!-- Export Button -->
+        <div>
+            <button id="exportBtn" class="action-btn btn-secondary w-full">
+                <i class="fas fa-download ml-2"></i>
+                تصدير البيانات
+            </button>
+        </div>
+    </div>
+
+    <!-- Active Filters Display -->
+    <div id="activeFilters" class="mt-4 hidden">
+        <p class="text-sm text-gray-600 mb-2">الفلاتر النشطة:</p>
+        <div id="filterTags" class="flex flex-wrap"></div>
+    </div>
+</div>
+
+<!-- Factories Table -->
+<div class="factory-table" data-aos="fade-up" data-aos-delay="200">
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="text-white">
+                    <th class="p-4 text-right">المصنع</th>
+                    <th class="p-4 text-right">الشركة المصنعة</th>
+                    <th class="p-4 text-right">نوع الصناعة</th>
+                    <th class="p-4 text-right">التقييم</th>
+                    <th class="p-4 text-right">عدد الطلبات</th>
+                    <th class="p-4 text-right">آخر طلب</th>
+                    <th class="p-4 text-right">الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody id="factoriesTableBody">
+                <!-- Factory Row 1 -->
+                <tr data-industry="electronics" data-rating="5">
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full ml-3" src="https://via.placeholder.com/50x50/2563eb/ffffff?text=S" alt="شعار المصنع">
+                            <div>
+                                <span class="font-semibold block">لي شين</span>
+                                <span class="text-sm text-gray-600">مدير الإنتاج</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <div>
+                            <span class="font-semibold block">Shenzhen Tech Manufacturing</span>
+                            <span class="text-sm text-gray-600">متخصص في الإلكترونيات الدقيقة</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="category-badge category-electronics">إلكترونيات ومعدات</span>
+                    </td>
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <div class="rating-stars">
+                                <span class="text-yellow-500">★★★★★</span>
+                            </div>
+                            <span class="ml-2 font-semibold">4.9</span>
+                            <span class="text-sm text-gray-600 mr-1">(156)</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="font-semibold">234 طلب</span>
+                    </td>
+                    <td class="p-4">2025-01-20</td>
+                    <td class="p-4">
+                        <div class="flex space-x-2">
+                            <button onclick="window.location.href='/Admin/FactoryDetails/id';" class="factory-action-btn text-blue-500 hover:text-blue-700 p-1" title="عرض التفاصيل">
+                                <i class="fas fa-eye"></i>
+                            </button>
+
+                            <button class="factory-action-btn text-green-500 hover:text-green-700 p-1" data-action="rate" title="تقييم المصنع">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button class="factory-action-btn text-purple-500 hover:text-purple-700 p-1" data-action="contact" title="تواصل">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="factory-action-btn text-orange-500 hover:text-orange-700 p-1" data-action="visit" title="زيارة ميدانية">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Factory Row 2 -->
+                <tr data-industry="textiles" data-rating="4">
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full ml-3" src="https://via.placeholder.com/50x50/059669/ffffff?text=T" alt="شعار المصنع">
+                            <div>
+                                <span class="font-semibold block">محمد أوغلو</span>
+                                <span class="text-sm text-gray-600">مدير المبيعات التصديرية</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <div>
+                            <span class="font-semibold block">Istanbul Premium Textiles</span>
+                            <span class="text-sm text-gray-600">منسوجات فاخرة وملابس جاهزة</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="category-badge category-textiles">المنسوجات والألبسة</span>
+                    </td>
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <div class="rating-stars">
+                                <span class="text-yellow-500">★★★★☆</span>
+                            </div>
+                            <span class="ml-2 font-semibold">4.4</span>
+                            <span class="text-sm text-gray-600 mr-1">(89)</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="font-semibold">187 طلب</span>
+                    </td>
+                    <td class="p-4">2025-01-18</td>
+                    <td class="p-4">
+                        <div class="flex space-x-2">
+                            <button onclick="window.location.href='/Admin/FactoryDetails/id';" class="factory-action-btn text-blue-500 hover:text-blue-700 p-1" title="عرض التفاصيل">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="factory-action-btn text-green-500 hover:text-green-700 p-1" data-action="rate" title="تقييم المصنع">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button class="factory-action-btn text-purple-500 hover:text-purple-700 p-1" data-action="contact" title="تواصل">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="factory-action-btn text-orange-500 hover:text-orange-700 p-1" data-action="visit" title="زيارة ميدانية">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Factory Row 3 -->
+                <tr data-industry="machinery" data-rating="5">
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full ml-3" src="https://via.placeholder.com/50x50/dc2626/ffffff?text=M" alt="شعار المصنع">
+                            <div>
+                                <span class="font-semibold block">هانز شميت</span>
+                                <span class="text-sm text-gray-600">مهندس رئيسي</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <div>
+                            <span class="font-semibold block">Bavaria Industrial Solutions</span>
+                            <span class="text-sm text-gray-600">آلات ومعدات صناعية متطورة</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="category-badge category-machinery">الآلات والمعدات الثقيلة</span>
+                    </td>
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <div class="rating-stars">
+                                <span class="text-yellow-500">★★★★★</span>
+                            </div>
+                            <span class="ml-2 font-semibold">4.8</span>
+                            <span class="text-sm text-gray-600 mr-1">(45)</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="font-semibold">67 طلب</span>
+                    </td>
+                    <td class="p-4">2025-01-15</td>
+                    <td class="p-4">
+                        <div class="flex space-x-2">
+                            <button onclick="window.location.href='/Admin/FactoryDetails/id';" class="factory-action-btn text-blue-500 hover:text-blue-700 p-1" title="عرض التفاصيل">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="factory-action-btn text-green-500 hover:text-green-700 p-1" data-action="rate" title="تقييم المصنع">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button class="factory-action-btn text-purple-500 hover:text-purple-700 p-1" data-action="contact" title="تواصل">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="factory-action-btn text-orange-500 hover:text-orange-700 p-1" data-action="visit" title="زيارة ميدانية">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Factory Row 4 -->
+                <tr data-industry="food" data-rating="4">
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full ml-3" src="https://via.placeholder.com/50x50/f59e0b/ffffff?text=F" alt="شعار المصنع">
+                            <div>
+                                <span class="font-semibold block">أنطونيو كاستيلو</span>
+                                <span class="text-sm text-gray-600">مدير الجودة</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <div>
+                            <span class="font-semibold block">Mediterranean Foods Factory</span>
+                            <span class="text-sm text-gray-600">أغذية متوسطية وزيوت طبيعية</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="category-badge category-food">الصناعات الغذائية</span>
+                    </td>
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <div class="rating-stars">
+                                <span class="text-yellow-500">★★★★☆</span>
+                            </div>
+                            <span class="ml-2 font-semibold">4.2</span>
+                            <span class="text-sm text-gray-600 mr-1">(78)</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="font-semibold">145 طلب</span>
+                    </td>
+                    <td class="p-4">2025-01-12</td>
+                    <td class="p-4">
+                        <div class="flex space-x-2">
+                            <button onclick="window.location.href='/Admin/FactoryDetails/id';" class="factory-action-btn text-blue-500 hover:text-blue-700 p-1" title="عرض التفاصيل">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="factory-action-btn text-green-500 hover:text-green-700 p-1" data-action="rate" title="تقييم المصنع">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button class="factory-action-btn text-purple-500 hover:text-purple-700 p-1" data-action="contact" title="تواصل">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="factory-action-btn text-orange-500 hover:text-orange-700 p-1" data-action="visit" title="زيارة ميدانية">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Factory Row 5 -->
+                <tr data-industry="furniture" data-rating="4">
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full ml-3" src="https://via.placeholder.com/50x50/8b5cf6/ffffff?text=D" alt="شعار المصنع">
+                            <div>
+                                <span class="font-semibold block">ياسر العبدالله</span>
+                                <span class="text-sm text-gray-600">مصمم أثاث</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <div>
+                            <span class="font-semibold block">Dubai Luxury Furniture</span>
+                            <span class="text-sm text-gray-600">أثاث فاخر وديكورات حديثة</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="category-badge category-furniture">الأثاث والديكور</span>
+                    </td>
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <div class="rating-stars">
+                                <span class="text-yellow-500">★★★★☆</span>
+                            </div>
+                            <span class="ml-2 font-semibold">4.1</span>
+                            <span class="text-sm text-gray-600 mr-1">(52)</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="font-semibold">98 طلب</span>
+                    </td>
+                    <td class="p-4">2025-01-10</td>
+                    <td class="p-4">
+                        <div class="flex space-x-2">
+                            <button onclick="window.location.href='/Admin/FactoryDetails/id';" class="factory-action-btn text-blue-500 hover:text-blue-700 p-1" title="عرض التفاصيل">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="factory-action-btn text-green-500 hover:text-green-700 p-1" data-action="rate" title="تقييم المصنع">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button class="factory-action-btn text-purple-500 hover:text-purple-700 p-1" data-action="contact" title="تواصل">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="factory-action-btn text-orange-500 hover:text-orange-700 p-1" data-action="visit" title="زيارة ميدانية">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Factory Row 6 -->
+                <tr data-industry="automotive" data-rating="3">
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full ml-3" src="https://via.placeholder.com/50x50/ef4444/ffffff?text=A" alt="شعار المصنع">
+                            <div>
+                                <span class="font-semibold block">راج كومار</span>
+                                <span class="text-sm text-gray-600">مهندس ميكانيكي</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <div>
+                            <span class="font-semibold block">Auto Components India Ltd.</span>
+                            <span class="text-sm text-gray-600">قطع غيار وملحقات السيارات</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="category-badge category-automotive">صناعة السيارات</span>
+                    </td>
+                    <td class="p-4">
+                        <div class="flex items-center">
+                            <div class="rating-stars">
+                                <span class="text-yellow-500">★★★☆☆</span>
+                            </div>
+                            <span class="ml-2 font-semibold">3.7</span>
+                            <span class="text-sm text-gray-600 mr-1">(34)</span>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="font-semibold">76 طلب</span>
+                    </td>
+                    <td class="p-4">2025-01-08</td>
+                    <td class="p-4">
+                        <div class="flex space-x-2">
+                            <button class="factory-action-btn text-blue-500 hover:text-blue-700 p-1" data-action="view" title="عرض التفاصيل">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="factory-action-btn text-green-500 hover:text-green-700 p-1" data-action="rate" title="تقييم المصنع">
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button class="factory-action-btn text-purple-500 hover:text-purple-700 p-1" data-action="contact" title="تواصل">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="factory-action-btn text-orange-500 hover:text-orange-700 p-1" data-action="visit" title="زيارة ميدانية">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Add/Edit Factory Modal -->
+<div id="factoryModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden items-center justify-center z-50">
+    <div class="modal-content max-w-4xl w-full mx-4 p-8 bg-white rounded-lg">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color" id="modalTitle">إضافة مصنع جديد</h3>
+            <button id="closeFactoryModal" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <form id="factoryForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="form-label">اسم المصنع *</label>
+                    <input type="text" id="factoryName" name="factoryName" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">اسم الشركة المصنعة *</label>
+                    <input type="text" id="companyName" name="companyName" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">البريد الإلكتروني *</label>
+                    <input type="email" id="factoryEmail" name="factoryEmail" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">رقم الهاتف *</label>
+                    <input type="tel" id="factoryPhone" name="factoryPhone" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">نوع الصناعة *</label>
+                    <select id="industryType" name="industryType" class="form-input" required>
+                        <option value="">اختر نوع الصناعة</option>
+                        <option value="electronics">إلكترونيات ومعدات</option>
+                        <option value="textiles">المنسوجات والألبسة</option>
+                        <option value="machinery">الآلات والمعدات الثقيلة</option>
+                        <option value="food">الصناعات الغذائية</option>
+                        <option value="chemicals">الصناعات الكيميائية</option>
+                        <option value="automotive">صناعة السيارات</option>
+                        <option value="furniture">الأثاث والديكور</option>
+                        <option value="plastics">البلاستيك والمطاط</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">البلد والمدينة</label>
+                    <input type="text" id="factoryLocation" name="factoryLocation" class="form-input" placeholder="البلد، المدينة">
+                </div>
+
+
+                <div class="md:col-span-2">
+                    <label class="form-label">وصف المنتجات والخدمات</label>
+                    <textarea id="productDescription" name="productDescription" class="form-input" rows="3" placeholder="اكتب وصفاً مفصلاً عن المنتجات والخدمات التي يقدمها المصنع..."></textarea>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label">العنوان الكامل</label>
+                    <textarea id="factoryAddress" name="factoryAddress" class="form-input" rows="2" placeholder="العنوان التفصيلي للمصنع..."></textarea>
+                </div>
+
+
+
+                <div class="md:col-span-2">
+                    <label class="form-label">ملاحظات إضافية</label>
+                    <textarea id="factoryNotes" name="factoryNotes" class="form-input" rows="3" placeholder="أي معلومات إضافية مهمة..."></textarea>
+                </div>
+            </div>
+
+            <div class="flex space-x-4 mt-8">
+                <button type="submit" class="action-btn btn-primary flex-1">
+                    <i class="fas fa-save ml-2"></i>
+                    <span id="saveButtonText">حفظ المصنع</span>
+                </button>
+                <button type="button" id="cancelFactoryModal" class="action-btn btn-secondary flex-1">
+                    إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Rating Modal -->
+<div id="ratingModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden items-center justify-center z-50">
+    <div class="modal-content max-w-lg w-full mx-4 p-8 bg-white rounded-lg">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color">تقييم المصنع</h3>
+            <button id="closeRatingModal" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="text-center mb-6">
+            <img id="ratingFactoryImage" class="w-20 h-20 rounded-full mx-auto mb-4" src="" alt="شعار المصنع">
+            <h4 class="text-xl font-bold text-primary-color" id="ratingFactoryName"></h4>
+            <p class="text-gray-600" id="ratingFactoryCompany"></p>
+        </div>
+
+        <form id="ratingForm">
+            <div class="mb-6">
+                <label class="form-label">التقييم العام *</label>
+                <div class="rating-input flex justify-center items-center space-x-2 mt-2">
+                    <span class="star text-2xl cursor-pointer text-gray-300 hover:text-yellow-500" data-rating="1">★</span>
+                    <span class="star text-2xl cursor-pointer text-gray-300 hover:text-yellow-500" data-rating="2">★</span>
+                    <span class="star text-2xl cursor-pointer text-gray-300 hover:text-yellow-500" data-rating="3">★</span>
+                    <span class="star text-2xl cursor-pointer text-gray-300 hover:text-yellow-500" data-rating="4">★</span>
+                    <span class="star text-2xl cursor-pointer text-gray-300 hover:text-yellow-500" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="selectedRating" name="selectedRating" value="" required>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="form-label">جودة المنتج</label>
+                    <select class="form-input" id="productQuality" name="productQuality">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الالتزام بالمواعيد</label>
+                    <select class="form-input" id="deliveryCommitment" name="deliveryCommitment">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">التواصل والخدمة</label>
+                    <select class="form-input" id="communication" name="communication">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الأسعار التنافسية</label>
+                    <select class="form-input" id="pricing" name="pricing">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="form-label">تعليق التقييم</label>
+                <textarea id="ratingComment" name="ratingComment" class="form-input" rows="4" placeholder="شارك تجربتك مع هذا المصنع وأي ملاحظات مهمة..."></textarea>
+            </div>
+
+            <div class="flex space-x-4">
+                <button type="submit" class="action-btn btn-primary flex-1">
+                    <i class="fas fa-star ml-2"></i>
+                    إرسال التقييم
+                </button>
+                <button type="button" id="cancelRatingModal" class="action-btn btn-secondary flex-1">
+                    إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    // Initialize AOS animations
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+    });
+
+    // Test the modal functionality directly
+    window.testAddFactoryModal = function() {
+        console.log('Testing modal...');
+        const modal = document.getElementById('factoryModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            console.log('Modal opened successfully');
+        } else {
+            console.error('Modal not found!');
+        }
+    };
+
+    // Make sure the button works on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const addFactoryBtn = document.getElementById('addFactoryBtn');
+        if (addFactoryBtn) {
+            console.log('Add factory button found and ready');
+        } else {
+            console.error('Add factory button not found!');
+        }
+    });
+</script>
+

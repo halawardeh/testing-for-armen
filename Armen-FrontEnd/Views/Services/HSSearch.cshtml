@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "بحث الأكواد الجمركية";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/hsSearch.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/hsSearch.js" asp-append-version="true"></script>
+}
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <h1>بحث الأكواد الجمركية</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Services" asp-action="Index">خدماتنا</a></li>
+                    <li class="breadcrumb-item active">بحث الأكواد الجمركية</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<section class="search-section">
+    <div class="container">
+        <div class="search-card">
+            <div class="search-form">
+                <input type="text" id="searchInput" class="search-input" 
+                       placeholder="ابحث عن المنتج (مثال: هاتف ذكي، أجهزة كمبيوتر، ملابس...)"
+                       onkeypress="handleEnterKey(event)">
+                <button class="search-btn" onclick="performSearch()">
+                    <i class="fas fa-search"></i>
+                    بحث الآن
+                </button>
+            </div>
+
+            <div class="suggestions">
+                <button class="suggestion-btn" onclick="quickSearch('هواتف ذكية')">هواتف ذكية</button>
+                <button class="suggestion-btn" onclick="quickSearch('أجهزة كمبيوتر')">أجهزة كمبيوتر</button>
+                <button class="suggestion-btn" onclick="quickSearch('ملابس قطنية')">ملابس قطنية</button>
+                <button class="suggestion-btn" onclick="quickSearch('أدوية')">أدوية</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="loading" id="loadingDiv">
+    <div class="loader-content">
+        <div class="icon-loader">
+            <i class="fas fa-plane"></i>
+            <div class="loader-path"></div>
+        </div>
+        <p>جاري البحث...</p>
+    </div>
+</div>
+
+<section class="results-section" id="resultsContainer">
+    <!-- Results will be displayed here -->
+</section> 

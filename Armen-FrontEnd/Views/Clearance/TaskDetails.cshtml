@@ -1,0 +1,200 @@
+﻿@{
+    Layout = "~/Views/Shared/_clearanceLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Clearance/TaskDetails.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/Clearance/TaskDetails.js" asp-append-version="true"></script>
+}
+
+<div class="p-6">
+    <!-- Order Details Card -->
+    <div class="main-card" data-aos="fade-up">
+        <div class="card-header">
+            <h3 class="text-2xl font-bold flex items-center">
+                <i class="fas fa-info-circle ml-3"></i>
+                تفاصيل الطلب (للاطلاع فقط)
+            </h3>
+        </div>
+        <div class="card-content">
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">رقم الطلب</div>
+                    <div class="detail-value">ORD-2025-005</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">اسم العميل</div>
+                    <div class="detail-value">شركة التقنيات المتطورة</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">موظف الاستيراد</div>
+                    <div class="detail-value">أحمد محمد سالم</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">تاريخ إنشاء الطلب</div>
+                    <div class="detail-value">20 يوليو 2025</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">بلد المنشأ</div>
+                    <div class="detail-value">الصين</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">ميناء الوصول</div>
+                    <div class="detail-value">ميناء العقبة</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">نوع البضاعة</div>
+                    <div class="detail-value">أجهزة إلكترونية</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">الوزن الإجمالي</div>
+                    <div class="detail-value">2.5 طن</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Files Section -->
+    <div class="main-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-header">
+            <h3 class="text-2xl font-bold flex items-center">
+                <i class="fas fa-folder-open ml-3"></i>
+                إدارة الملفات
+            </h3>
+        </div>
+        <div class="card-content">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Download Section -->
+                <div class="file-section">
+                    <div class="file-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-color mb-4">تنزيل الملف الرئيسي</h4>
+                    <p class="text-gray-600 mb-6">احصل على الملف الأصلي للمراجعة والتعديل</p>
+                    <button class="action-btn btn-primary" onclick="downloadMainFile()">
+                        <i class="fas fa-download"></i>
+                        تنزيل الملف الرئيسي
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Customs Clearance Price Section -->
+    <div class="main-card" data-aos="fade-up" data-aos-delay="150" style="background: #fff7dc; border: 2px solid #f59e0b; border-radius: 18px; margin-bottom: 40px; margin-top: 32px;">
+        <div class="card-header">
+            <h3 class="text-xl font-bold flex items-center" style="color: #a86a00;">
+                <i class="fas fa-money-bill-wave ml-3"></i>
+                سعر التخليص الجمركي
+            </h3>
+        </div>
+        <div class="card-content">
+            <form id="clearanceForm" style="max-width: 350px; margin: 0 auto;">
+                <div class="form-group mb-4">
+                    <label for="clearancePrice" class="form-label font-bold" style="color: #a86a00;">سعر التخليص (₪)</label>
+                    <input type="number" id="clearancePrice" name="clearancePrice" class="form-input" placeholder="أدخل سعر التخليص بالشيكل" min="0" step="0.01" style="width: 100%; border-radius: 10px; border: 2px solid #e0c97f; background: #fff; padding: 16px; font-size: 1.1em;">
+                </div>
+                <button type="submit" class="action-btn" style="background: linear-gradient(135deg, #a78bfa, #7c3aed); color: #fff; font-weight:700; font-size:1.1em; border-radius: 25px; padding: 14px 38px; width:100%; display:flex; align-items:center; justify-content:center; gap:10px;">
+                    <i class="fas fa-save ml-2"></i>
+                    حفظ
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notes Section -->
+    <div class="main-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-header">
+            <h3 class="text-2xl font-bold flex items-center">
+                <i class="fas fa-sticky-note ml-3"></i>
+                إضافة ملاحظات
+            </h3>
+        </div>
+        <div class="card-content">
+            <p class="text-gray-600 mb-4">أضف ملاحظاتك حول المراجعة التي تمت على الملفات والوثائق:</p>
+            <textarea 
+                class="notes-textarea" 
+                id="reviewNotes" 
+                placeholder="اكتب ملاحظاتك هنا... مثل: تم مراجعة جميع الوثائق، البيانات صحيحة، يوجد تعديل على رقم HS Code..."
+            ></textarea>
+        </div>
+    </div>
+
+
+    <!-- Action Buttons -->
+    <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+        <button class="action-btn btn-success ml-4" onclick="completeReview()">
+            <i class="fas fa-check-circle"></i>
+            إكمال المراجعة وإعادة الإرسال
+        </button>
+        <a href="#" class="action-btn btn-secondary">
+            <i class="fas fa-arrow-right"></i>
+            العودة للوحة التحكم
+        </a>
+    </div>
+</div>
+
+<!-- Completion Modal -->
+<div id="completionModal" class="modal">
+    <div class="modal-content">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-2xl text-green-500"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-primary-color mb-2">تأكيد إكمال المراجعة</h3>
+            <p class="text-gray-600">هل أنت متأكد من إكمال مراجعة هذه المهمة؟</p>
+        </div>
+        <div class="flex space-x-4">
+            <button class="action-btn btn-success flex-1" onclick="confirmCompletion()">
+                <i class="fas fa-check"></i>
+                نعم، إكمال المراجعة
+            </button>
+            <button class="action-btn btn-secondary flex-1" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+                إلغاء
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- جدول أرباح خدمات التخليص -->
+    <div class="import-calc-section" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="mb-4">حساب أرباح خدمات التخليص</h3>
+        <form onsubmit="event.preventDefault();calcClearanceProfit();">
+            <table class="import-calc-table">
+                <thead>
+                    <tr>
+                        <th>الخدمة</th>
+                        <th>مطلوب من الزبون</th>
+                        <th>المدفوعات</th>
+                        <th>الربح</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-label">مخلص</td>
+                        <td><input type="number" id="req-clearance-clearer" min="0" step="0.01" placeholder="0"> <span class="currency-label">₪</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">500.00</div></td>
+                        <td id="profit-clearance-clearer">-</td>
+                    </tr>
+                    <tr>
+                        <td class="service-label">فحص</td>
+                        <td><input type="number" id="req-clearance-inspection" min="0" step="0.01" placeholder="0"> <span class="currency-label">₪</span></td>
+                        <td><div class="w-full p-2 border border-gray-300 rounded bg-gray-100">200.00</div></td>
+                        <td id="profit-clearance-inspection">-</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="service-label">المجموع</td>
+                        <td id="total-req-clearance">-</td>
+                        <td id="total-paid-clearance">-</td>
+                        <td id="total-profit-clearance">-</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button type="submit" class="import-calc-btn">حفظ</button>
+        </form>
+    </div>
+

@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "???????";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/services.js" asp-append-version="true"></script>
+}
+
+<!-- Redirect to Home/Services -->
+<script>
+    window.location.href = '@Url.Action("Services", "Home")';
+</script>
+
+<div class="text-center">
+    <h1>???? ???????...</h1>
+    <p>??? ?? ??? ??????? ????????? <a asp-controller="Home" asp-action="Services">???? ???</a></p>
+</div>

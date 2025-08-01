@@ -1,0 +1,221 @@
+@{
+    ViewData["Title"] = "من نحن";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/about.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/about.js" asp-append-version="true"></script>
+}
+
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <h1>من نحن</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item active">من نحن</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- قسم الإحصائيات -->
+<section class="stats-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>قصة نجاح بدأت منذ 2010</h2>
+            <p>نحن أكثر من مجرد شركة شحن - نحن شريك موثوق في نجاح أعمالك</p>
+        </div>
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number counter" data-target="15">0</div>
+                <div class="stat-label">سنوات خبرة</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number counter" data-target="35">0</div>
+                <div class="stat-label">دولة حول العالم</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number counter" data-target="1200">0</div>
+                <div class="stat-label">عميل راضٍ</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- قسم قصتنا -->
+<section class="story-section">
+    <div class="container">
+        <div class="story-content">
+            <div class="story-text">
+                <h2>قصتنا</h2>
+                <p>بدأت رحلة آرمن في عام 2010 برؤية واضحة: تقديم حلول شحن مبتكرة تتجاوز توقعات العملاء. اليوم، نفخر بأننا من رواد قطاع الشحن في المنطقة.</p>
+                <div class="vision-mission">
+                    <div class="vision-item">
+                        <div class="icon-circle">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="vision-text">
+                            <h4>رؤيتنا</h4>
+                            <p>أن نكون الخيار الأول والأكثر موثوقية في عالم الشحن والخدمات اللوجستية.</p>
+                        </div>
+                    </div>
+                    <div class="vision-item">
+                        <div class="icon-circle">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="vision-text">
+                            <h4>رسالتنا</h4>
+                            <p>تقديم حلول شحن متكاملة تساعد عملاءنا على النمو وتحقيق أهدافهم.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="video-thumbnail">
+                <a href="#" class="video-link" data-video-url="YOUR_VIDEO_URL_HERE">
+                    <img src="https://mlmvamjmfkcs.i.optimole.com/w:1920/h:1080/q:mauto/ig:avif/https://elfayoumi.com/wp-content/uploads/2025/05/%D9%85%D8%B7%D8%A7%D8%B1%D8%A7%D8%AA.png" 
+                         alt="فيديو تعريفي">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- قسم قيمنا -->
+<section class="values-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>قيمنا الأساسية</h2>
+        </div>
+        <div class="values-container">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>الثقة والمصداقية</h3>
+                <p>نبني علاقات طويلة المدى مع عملائنا على أساس الثقة والشفافية.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>الابتكار المستمر</h3>
+                <p>نستثمر في أحدث التقنيات لتقديم حلول شحن ذكية ومبتكرة.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>التركيز على العميل</h3>
+                <p>نضع رضا العملاء في مقدمة أولوياتنا ونسعى دائماً لتجاوز توقعاتهم.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- قسم فريق العمل -->
+<section class="team-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>فريقنا المتميز</h2>
+        </div>
+        <div class="team-container">
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="https://i.pravatar.cc/300?img=11" alt="المدير التنفيذي">
+                    <div class="member-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>أحمد محمد</h3>
+                    <p>المدير التنفيذي</p>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="https://i.pravatar.cc/300?img=2" alt="مدير العمليات">
+                    <div class="member-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>سارة خالد</h3>
+                    <p>مدير العمليات</p>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="https://i.pravatar.cc/300?img=8" alt="مدير التسويق">
+                    <div class="member-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>محمد عمر</h3>
+                    <p>مدير التسويق</p>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="https://i.pravatar.cc/300?img=5" alt="مدير خدمة العملاء">
+                    <div class="member-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h3>ليلى أحمد</h3>
+                    <p>مدير خدمة العملاء</p>
+                </div>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- قسم الشركاء -->
+<section class="partners-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>شركاؤنا في النجاح</h2>
+        </div>
+        <div class="partners-container">
+            <div class="partner-logo">
+                <img src="https://companieslogo.com/img/orig/DPSGY_BIG-96d6f6c9.png?t=1633497370" alt="DHL">
+            </div>
+            <div class="partner-logo">
+                <img src="https://companieslogo.com/img/orig/MAERSK.CO-6535e4c9.png?t=1633497529" alt="Maersk">
+            </div>
+            <div class="partner-logo">
+                <img src="https://companieslogo.com/img/orig/FDX-0023b567.png?t=1633218252" alt="FedEx">
+            </div>
+            <div class="partner-logo">
+                <img src="https://companieslogo.com/img/orig/UPS-0c99009d.png?t=1633497401" alt="UPS">
+            </div>
+        </div>
+    </div>
+</section> 

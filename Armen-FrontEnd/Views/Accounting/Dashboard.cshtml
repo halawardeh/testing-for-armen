@@ -1,0 +1,235 @@
+﻿@{
+    ViewData["Title"] = "لوحة التحكم المحاسبية";
+    Layout = "~/Views/Shared/_AccountingLayout.cshtml";
+}
+
+@section Styles {
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Accounting/Dashboard.css" asp-append-version="true">
+}
+
+
+<div class="p-6">
+    <!-- Welcome Section -->
+    <div class="accounting-welcome" data-aos="fade-up">
+        <div class="relative z-10">
+            <h2 class="text-2xl font-bold mb-2">مرحباً بك في القسم المحاسبي</h2>
+            <p class="opacity-90 mb-4">مراجعة وإغلاق الطلبات من الناحية المالية</p>
+            <button class="bg-gradient-to-r from-[#025F70] to-[#00a878] text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-all">
+                <i class="fas fa-plus ml-2"></i> بدء مهمة جديدة
+            </button>
+        </div>
+    </div>
+
+    <!-- قسم أسعار الصرف اليومي -->
+    <!-- ... الكود الخاص بأسعار الصرف كما هو بدون تعديل ... -->
+    <!-- Accounting Tasks Management -->
+    <div class="accounting-tabs" data-aos="fade-up" data-aos-delay="300">
+        <div class="tab-header">
+            <button class="tab-button active" onclick="switchTab(event, 'pendingReview')">
+                <i class="fas fa-clock ml-2"></i>
+                مهام بانتظار المراجعة
+                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full mr-2">18</span>
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'closedTasks')">
+                <i class="fas fa-check-circle ml-2"></i>
+                مهام مغلقة ماليًا
+                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full mr-2">142</span>
+            </button>
+        </div>
+
+        <!-- Pending Review Tab -->
+        <div id="pendingReview" class="tab-content active">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-primary-color">المهام بانتظار المراجعة المالية</h3>
+                <div class="flex space-x-3">
+                    <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-color focus:ring-1 focus:ring-primary-color">
+                        <option value="">ترتيب حسب</option>
+                        <option value="date">تاريخ الإحالة</option>
+                        <option value="amount">المبلغ</option>
+                    </select>
+                    <button class="accounting-action-btn btn-audit">
+                        <i class="fas fa-filter"></i>
+                        فلترة
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="accounting-table">
+                    <thead>
+                        <tr>
+                            <th>رقم الطلب</th>
+                            <th>اسم الزبون</th>
+                            <th>تاريخ الإحالة</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold text-primary-color">#ORD-2025-001</td>
+                            <td>شركة النخبة التجارية</td>
+                            <td>2025-07-20</td>
+                            <td><span class="status-ready-audit">جاهزة للتدقيق</span></td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <a asp-controller="Accounting" asp-action="TasksDetalse" class="accounting-action-btn btn-audit text-sm">
+                                        <i class="fas fa-search-dollar"></i>
+                                        فتح للتدقيق
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-primary-color">#ORD-2025-002</td>
+                            <td>مؤسسة الأمل للاستيراد</td>
+                            <td>2025-07-19</td>
+                            <td><span class="status-pending-review">بانتظار تقرير الشحن</span></td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <a asp-controller="Accounting" asp-action="Tasks" asp-route-id="2" class="accounting-action-btn btn-view-details text-sm">
+                                        <i class="fas fa-eye"></i>
+                                        عرض التفاصيل
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-primary-color">#ORD-2025-003</td>
+                            <td>شركة الرائد للتجارة</td>
+                            <td>2025-07-18</td>
+                            <td><span class="status-ready-audit">جاهزة للتدقيق</span></td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <a asp-controller="Accounting" asp-action="TaskDetalse" asp-route-id="3" class="accounting-action-btn btn-audit text-sm">
+                                        <i class="fas fa-search-dollar"></i>
+                                        فتح للتدقيق
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-6">
+                <div class="text-sm text-gray-600">
+                    عرض 1 إلى 10 من 18 مدخلات
+                </div>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">السابق</button>
+                    <button class="px-3 py-1 bg-primary-color text-white rounded-md hover:bg-secondary-color">1</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">2</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">التالي</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Closed Tasks Tab -->
+        <div id="closedTasks" class="tab-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-primary-color">أرشيف المهام المغلقة ماليًا</h3>
+                <div class="flex space-x-3">
+                    <input type="date" class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-color focus:ring-1 focus:ring-primary-color">
+                    <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-primary-color focus:ring-1 focus:ring-primary-color">
+                        <option value="">جميع الشهور</option>
+                        <option value="2025-07">يوليو 2025</option>
+                        <option value="2025-06">يونيو 2025</option>
+                        <option value="2025-05">مايو 2025</option>
+                    </select>
+                    <button class="accounting-action-btn btn-audit">
+                        <i class="fas fa-download"></i>
+                        تصدير
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="accounting-table">
+                    <thead>
+                        <tr>
+                            <th>رقم الطلب</th>
+                            <th>اسم الزبون</th>
+                            <th>تاريخ الإغلاق</th>
+                            <th>التكلفة الإجمالية</th>
+                            <th>نسبة الأرباح</th>
+                            <th>قيمة الأرباح</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold text-primary-color">#ORD-2025-142</td>
+                            <td>شركة الأندلس التجارية</td>
+                            <td>2025-07-19</td>
+                            <td class="currency-display font-bold">$ 2,100</td>
+                            <td class="font-semibold text-green-600">15%</td>
+                            <td class="currency-display font-bold text-green-600">$ 315</td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <button class="text-primary-color hover:text-secondary-color p-1" title="عرض التفاصيل">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700 p-1" title="تحميل التقرير">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-primary-color">#ORD-2025-141</td>
+                            <td>مجموعة النصر للاستثمار</td>
+                            <td>2025-07-18</td>
+                            <td class="currency-display font-bold">$ 3,450</td>
+                            <td class="font-semibold text-green-600">12%</td>
+                            <td class="currency-display font-bold text-green-600">$ 414</td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <button class="text-primary-color hover:text-secondary-color p-1" title="عرض التفاصيل">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700 p-1" title="تحميل التقرير">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-6">
+                <div class="text-sm text-gray-600">عرض 1 إلى 10 من 142 مدخلات</div>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">السابق</button>
+                    <button class="px-3 py-1 bg-primary-color text-white rounded-md hover:bg-secondary-color">1</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">2</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">التالي</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+        function switchTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+}

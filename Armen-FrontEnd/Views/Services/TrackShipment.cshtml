@@ -1,0 +1,214 @@
+﻿@{
+    ViewData["Title"] = "تتبع الشحنة";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/trackShipment.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/trackShipment.js" asp-append-version="true"></script>
+}
+
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <h1>تتبع شحنتك</h1>
+            <p class="hero-subtitle">تتبع شحنتك من الصين إلى فلسطين في الوقت الفعلي مع خدمة متابعة متطورة ودقيقة</p>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Services" asp-action="Index">خدماتنا</a></li>
+                    <li class="breadcrumb-item active">تتبع الشحنة</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- البحث -->
+<section class="search-section">
+    <div class="container">
+        <div class="search-card">
+            <h2 class="search-title">أدخل رقم تتبع الشحنة</h2>
+
+            <div class="search-form">
+                <input type="text"
+                       id="trackingNumber"
+                       class="search-input"
+                       placeholder="مثال: ARM001"
+                       onkeypress="handleEnterKey(event)">
+
+                <button class="search-btn" onclick="trackShipment()">
+                    <i class="fas fa-search"></i>
+                    تتبع الشحنة
+                </button>
+            </div>
+
+            <div class="sample-numbers">
+                <p class="sample-title">أرقام تجريبية للاختبار:</p>
+                <div class="sample-links">
+                    <a href="#" class="sample-link" onclick="setTrackingNumber('ARM001')">ARM001</a>
+                    <a href="#" class="sample-link" onclick="setTrackingNumber('ARM002')">ARM002</a>
+                    <a href="#" class="sample-link" onclick="setTrackingNumber('ARM003')">ARM003</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- التحميل -->
+<div class="loading-section" id="loadingDiv">
+    <div class="loading-content">
+        <div class="spinner"></div>
+        <p class="loading-text">جاري البحث عن الشحنة...</p>
+    </div>
+</div>
+
+<!-- معلومات الشحنة -->
+<section class="results-section" id="resultsContainer">
+    <div class="container">
+        <!-- معلومات العميل والحاوية -->
+        <div class="info-grid">
+            <!-- معلومات العميل -->
+            <div class="info-card customer-info">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 class="card-title">معلومات العميل</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">الاسم:</span>
+                            <span class="info-value" id="customerName">محمد أحمد العلي</span>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">الهاتف:</span>
+                            <span class="info-value" id="customerPhone">+970 59 123 4567</span>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">البريد الإلكتروني:</span>
+                            <span class="info-value" id="customerEmail">mohamed@example.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- معلومات الحاوية -->
+            <div class="info-card container-info">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3 class="card-title">معلومات الحاوية</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">رقم الحاوية:</span>
+                            <span class="info-value" id="containerNumber">ARM001</span>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">الموقع الحالي:</span>
+                            <span class="info-value" id="currentLocation">ميناء شنغهاي، الصين</span>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">الوجهة:</span>
+                            <span class="info-value" id="destination">جنين، فلسطين</span>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">تاريخ التسليم المتوقع:</span>
+                            <span class="info-value" id="deliveryDate">15 فبراير 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-weight-hanging"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">الوزن:</span>
+                            <span class="info-value" id="weight">2.5 طن</span>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">الأبعاد:</span>
+                            <span class="info-value" id="dimensions">2.6 × 24 × 6 متر</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- حالة الشحنة الحالية -->
+        <div class="status-card">
+            <h3 class="status-title">حالة الشحنة الحالية</h3>
+            <div class="status-content" id="currentStatus">
+                <span class="status-badge status-shipping">
+                    <i class="fas fa-ship"></i>
+                    في الطريق - البحر الأبيض المتوسط
+                </span>
+            </div>
+        </div>
+
+        <!-- تايم لاين الرحلة -->
+        <div class="timeline-container">
+            <div class="section-header">
+                <h2 class="timeline-title">
+                    <i class="fas fa-route"></i>
+                    مسار رحلة الشحنة
+                </h2>
+            </div>
+
+            <div class="timeline" id="shipmentTimeline">
+                <!-- سيتم إضافة عناصر التايم لاين هنا بواسطة JavaScript -->
+            </div>
+        </div>
+    </div>
+</section>

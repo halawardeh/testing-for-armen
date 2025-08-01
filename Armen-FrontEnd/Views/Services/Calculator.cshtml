@@ -1,0 +1,417 @@
+@{
+    ViewData["Title"] = "حاسبة الشحن وطلب السعر";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/calculator.css" asp-append-version="true" />
+}
+@section Scripts {
+    <script src="~/js/calculator.js" asp-append-version="true"></script>
+}
+
+<!-- Hero Section -->
+<div class="inner-hero">
+    <div class="inner-hero-overlay"></div>
+    <div class="container">
+        <div class="inner-hero-content">
+            <h1>حاسبة الشحن وطلب السعر</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">الرئيسية</a></li>
+                    <li class="breadcrumb-item active">حاسبة الشحن وطلب السعر</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Main Calculator Section -->
+<div class="calculator-section">
+    <div class="container">
+
+        <!-- Progress Bar -->
+        <div class="progress-wrapper">
+            <div class="progress-header">
+                <h3><i class="fas fa-tasks"></i> تقدم طلبك</h3>
+                <span class="progress-text">الخطوة <span id="current-step">1</span> من 3</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-steps">
+                    <div class="step-indicator active" data-step="1">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="step-indicator" data-step="2">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="step-indicator" data-step="3">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-labels">
+                <span>حساب التكلفة</span>
+                <span>تفاصيل الطلب</span>
+                <span>إرسال الطلب</span>
+            </div>
+        </div>
+
+        <!-- Step 1: Calculator -->
+        <div class="step-content active" id="step-1">
+            <div class="main-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-calculator"></i>
+                        <h3>احسب تكلفة الشحنة</h3>
+                    </div>
+                    <p>أدخل بيانات الشحنة للحصول على السعر التقديري</p>
+                </div>
+
+                <form id="shipping-form" class="calculator-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="origin"><i class="fas fa-map-marker-alt"></i> المنشأ (الصين)</label>
+                            <div class="select-wrapper">
+                                <input type="text" id="origin" name="origin" class="form-input"
+                                       placeholder="اختر أو اكتب اسم المدينة" required
+                                       list="origin-options">
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                                <datalist id="origin-options">
+                                    <option value="Yiwu"></option>
+                                    <option value="Guangzhou"></option>
+                                    <option value="Shanghai"></option>
+                                    <option value="Shenzhen"></option>
+                                </datalist>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destination"><i class="fas fa-flag"></i> الوجهة (فلسطين)</label>
+                            <div class="select-wrapper">
+                                <input type="text" id="destination" name="destination" class="form-input"
+                                       placeholder="اختر أو اكتب اسم المدينة" required
+                                       list="destination-options">
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                                <datalist id="destination-options">
+                                    <option value="جنين"></option>
+                                    <option value="رام الله"></option>
+                                    <option value="نابلس"></option>
+                                    <option value="الخليل"></option>
+                                    <option value="بيت لحم"></option>
+                                    <option value="القدس"></option>
+                                    <option value="غزة"></option>
+                                    <option value="طولكرم"></option>
+                                    <option value="قلقيلية"></option>
+                                    <option value="أريحا"></option>
+                                </datalist>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="item-type"><i class="fas fa-boxes"></i> نوع البضاعة</label>
+                            <div class="select-wrapper">
+                                <input type="text" id="item-type" class="form-input"
+                                       placeholder="اختر أو اكتب نوع البضاعة" required
+                                       list="item-type-options">
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                                <datalist id="item-type-options">
+                                    <option value="إلكترونيات"></option>
+                                    <option value="ملابس ونسيج"></option>
+                                    <option value="أجهزة منزلية"></option>
+                                    <option value="ألعاب وهدايا"></option>
+                                    <option value="أثاث ومفروشات"></option>
+                                    <option value="مستحضرات تجميل"></option>
+                                    <option value="قطع غيار"></option>
+                                    <option value="أدوات رياضية"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Volume Type Selection -->
+                    <div class="volume-section">
+                        <label class="section-label"><i class="fas fa-cube"></i> طريقة حساب الحجم</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="volume-type" value="cbm" checked>
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">CBM</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="volume-type" value="dimensions">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">الأبعاد</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- CBM Inputs -->
+                    <div class="volume-inputs cbm-inputs active" id="cbm-inputs">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cbm"><i class="fas fa-cube"></i> الحجم (CBM)</label>
+                                <input type="number" id="cbm" class="form-input" min="0.01" step="0.01" placeholder="0.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="cartons-cbm"><i class="fas fa-box"></i> عدد الكراتين</label>
+                                <input type="number" id="cartons-cbm" class="form-input" min="1" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dimensions Inputs -->
+                    <div class="volume-inputs dimensions-inputs" id="dimensions-inputs">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="length"><i class="fas fa-ruler"></i> الطول (سم)</label>
+                                <input type="number" id="length" class="form-input" min="1" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="width"><i class="fas fa-ruler-horizontal"></i> العرض (سم)</label>
+                                <input type="number" id="width" class="form-input" min="1" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="height"><i class="fas fa-ruler-vertical"></i> الارتفاع (سم)</label>
+                                <input type="number" id="height" class="form-input" min="1" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="cartons-dim"><i class="fas fa-box"></i> عدد الكراتين</label>
+                                <input type="number" id="cartons-dim" class="form-input" min="1" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="weight"><i class="fas fa-weight-hanging"></i> الوزن الإجمالي (كجم)</label>
+                            <input type="number" id="weight" class="form-input" min="0.1" step="0.1" placeholder="0.0" required>
+                        </div>
+                    </div>
+
+                    <!-- Insurance Option -->
+                    <div class="insurance-section">
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="insurance" name="insurance">
+                            <span class="checkbox-custom"></span>
+                            <div class="checkbox-content">
+                                <strong><i class="fas fa-shield-alt"></i> التأمين على الشحنة</strong>
+                                <small>حماية إضافية لشحنتك ضد المخاطر</small>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-calculator"></i>
+                            احسب التكلفة
+                        </button>
+                    </div>
+                </form>
+
+                <div class="info-note">
+                    <div class="note-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="note-content">
+                        <strong>ملاحظة هامة:</strong>
+                        <span>أسعار الشحن تتغير بشكل دوري حسب ظروف السوق والطلب</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Order Details -->
+        <div class="step-content" id="step-2">
+            <div class="main-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>تفاصيل المنتجات والبيانات الشخصية</h3>
+                    </div>
+                    <p>أكمل البيانات المطلوبة لإرسال طلب السعر</p>
+                </div>
+
+                <form id="order-details-form" class="order-form">
+                    <!-- Product Details -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-box"></i> تفاصيل المنتجات</h4>
+                        <div class="section-divider"></div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="product-description"><i class="fas fa-file-alt"></i> وصف تفصيلي للمنتجات</label>
+                                <textarea id="product-description" class="form-input" rows="4" placeholder="اكتب وصفاً تفصيلياً للمنتجات التي تريد شحنها..." required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="product-quantity"><i class="fas fa-sort-numeric-up"></i> الكمية</label>
+                                <input type="text" id="product-quantity" class="form-input" placeholder="مثال: 100 قطعة" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-value"><i class="fas fa-dollar-sign"></i> القيمة التقديرية ($)</label>
+                                <input type="number" id="product-value" class="form-input" min="0" step="0.01" placeholder="0.00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-user"></i> البيانات الشخصية</h4>
+                        <div class="section-divider"></div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customer-name"><i class="fas fa-user-circle"></i> الاسم الكامل *</label>
+                                <input type="text" id="customer-name" class="form-input" placeholder="الاسم الكامل" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer-phone"><i class="fas fa-phone"></i> رقم الهاتف *</label>
+                                <input type="tel" id="customer-phone" class="form-input" placeholder="+970 XX XXX XXXX" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customer-email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                                <input type="email" id="customer-email" class="form-input" placeholder="example@domain.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="customer-company"><i class="fas fa-building"></i> اسم الشركة (اختياري)</label>
+                                <input type="text" id="customer-company" class="form-input" placeholder="اسم الشركة">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="delivery-address"><i class="fas fa-map-marker-alt"></i> عنوان التسليم *</label>
+                                <textarea id="delivery-address" class="form-input" rows="3" placeholder="العنوان الكامل للتسليم..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-sticky-note"></i> ملاحظات إضافية</h4>
+                        <div class="section-divider"></div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="order-notes"><i class="fas fa-comment"></i> ملاحظات أو طلبات خاصة</label>
+                                <textarea id="order-notes" class="form-input" rows="3" placeholder="أي ملاحظات أو طلبات خاصة..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions two-buttons">
+                        <button type="button" class="btn-secondary" onclick="goToStep(1)">
+                            <i class="fas fa-arrow-right"></i>
+                            العودة
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            إرسال طلب السعر
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Step 3: Success -->
+        <div class="step-content" id="step-3">
+            <div class="main-card success-card">
+                <div class="success-content">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>تم إرسال طلبك بنجاح!</h3>
+                    <p>شكراً لثقتك في خدماتنا. سيتم التواصل معك قريباً للتأكيد على طلبك وتزويدك بالتفاصيل النهائية.</p>
+
+                    <div class="login-invitation">
+                        <div class="invitation-content">
+                            <div class="invitation-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h4>احصل على تجربة أفضل!</h4>
+                            <p>سجل دخولك الآن لتتبع طلباتك والاستفادة من خدمات إضافية وخصومات حصرية</p>
+                            <div class="invitation-actions">
+                                <a asp-controller="User" asp-action="Login" class="btn-primary">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    تسجيل الدخول
+                                </a>
+                                <a asp-controller="User" asp-action="Register" class="btn-secondary">
+                                    <i class="fas fa-user-plus"></i>
+                                    إنشاء حساب جديد
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="final-actions">
+                        <button onclick="resetCalculator()" class="btn-outline">
+                            <i class="fas fa-plus"></i>
+                            طلب جديد
+                        </button>
+                        <a asp-controller="Home" asp-action="Index" class="btn-outline">
+                            <i class="fas fa-home"></i>
+                            العودة للرئيسية
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Calculation Loader -->
+<div id="calculation-loader" class="calculation-loader">
+    <div class="loader-content">
+        <div class="loader-animation">
+            <i class="fas fa-plane"></i>
+        </div>
+        <div class="loader-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <p>جاري حساب التكلفة...</p>
+    </div>
+</div>
+
+<!-- Results Modal -->
+<div class="modal fade" id="resultsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-chart-line"></i> تفاصيل الشحنة والتكلفة</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="shipment-details"></div>
+                <div class="cost-summary">
+                    <div class="cost-row">
+                        <span><i class="fas fa-shipping-fast"></i> تكلفة الشحن:</span>
+                        <span id="shipping-cost" class="cost-value">$0</span>
+                    </div>
+                    <div class="cost-row" id="insurance-row" style="display: none;">
+                        <span><i class="fas fa-shield-alt"></i> تكلفة التأمين:</span>
+                        <span id="insurance-cost" class="cost-value">$0</span>
+                    </div>
+                    <div class="cost-row total-row">
+                        <span><i class="fas fa-calculator"></i> التكلفة الإجمالية:</span>
+                        <span id="total-cost" class="total-value">$0</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-edit"></i>
+                        تعديل البيانات
+                    </button>
+                    <button type="button" class="btn-primary" onclick="acceptPrice()">
+                        <i class="fas fa-check"></i>
+                        أوافق على السعر - المتابعة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confetti for Success -->
+<div id="confetti-container"></div>

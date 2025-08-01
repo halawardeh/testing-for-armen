@@ -1,0 +1,277 @@
+﻿@{
+    ViewData["Title"] = "ShippingOrders";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/js/Admin/CSS/ShippingOrders.css" asp-append-version="true" />
+}
+@section Scripts {
+    <script src="~/js/Admin/js/ShippingOrders.js" asp-append-version="true"></script>
+}
+<script src="~/js/ShippingOrders.js" asp-append-version="true"></script>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content" id="mainContent">
+    <!-- شريط التنقل العلوي -->
+    <div class="topbar">
+    </div>
+
+
+    <div class="container-fluid py-4">
+        <!-- عنوان الصفحة -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0">إدارة طلبات الشحن</h4>
+            <div>
+                <button class="btn btn-primary me-2" id="filterBtn">
+                    <i class="fas fa-filter me-2"></i>تصفية
+                </button>
+                <button class="btn btn-success" id="exportBtn">
+                    <i class="fas fa-file-export me-2"></i>تصدير
+                </button>
+            </div>
+        </div>
+        <!-- جدول طلبات الشحن -->
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">قائمة طلبات الشحن</h5>
+                <div class="d-flex">
+                    <div class="input-group me-3" style="width: 250px;">
+                        <input type="text" class="form-control" placeholder="ابحث عن طلب..." id="searchInput">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>رقم الطلب</th>
+                                <th>اسم العميل</th>
+                                <th>نوع الشحنة</th>
+                                <th>الميناء</th>
+                                <th>الرحلة</th>
+                                <th>الحاوية</th>
+                                <th>نوع النقل</th>
+                                <th>تاريخ التقديم</th>
+                                <th>السعر</th>
+                                <th>الحالة</th>
+                                <th>الموظف المسؤول</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTable">
+                            <!-- سيتم ملؤه بالبيانات عبر JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- الترقيم الصفحي -->
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center" id="paginationContainer">
+                        <!-- يتم ملؤها بالـ JavaScript -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal تفاصيل الطلب -->
+<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderDetailsModalLabel">تفاصيل طلب الشحن #<span id="orderId"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <!-- تفاصيل الطلب الأساسية -->
+                        <div class="order-details-card mb-4">
+                            <div class="order-details-header">
+                                <h6 class="mb-0">معلومات الطلب الأساسية</h6>
+                            </div>
+                            <div class="order-details-body">
+                                <div class="detail-row">
+                                    <div class="detail-label">اسم العميل:</div>
+                                    <div class="detail-value" id="clientName"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">نوع الشحنة:</div>
+                                    <div class="detail-value" id="shipmentType"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">الميناء:</div>
+                                    <div class="detail-value" id="port"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">الرحلة:</div>
+                                    <div class="detail-value" id="voyage"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">الحاوية:</div>
+                                    <div class="detail-value" id="container"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">نوع النقل الداخلي:</div>
+                                    <div class="detail-value" id="transportType"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">مدينة التحميل:</div>
+                                    <div class="detail-value" id="loadingCity"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">عنوان المخزن الصيني:</div>
+                                    <div class="detail-value" id="warehouseAddress"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">رقم تواصل صيني:</div>
+                                    <div class="detail-value" id="contactNumber"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">تاريخ التقديم:</div>
+                                    <div class="detail-value" id="submissionDate"></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">السعر:</div>
+                                    <div class="detail-value" id="price"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- المرفقات -->
+                        <div class="order-details-card mb-4">
+                            <div class="order-details-header">
+                                <h6 class="mb-0">الملفات المرفقة</h6>
+                            </div>
+                            <div class="order-details-body">
+                                <div class="attachments-container" id="attachmentsContainer">
+                                    <!-- سيتم ملؤه بالبيانات عبر JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!-- حالة الطلب -->
+                        <div class="order-details-card mb-4">
+                            <div class="order-details-header">
+                                <h6 class="mb-0">حالة الطلب</h6>
+                            </div>
+                            <div class="order-details-body">
+                                <div class="mb-3">
+                                    <select class="status-select" id="statusSelect">
+                                        <option value="pending">معلق</option>
+                                        <option value="processing">قيد المعالجة</option>
+                                        <option value="completed">مكتمل</option>
+                                        <option value="rejected">مرفوض</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary w-100" id="updateStatusBtn">تحديث الحالة</button>
+                            </div>
+                        </div>
+
+                        <!-- الموظف المسؤول -->
+                        <div class="order-details-card mb-4">
+                            <div class="order-details-header">
+                                <h6 class="mb-0">الموظف المسؤول</h6>
+                            </div>
+                            <div class="order-details-body">
+                                <div class="mb-3">
+                                    <select class="form-select" id="employeeSelect">
+                                        <option value="1">أحمد محمد - موظف توثيق شحنات</option>
+                                        <option value="2">سارة عبدالله - مسؤولة استيراد</option>
+                                        <option value="3">خالد أحمد - موظف تخليص جمركي</option>
+                                        <option value="4">نورا سعيد - محاسبة شحنات دولية</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-secondary w-100" id="updateEmployeeBtn">تغيير المسؤول</button>
+                            </div>
+                        </div>
+
+                        <!-- سجل النشاط -->
+                        <div class="order-details-card">
+                            <div class="order-details-header">
+                                <h6 class="mb-0">سجل النشاط</h6>
+                            </div>
+                            <div class="order-details-body">
+                                <div class="activity-timeline" id="activityTimeline">
+                                    <!-- سيتم ملؤه بالبيانات عبر JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- إضافة ملاحظة -->
+                <div class="order-details-card mt-4">
+                    <div class="order-details-header">
+                        <h6 class="mb-0">إضافة ملاحظة جديدة</h6>
+                    </div>
+                    <div class="order-details-body">
+                        <textarea class="note-textarea" id="noteTextarea" placeholder="اكتب ملاحظتك هنا..."></textarea>
+                        <button class="btn btn-success mt-3" id="addNoteBtn">إضافة الملاحظة</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal تصفية الطلبات -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">تصفية طلبات الشحن</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="filterForm">
+                    <div class="mb-3">
+                        <label for="filterStatus" class="form-label">حالة الطلب</label>
+                        <select class="form-select" id="filterStatus">
+                            <option value="">الكل</option>
+                            <option value="pending">معلق</option>
+                            <option value="processing">قيد المعالجة</option>
+                            <option value="completed">مكتمل</option>
+                            <option value="rejected">مرفوض</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="filterPort" class="form-label">الميناء</label>
+                        <select class="form-select" id="filterPort">
+                            <option value="">الكل</option>
+                            <option value="جدة الإسلامية">جدة الإسلامية</option>
+                            <option value="دمياط">دمياط</option>
+                            <option value="دبي">دبي</option>
+                            <option value="شنغهاي">شنغهاي</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="filterDateFrom" class="form-label">من تاريخ</label>
+                        <input type="date" class="form-control" id="filterDateFrom">
+                    </div>
+                    <div class="mb-3">
+                        <label for="filterDateTo" class="form-label">إلى تاريخ</label>
+                        <input type="date" class="form-control" id="filterDateTo">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary" id="applyFilterBtn">تطبيق التصفية</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

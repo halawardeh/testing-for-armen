@@ -1,0 +1,819 @@
+﻿@{
+    ViewData["Title"] = "الرئيسية";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var heroVideo = document.querySelector('.hero-video-bg video');
+            if (heroVideo) {
+                heroVideo.playbackRate = 0.5;
+            }
+        });
+    </script>
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <div class="container">
+            <h1>
+                شحن سريع وموثوق من الصين إلى باب منزلك
+            </h1>
+            <p>مع آرمين، أنت دائمًا كسبان! نوفر وقتك وجهدك ومالك، وخدمات شحن وتخليص جمركي وتسوق في الصين وتحصيل. حلول لوجستية متكاملة من الصين مباشرة إلى فلسطين.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary btn-lg">اكتشف حلول الشحن</a>
+                <a href="#" class="btn btn-outline-light btn-lg">من نحن</a>
+            </div>
+        </div>
+    </div>
+    <div class="hero-video-bg">
+        <video autoplay loop muted playsinline poster="/images/import.mp4" class="hero-video">
+            <source src="/images/import.mp4" type="video/mp4">
+            <!-- في حال لم يعمل الفيديو -->
+            متصفحك لا يدعم تشغيل الفيديو.
+        </video>
+    </div>
+</section>
+
+<section class="services-simple-section">
+    <div class="section-header">
+        <h2 class="section-title">خدماتنا الرئيسية</h2>
+        <p class="section-desc">مجموعة متكاملة من الخدمات اللوجستية لتسهيل أعمالك</p>
+    </div>
+    <div class="services-simple-grid">
+        <div class="services-simple-card">
+            <div class="services-simple-icon"><i class="fas fa-shipping-fast"></i></div>
+            <div class="services-simple-title">الشحن</div>
+            <div class="services-simple-desc">خدمات شحن دولي موثوقة وسريعة من الصين إلى فلسطين.</div>
+        </div>
+        <div class="services-simple-card">
+            <div class="services-simple-icon"><i class="fas fa-search-location"></i></div>
+            <div class="services-simple-title">تتبع الشحنة</div>
+            <div class="services-simple-desc">تتبع شحنتك في كل خطوة حتى وصولها بأمان.</div>
+        </div>
+        <div class="services-simple-card">
+            <div class="services-simple-icon"><i class="fas fa-calculator"></i></div>
+            <div class="services-simple-title">حاسبة الشحن</div>
+            <div class="services-simple-desc">احسب تكلفة شحنتك بسهولة وشفافية عبر الحاسبة الذكية.</div>
+        </div>
+        <div class="services-simple-card">
+            <div class="services-simple-icon"><i class="fas fa-file-invoice"></i></div>
+            <div class="services-simple-title">التخليص الجمركي</div>
+            <div class="services-simple-desc">تخليص جمركي احترافي لجميع أنواع البضائع.</div>
+        </div>
+    </div>
+</section>
+
+<section class="solutions-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="content-block">
+                    <span class="section-tag">من نحن</span>
+                    <h2>
+                        شريكك الموثوق للشحن والتخليص الجمركي
+                    </h2>
+                    <p>
+                        منذ تأسيسنا، نلتزم في شركة آرمين بتقديم خدمات لوجستية متكاملة وموثوقة من الصين إلى فلسطين. فريقنا المتخصص يجمع بين الخبرة العملية والإبداع لتقديم حلول شحن وتخليص جمركي وتسوق في الصين تلبي احتياجاتك.
+                    </p>
+                    <div class="services-grid">
+                        <div class="row g-1">
+                            <div class="col-sm-6">
+                                <div class="service-item">
+                                    <i class="fa fa-check"></i>
+                                    <span>فريق متخصص في الشحن والتخليص الجمركي</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="service-item">
+                                    <i class="fa fa-check"></i>
+                                    <span>خبرة واسعة في السوق الصيني</span>
+                                </div>
+                            </div>
+                            @* <div class="col-sm-6">
+                                <div class="service-item">
+                                    <i class="fa fa-check"></i>
+                                    <span>التزام بالمواعيد والجودة</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="service-item">
+                                    <i class="fa fa-check"></i>
+                                    <span>دعم مستمر بعد الشحن</span>
+                                </div>
+                            </div> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="loop-wrapper">
+                    <div class="mountain"></div>
+                    <div class="hill"></div>
+                    <div class="tree"></div>
+                    <div class="tree"></div>
+                    <div class="tree"></div>
+                    <div class="rock"></div>
+                    <div class="truck"></div>
+                    <div class="wheels"></div>
+                </div>
+
+            </div>
+        </div>
+   
+    </div>
+</section>
+
+<section class="transport-services">
+    <div class="section-header text-center">
+        @* <span class="service-tag">خدماتنا</span> *@
+        <h2>نضمن نقلاً سريعاً وآمناً</h2>
+    </div>
+
+    <div class="services-gallery">
+        @* <div class="service-card" style="background-image: url('https://images.pexels.com/photos/13433787/pexels-photo-13433787.jpeg')">
+            <div class="service-overlay"></div>
+            <div class="service-icon">
+                <i class="fas fa-truck"></i>
+            </div>
+            <div class="service-content">
+                <h3>النقل البري</h3>
+                <p>خدمات نقل بري متكاملة مع أسطول حديث من الشاحنات وتغطية لجميع المناطق مع تتبع مباشر للشحنات.</p>
+                <a href="#" class="know-more-btn">
+                    اعرف المزيد
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+        </div> *@
+
+        <div class="service-card" style="background-image: url('/images/Air freight.jpg')">
+            <div class="service-overlay"></div>
+            <div class="service-icon">
+                <i class="fas fa-plane"></i>
+            </div>
+            <div class="service-content">
+                <h3>الشحن الجوي</h3>
+                <p>خدمات شحن جوي سريعة وموثوقة لجميع أنحاء العالم مع أفضل شركات الطيران العالمية.</p>
+                <a href="#" class="know-more-btn">
+                    اعرف المزيد
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="service-card" style="background-image: url('/images/Sea-shiiping.jpg')">
+            <div class="service-overlay"></div>
+            <div class="service-icon">
+                <i class="fas fa-ship"></i>
+            </div>
+            <div class="service-content">
+                <h3>الشحن البحري</h3>
+                <p>حلول شحن بحري شاملة للحاويات الكاملة والجزئية مع خدمات التخليص الجمركي.</p>
+                <a href="#" class="know-more-btn">
+                    اعرف المزيد
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="service-card" style="background-image: url('/images/clearence.jpg')">
+            <div class="service-overlay"></div>
+            <div class="service-icon">
+                <i class="fas fa-train"></i>
+            </div>
+            <div class="service-content">
+                <h3>التخليص الجمركي</h3>
+                <p>تخليص جميع البضائع من الميناء وتأمين على البضائع</p>
+                <a href="#" class="know-more-btn">
+                    اعرف المزيد
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="workflow-section">
+    <div class="container position-relative">
+        <div class="airplane-path">
+            <svg viewBox="0 0 1200 200" class="path-svg">
+                <path d="M50,100 Q300,180 600,100 T1150,100" class="path-line" />
+            </svg>
+            <div class="moving-airplane">
+                <i class="fas fa-plane"></i>
+            </div>
+        </div>
+
+        <div class="section-header text-center">
+            <span class="workflow-tag">كيف نعمل</span>
+            <h2>كيف نقوم بتوصيل شحنتك</h2>
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-item">
+                <div class="step-icon">
+                    <div class="icon-circle">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="step-number">01</div>
+                </div>
+                <h3>التشاور</h3>
+                <p>نستمع لاحتياجاتك ونفهم أهدافك</p>
+            </div>
+
+            <div class="step-arrow">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+
+            <div class="workflow-item">
+                <div class="step-icon">
+                    <div class="icon-circle">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="step-number">02</div>
+                </div>
+                <h3>التخطيط</h3>
+                <p>
+                    نضع خطة مفصلة ومخصصة لعملك
+
+                </p>
+            </div>
+
+            <div class="step-arrow">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+
+            <div class="workflow-item">
+                <div class="step-icon">
+                    <div class="icon-circle">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <div class="step-number">03</div>
+                </div>
+                <h3>التنفيذ</h3>
+                <p>
+                    نبدأ العمل وفقاً للخطة المتفق عليها
+
+                </p>
+            </div>
+
+            <div class="step-arrow">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+
+            <div class="workflow-item">
+                <div class="step-icon">
+                    <div class="icon-circle">
+                        <i class="fas fa-people-carry"></i>
+                    </div>
+                    <div class="step-number">04</div>
+                </div>
+                <h3>
+                    المتابعة
+                </h3>
+                <p>
+                    نقدم الدعم المستمر ونقيس النتائج
+
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-types-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-tag">أنواع الحاويات</span>
+            <h2>حلول متنوعة لكل احتياجاتك</h2>
+        </div>
+
+        <div class="container-cards">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="container-card-wrapper">
+                        <div class="container-card-bg"></div>
+                        <div class="container-card">
+                            <div class="container-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <h3>حاوية 20 قدم</h3>
+                            @* <p class="description">مثالية للشحنات المتوسطة والبضائع العامة. حل اقتصادي للشحنات الأقل حجماً.</p> *@
+
+                            <div class="container-specs">
+                                <h4>الحجم</h4>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <i class="fas fa-cube"></i>
+                                        <span>33 م³</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-weight-hanging"></i>
+                                        <span>21,800 كجم</span>
+                                    </div>
+                                </div>
+                                <h4>الأبعاد</h4>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt-h"></i>
+                                        <span>الطول: 5.90 م</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt"></i>
+                                        <span>العرض: 2.35 م</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt-v"></i>
+                                        <span>الارتفاع: 2.39 م</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-features">
+                                <h4>المميزات</h4>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> مناسبة للبضائع العامة</li>
+                                    <li><i class="fas fa-check"></i> سهولة التحميل والتفريغ</li>
+                                    <li><i class="fas fa-check"></i> حماية من العوامل الجوية</li>
+                                </ul>
+                            </div>
+
+                            <a href="#" class="btn btn-primary book-now">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="container-card-wrapper">
+                        <div class="container-card-bg"></div>
+                        <div class="container-card">
+                            <div class="container-icon">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <h3>حاوية 40 قدم</h3>
+                            @* <p class="description">الحل الأمثل للشحنات الكبيرة والبضائع الثقيلة. مساحة تخزين مضاعفة.</p> *@
+
+                            <div class="container-specs">
+                                <h4>الحجم</h4>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <i class="fas fa-cube"></i>
+                                        <span>67 م³</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-weight-hanging"></i>
+                                        <span>26,580 كجم</span>
+                                    </div>
+                                </div>
+                                <h4>الأبعاد</h4>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt-h"></i>
+                                        <span>الطول: 12.03 م</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt"></i>
+                                        <span>العرض: 2.35 م</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt-v"></i>
+                                        <span>الارتفاع: 2.39 م</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-features">
+                                <h4>المميزات</h4>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> مساحة تخزين كبيرة</li>
+                                    <li><i class="fas fa-check"></i> مثالية للشحنات الضخمة</li>
+                                    <li><i class="fas fa-check"></i> تأمين عالي للبضائع</li>
+                                </ul>
+                            </div>
+
+                            <a href="#" class="btn btn-primary book-now">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="container-card-wrapper">
+                        <div class="container-card-bg"></div>
+                        <div class="container-card">
+                            <div class="container-icon">
+                                <i class="fas fa-temperature-high"></i>
+                            </div>
+                            <h3>حاوية مبردة 40 قدم</h3>
+                            @* <p class="description">مجهزة بنظام تبريد متطور للبضائع التي تتطلب درجات حرارة محددة.</p> *@
+
+                            <div class="container-specs">
+                                <h4>الحجم</h4>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <i class="fas fa-cube"></i>
+                                        <span>59 م³</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-weight-hanging"></i>
+                                        <span>29,520 كجم</span>
+                                    </div>
+                                </div>
+                                <h4>الأبعاد</h4>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt-h"></i>
+                                        <span>الطول: 11.58 م</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt"></i>
+                                        <span>العرض: 2.29 م</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt-v"></i>
+                                        <span>الارتفاع: 2.28 م</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-features">
+                                <h4>المميزات</h4>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> نظام تبريد متطور</li>
+                                    @* <li><i class="fas fa-check"></i> مراقبة درجة الحرارة</li>  *@
+                                    <li><i class="fas fa-check"></i> عزل حراري ممتاز</li>
+                                </ul>
+                            </div>
+
+                            <a href="#" class="btn btn-primary book-now">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="container-card-wrapper">
+                        <div class="container-card-bg"></div>
+                        <div class="container-card">
+                            <div class="container-icon">
+                                <i class="fas fa-door-open"></i>
+                            </div>
+                            <h3>حاوية 45 قدم</h3>
+                            @* <p class="description">مثالية للبضائع الضخمة والثقيلة التي تتطلب تحميلاً من الأعلى.</p> *@
+
+                            <div class="container-specs">
+                                <h4>الحجم</h4>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <i class="fas fa-cube"></i>
+                                        <span>66 م³</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-weight-hanging"></i>
+                                        <span>27,600 كجم</span>
+                                    </div>
+                                </div>
+                                <h4>الأبعاد</h4>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt-h"></i>
+                                        <span>الطول: 12.03 م</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt"></i>
+                                        <span>العرض: 2.35 م</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-arrows-alt-v"></i>
+                                        <span>الارتفاع: 2.39 م</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-features">
+                                <h4>المميزات</h4>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> سقف قابل للإزالة</li>
+                                    <li><i class="fas fa-check"></i> تحميل علوي سهل</li>
+                                    <li><i class="fas fa-check"></i> مرونة في المناولة</li>
+                                </ul>
+                            </div>
+
+                            <a href="#" class="btn btn-primary book-now">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="values-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-tag">قيمنا</span>
+            <h2>نلتزم بقيم راسخة في كل ما نقوم به</h2>
+        </div>
+
+        <div class="values-grid">
+            @* <div class="value-card">
+                <div class="value-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                </div>
+                <div class="value-content">
+                    <h3>الموثوقية</h3>
+                    <p>نبني علاقات طويلة الأمد مع عملائنا على أساس الثقة والشفافية في جميع تعاملاتنا.</p>
+                </div>
+                <div class="value-bg-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+            </div> *@
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                <div class="value-content">
+                    <h3>الالتزام بالمواعيد</h3>
+                    <p>نحترم وقت عملائنا ونلتزم بجداول التسليم المتفق عليها بدقة عالية.</p>
+                </div>
+                <div class="value-bg-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                </div>
+                <div class="value-content">
+                    <h3>الموثوقية والأمان</h3>
+                    <p>نضمن سلامة شحناتك وسرية بياناتك في كل خطوة.</p>
+                </div>
+                <div class="value-bg-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                </div>
+                <div class="value-content">
+                    <h3>الشفافية والنزاهة</h3>
+                    <p>نعمل بشفافية تامة ونقدم لك معلومات واضحة حول جميع الإجراءات.</p>
+                </div>
+                <div class="value-bg-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+            </div>
+
+            @* <div class="value-card">
+                <div class="value-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="value-content">
+                    <h3>العمل الجماعي</h3>
+                    <p>نؤمن بقوة العمل الجماعي وروح الفريق لتحقيق أفضل النتائج لعملائنا.</p>
+                </div>
+                <div class="value-bg-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div> *@
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                </div>
+                <div class="value-content">
+                    <h3> نطاق التوصيل</h3>
+                    <p>قدم خدماتنا من الصين إلى جميع أنحاء فلسطين.</p>
+                </div>
+                <div class="value-bg-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="news-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-tag">آخر الأخبار</span>
+            <h2>تابع آخر أخبارنا وتحديثاتنا</h2>
+        </div>
+
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://images.pexels.com/photos/1554646/pexels-photo-1554646.jpeg" alt="شحن جوي">
+                    <div class="hover-arrow">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-tag">الشحن الجوي</span>
+                    <h3>خدمات الشحن الجوي المباشر من الصين إلى فلسطين</h3>
+                    <div class="news-meta">
+                        <span><i class="far fa-calendar"></i> 20 يوليو 2025</span>
+                        <span><i class="far fa-comments"></i> 0 تعليقات</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg" alt="تتبع الشحنات">
+                    <div class="hover-arrow">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-tag">خدمات التوصيل</span>
+                    <h3>نظام جديد لتتبع الشحنات بتقنيات متطورة</h3>
+                    <div class="news-meta">
+                        <span><i class="far fa-calendar"></i> 20 يوليو 2025</span>
+                        <span><i class="far fa-comments"></i> 1 تعليقات</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://images.pexels.com/photos/1554646/pexels-photo-1554646.jpeg" alt="الشحن البحري">
+                    <div class="hover-arrow">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-tag">الشحن البحري</span>
+                    <h3>توسيع خدمات الشحن البحري لتشمل موانئ جديدة</h3>
+                    <div class="news-meta">
+                        <span><i class="far fa-calendar"></i> 20 يوليو 2025</span>
+                        <span><i class="far fa-comments"></i> 0 تعليقات</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="help-section">
+    <div class="help-overlay"></div>
+    <div class="animated-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6">
+                <div class="support-badge">
+                    <div class="badge-circle">
+                        <div class="rotating-text">
+                            <svg viewBox="0 0 100 100">
+                                <path d="M 50 50 m -37 0 a 37 37 0 1 1 74 0 a 37 37 0 1 1 -74 0" id="rotating-text-path"></path>
+                                <text>
+                                    <textPath href="#rotating-text-path">متوفرون على مدار الساعة • متوفرون على مدار الساعة •</textPath>
+                                </text>
+                            </svg>
+                        </div>
+                        <h2>24/7</h2>
+                        <p>للدعم الفني</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6">
+                <div class="help-content">
+                    <h2>
+                        نحن هنا لمساعدتك
+                        ابدأ رحلتك معنا اليوم
+                    </h2>
+                    <p>تواصل معنا للحصول على استشارة مجانية أو لمناقشة مشروعك القادم. فريقنا جاهز لمساعدتك في تحقيق أهدافك</p>
+                    @* <a href="#" class="btn btn-primary contact-btn">
+                        تواصل معنا
+                    </a> *@
+                </div>
+            </div>
+            <div class="floating-icons">
+                <div class="icon-item">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="icon-item">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="icon-item">
+                    <i class="fas fa-envelope"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="contact-section">
+    <div class="contact-wrapper">
+        <div class="contact-form-side">
+            <div class="form-container">
+                <h2>تواصل معنا</h2>
+                <form class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" class="form-control" required style="text-align:right">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" class="form-control" required style="text-align:right">
+                        </div>
+                        <div class="form-group">
+                            <label>نوع الاستفسار</label>
+                            <select class="form-select" required>
+                                <option value="" selected disabled>اختر نوع الاستفسار</option>
+                                <option value="shipping">الشحن البحري</option>
+                                <option value="air">الشحن الجوي</option>
+                                <option value="customs">التخليص الجمركي</option>
+                                <option value="other">استفسار آخر</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>رسالتك</label>
+                        <textarea class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        إرسال
+                        <div class="btn-hover"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="contact-map-side">
+            <div class="contact-info-overlay">
+                <div class="contact-card">
+                    <h3>معلومات التواصل</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <div class="icon-box">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>العنوان</h4>
+                                <p>جنين، فلسطين</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="icon-box">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>البريد الإلكتروني</h4>
+                                <a href="mailto:armin.jenin@gmail.com">armin.jenin@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="icon-box">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>رقم الهاتف</h4>
+                                <a href="tel:+972594335839">972594335839+</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13483.677044865501!2d35.2903163!3d32.4597155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c7659851d6a35%3A0x51f0b6d256e3deed!2sJenin!5e0!3m2!1sen!2s!4v1709305160595!5m2!1sen!2s"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>

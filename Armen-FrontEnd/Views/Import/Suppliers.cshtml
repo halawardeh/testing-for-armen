@@ -1,0 +1,600 @@
+﻿@{
+    Layout = "~/Views/Shared/_ImportLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Import/ImportSuppliers.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/Import/ImportSuppliers.js" asp-append-version="true"></script>
+}
+
+<!-- Main Content -->
+<main class="flex-1 transition-all duration-300" id="mainContent">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-sm p-4 mb-8" data-aos="fade-down">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-primary-color">إدارة الموردين</h1>
+            <div class="flex items-center space-x-4">
+                <button class="action-btn btn-primary" onclick="openAddSupplierModal()">
+                    <i class="fas fa-plus ml-2"></i>
+                    إضافة مورد جديد
+                </button>
+                <div class="relative">
+                    <button class="p-2 text-gray-600 hover:text-accent-color transition-colors">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <img class="w-10 h-10 rounded-full border-2 border-accent-color" src="https://i.pravatar.cc/100?img=4" alt="صورة الموظف">
+                    <span class="font-semibold text-primary-color">أحمد محمد</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="p-6">
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-lg font-semibold opacity-90">إجمالي الموردين</p>
+                        <p class="text-3xl font-bold counter" data-target="156">0</p>
+                    </div>
+                    <div class="text-4xl opacity-80">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-lg font-semibold opacity-90">موردين نشطين</p>
+                        <p class="text-3xl font-bold counter" data-target="142">0</p>
+                    </div>
+                    <div class="text-4xl opacity-80">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-lg font-semibold opacity-90">متوسط التقييم</p>
+                        <p class="text-3xl font-bold counter" data-target="4.2">0</p>
+                        <span class="text-yellow-500">★★★★☆</span>
+                    </div>
+                    <div class="text-4xl opacity-80">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card p-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-lg font-semibold opacity-90">موردين جدد</p>
+                        <p class="text-3xl font-bold counter" data-target="8">0</p>
+                    </div>
+                    <div class="text-4xl opacity-80">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="search-filter-bar p-6 mb-8" data-aos="fade-up">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Search Input -->
+                <div class="relative">
+                    <input type="text"
+                           id="searchInput"
+                           class="search-input w-full"
+                           placeholder="البحث في الموردين..."
+                           oninput="filterSuppliers()">
+                    <i class="search-icon fas fa-search"></i>
+                </div>
+
+                <!-- Product Category Filter -->
+                <div>
+                    <select id="categoryFilter" class="form-input" onchange="filterSuppliers()">
+                        <option value="">جميع الفئات</option>
+                        <option value="electronics">إلكترونيات</option>
+                        <option value="textiles">منسوجات</option>
+                        <option value="machinery">آلات ومعدات</option>
+                        <option value="food">مواد غذائية</option>
+                        <option value="chemicals">مواد كيميائية</option>
+                        <option value="automotive">قطع سيارات</option>
+                    </select>
+                </div>
+
+                <!-- Rating Filter -->
+                <div>
+                    <select id="ratingFilter" class="form-input" onchange="filterSuppliers()">
+                        <option value="">جميع التقييمات</option>
+                        <option value="5">5 نجوم</option>
+                        <option value="4">4+ نجوم</option>
+                        <option value="3">3+ نجوم</option>
+                        <option value="2">2+ نجوم</option>
+                    </select>
+                </div>
+
+                <!-- Export Button -->
+                <div>
+                    <button class="action-btn btn-secondary w-full" onclick="exportSuppliers()">
+                        <i class="fas fa-download ml-2"></i>
+                        تصدير البيانات
+                    </button>
+                </div>
+            </div>
+
+            <!-- Active Filters Display -->
+            <div id="activeFilters" class="mt-4 hidden">
+                <p class="text-sm text-gray-600 mb-2">الفلاتر النشطة:</p>
+                <div id="filterTags" class="flex flex-wrap"></div>
+            </div>
+        </div>
+
+        <!-- Suppliers Table -->
+        <div class="supplier-table" data-aos="fade-up" data-aos-delay="200">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-white">
+                            <th class="p-4 text-right">المورد</th>
+                            <th class="p-4 text-right">الشركة</th>
+                            <th class="p-4 text-right">فئة المنتجات</th>
+                            <th class="p-4 text-right">التقييم</th>
+                            <th class="p-4 text-right">عدد الطلبات</th>
+                            <th class="p-4 text-right">آخر طلب</th>
+                            <th class="p-4 text-right">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="suppliersTableBody">
+                        <tr data-category="electronics" data-rating="5">
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <img class="w-12 h-12 rounded-full ml-3" src="https://i.pravatar.cc/100?img=11" alt="صورة المورد">
+                                    <div>
+                                        <span class="font-semibold block">لي ويي</span>
+                                        <span class="text-sm text-gray-600">مدير المبيعات</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <div>
+                                    <span class="font-semibold block">Shenzhen Electronics Co.</span>
+                                    <span class="text-sm text-gray-600">متخصصة في الإلكترونيات</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="category-badge category-electronics">إلكترونيات</span>
+                            </td>
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <div class="rating-stars">
+                                        <span class="text-yellow-500">★★★★★</span>
+                                    </div>
+                                    <span class="ml-2 font-semibold">5.0</span>
+                                    <span class="text-sm text-gray-600 mr-1">(42)</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="font-semibold">87 طلب</span>
+                            </td>
+                            <td class="p-4">2025-01-15</td>
+                            <td class="p-4">
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-500 hover:text-blue-700 p-1" onclick="viewSupplier(1)" title="عرض التفاصيل">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700 p-1" onclick="rateSupplier(1)" title="تقييم">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="text-purple-500 hover:text-purple-700 p-1" onclick="contactSupplier(1)" title="تواصل">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-category="textiles" data-rating="4">
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <img class="w-12 h-12 rounded-full ml-3" src="https://i.pravatar.cc/100?img=12" alt="صورة المورد">
+                                    <div>
+                                        <span class="font-semibold block">أحمد أوغلو</span>
+                                        <span class="text-sm text-gray-600">مدير التصدير</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <div>
+                                    <span class="font-semibold block">Istanbul Textiles Ltd.</span>
+                                    <span class="text-sm text-gray-600">منسوجات عالية الجودة</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="category-badge category-textiles">منسوجات</span>
+                            </td>
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <div class="rating-stars">
+                                        <span class="text-yellow-500">★★★★☆</span>
+                                    </div>
+                                    <span class="ml-2 font-semibold">4.3</span>
+                                    <span class="text-sm text-gray-600 mr-1">(28)</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="font-semibold">54 طلب</span>
+                            </td>
+                            <td class="p-4">2025-01-10</td>
+                            <td class="p-4">
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-500 hover:text-blue-700 p-1" onclick="viewSupplier(2)" title="عرض التفاصيل">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700 p-1" onclick="rateSupplier(2)" title="تقييم">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="text-purple-500 hover:text-purple-700 p-1" onclick="contactSupplier(2)" title="تواصل">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-category="machinery" data-rating="5">
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <img class="w-12 h-12 rounded-full ml-3" src="https://i.pravatar.cc/100?img=13" alt="صورة المورد">
+                                    <div>
+                                        <span class="font-semibold block">هانز مولر</span>
+                                        <span class="text-sm text-gray-600">مدير المشاريع</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <div>
+                                    <span class="font-semibold block">German Machinery GmbH</span>
+                                    <span class="text-sm text-gray-600">آلات صناعية متطورة</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="category-badge category-machinery">آلات ومعدات</span>
+                            </td>
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <div class="rating-stars">
+                                        <span class="text-yellow-500">★★★★★</span>
+                                    </div>
+                                    <span class="ml-2 font-semibold">4.8</span>
+                                    <span class="text-sm text-gray-600 mr-1">(15)</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="font-semibold">23 طلب</span>
+                            </td>
+                            <td class="p-4">2025-01-08</td>
+                            <td class="p-4">
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-500 hover:text-blue-700 p-1" onclick="viewSupplier(3)" title="عرض التفاصيل">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700 p-1" onclick="rateSupplier(3)" title="تقييم">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="text-purple-500 hover:text-purple-700 p-1" onclick="contactSupplier(3)" title="تواصل">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-category="food" data-rating="4">
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <img class="w-12 h-12 rounded-full ml-3" src="https://i.pravatar.cc/100?img=14" alt="صورة المورد">
+                                    <div>
+                                        <span class="font-semibold block">ماركو روسي</span>
+                                        <span class="text-sm text-gray-600">مدير التصدير</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <div>
+                                    <span class="font-semibold block">Mediterranean Foods S.p.A</span>
+                                    <span class="text-sm text-gray-600">أغذية متوسطية أصيلة</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="category-badge category-food">مواد غذائية</span>
+                            </td>
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <div class="rating-stars">
+                                        <span class="text-yellow-500">★★★★☆</span>
+                                    </div>
+                                    <span class="ml-2 font-semibold">4.5</span>
+                                    <span class="text-sm text-gray-600 mr-1">(31)</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="font-semibold">68 طلب</span>
+                            </td>
+                            <td class="p-4">2025-01-12</td>
+                            <td class="p-4">
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-500 hover:text-blue-700 p-1" onclick="viewSupplier(4)" title="عرض التفاصيل">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700 p-1" onclick="rateSupplier(4)" title="تقييم">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="text-purple-500 hover:text-purple-700 p-1" onclick="contactSupplier(4)" title="تواصل">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr data-category="automotive" data-rating="3">
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <img class="w-12 h-12 rounded-full ml-3" src="https://i.pravatar.cc/100?img=15" alt="صورة المورد">
+                                    <div>
+                                        <span class="font-semibold block">راج باتيل</span>
+                                        <span class="text-sm text-gray-600">مدير المبيعات</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <div>
+                                    <span class="font-semibold block">Auto Parts India Ltd.</span>
+                                    <span class="text-sm text-gray-600">قطع غيار السيارات</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="category-badge category-automotive">قطع سيارات</span>
+                            </td>
+                            <td class="p-4">
+                                <div class="flex items-center">
+                                    <div class="rating-stars">
+                                        <span class="text-yellow-500">★★★☆☆</span>
+                                    </div>
+                                    <span class="ml-2 font-semibold">3.8</span>
+                                    <span class="text-sm text-gray-600 mr-1">(19)</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="font-semibold">35 طلب</span>
+                            </td>
+                            <td class="p-4">2025-01-05</td>
+                            <td class="p-4">
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-500 hover:text-blue-700 p-1" onclick="viewSupplier(5)" title="عرض التفاصيل">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700 p-1" onclick="rateSupplier(5)" title="تقييم">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="text-purple-500 hover:text-purple-700 p-1" onclick="contactSupplier(5)" title="تواصل">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button onclick="changePage(-1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button onclick="changePage(1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Add/Edit Supplier Modal -->
+<div id="supplierModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden flex items-center justify-center z-50">
+    <div class="modal-content max-w-3xl w-full mx-4 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color" id="modalTitle">إضافة مورد جديد</h3>
+            <button onclick="closeSupplierModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <form id="supplierForm" onsubmit="saveSupplier(event)">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="form-label">اسم المورد *</label>
+                    <input type="text" id="supplierName" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">اسم الشركة *</label>
+                    <input type="text" id="companyName" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">البريد الإلكتروني *</label>
+                    <input type="email" id="supplierEmail" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">رقم الهاتف *</label>
+                    <input type="tel" id="supplierPhone" class="form-input" required>
+                </div>
+
+                <div>
+                    <label class="form-label">فئة المنتجات *</label>
+                    <select id="productCategory" class="form-input" required>
+                        <option value="">اختر الفئة</option>
+                        <option value="electronics">إلكترونيات</option>
+                        <option value="textiles">منسوجات</option>
+                        <option value="machinery">آلات ومعدات</option>
+                        <option value="food">مواد غذائية</option>
+                        <option value="chemicals">مواد كيميائية</option>
+                        <option value="automotive">قطع سيارات</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الموقع</label>
+                    <input type="text" id="supplierLocation" class="form-input" placeholder="المدينة، البلد">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label">وصف المنتجات</label>
+                    <textarea id="productDescription" class="form-input" rows="3" placeholder="اكتب وصفاً مختصراً للمنتجات التي يوردها..."></textarea>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label">العنوان</label>
+                    <textarea id="supplierAddress" class="form-input" rows="2"></textarea>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label">ملاحظات</label>
+                    <textarea id="supplierNotes" class="form-input" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="flex space-x-4 mt-8">
+                <button type="submit" class="action-btn btn-primary flex-1">
+                    <i class="fas fa-save ml-2"></i>
+                    <span id="saveButtonText">حفظ المورد</span>
+                </button>
+                <button type="button" class="action-btn btn-secondary flex-1" onclick="closeSupplierModal()">
+                    إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Rating Modal -->
+<div id="ratingModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden flex items-center justify-center z-50">
+    <div class="modal-content max-w-lg w-full mx-4 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color">تقييم المورد</h3>
+            <button onclick="closeRatingModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="text-center mb-6">
+            <img id="ratingSupplierImage" class="w-20 h-20 rounded-full mx-auto mb-4" src="" alt="صورة المورد">
+            <h4 class="text-xl font-bold text-primary-color" id="ratingSupplierName"></h4>
+            <p class="text-gray-600" id="ratingSupplierCompany"></p>
+        </div>
+
+        <form id="ratingForm" onsubmit="submitRating(event)">
+            <div class="mb-6">
+                <label class="form-label">التقييم العام *</label>
+                <div class="rating-input flex justify-center items-center space-x-2 mt-2">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="selectedRating" value="" required>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="form-label">جودة المنتج</label>
+                    <select class="form-input" id="productQuality">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">سرعة التسليم</label>
+                    <select class="form-input" id="deliverySpeed">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">التواصل</label>
+                    <select class="form-input" id="communication">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الأسعار</label>
+                    <select class="form-input" id="pricing">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="form-label">تعليق التقييم</label>
+                <textarea id="ratingComment" class="form-input" rows="4" placeholder="شارك تجربتك مع هذا المورد..."></textarea>
+            </div>
+
+            <div class="flex space-x-4">
+                <button type="submit" class="action-btn btn-primary flex-1">
+                    <i class="fas fa-star ml-2"></i>
+                    إرسال التقييم
+                </button>
+                <button type="button" class="action-btn btn-secondary flex-1" onclick="closeRatingModal()">
+                    إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Loading Modal -->
+<div id="loadingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white p-8 rounded-lg text-center">
+        <div class="loading-spinner mx-auto mb-4"></div>
+        <p class="text-lg font-semibold text-primary-color">جاري المعالجة...</p>
+    </div>
+</div>
+
+<!-- Success Toast -->
+<div id="successToast" class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+    <div class="flex items-center">
+        <i class="fas fa-check-circle ml-2"></i>
+        <span id="toastMessage">تم تنفيذ العملية بنجاح!</span>
+    </div>
+</div>

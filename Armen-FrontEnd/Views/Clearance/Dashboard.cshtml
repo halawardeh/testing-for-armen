@@ -1,0 +1,207 @@
+﻿@{
+    Layout = "~/Views/Shared/_clearanceLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Clearance/Dashboard.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/Clearance/Dashboard.js" asp-append-version="true"></script>
+}
+
+<div class="p-6">
+    <!-- Welcome Section -->
+    <div class="welcome-section" data-aos="fade-up">
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold mb-4">أهلاً بك، سامر أحمد</h2>
+            <p class="text-xl opacity-90">مخلص جمركي معتمد - قسم التخليص</p>
+        </div>
+    </div>
+    <!-- Stats Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" data-aos="fade-up" data-aos-delay="100">
+        <div class="stats-card">
+            <div class="stats-number">7</div>
+            <div class="stats-label">مهام جديدة للمراجعة</div>
+        </div>
+        <div class="stats-card">
+            <div class="stats-number">23</div>
+            <div class="stats-label">مهام مكتملة هذا الأسبوع</div>
+        </div>
+    </div>
+    <!-- Task Tabs -->
+    <div class="tab-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="tab-header">
+            <button class="tab-button active" onclick="switchTab(event, 'new-tasks')">
+                <i class="fas fa-plus ml-2"></i>
+                المهام الجديدة
+                <span class="badge new mr-2">7</span>
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'completed-tasks')">
+                <i class="fas fa-check ml-2"></i>
+                المهام المنجزة
+                <span class="badge completed mr-2">23</span>
+            </button>
+        </div>
+        <!-- New Tasks Tab -->
+        <div id="new-tasks" class="tab-content active">
+            <h3 class="text-xl font-bold text-primary-color mb-4">
+                <i class="fas fa-tasks ml-2"></i>
+                المهام المعينة لك للمراجعة
+            </h3>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>رقم الطلب</th>
+                        <th>موظف الاستيراد</th>
+                        <th>تاريخ التعيين</th>
+                        <th>الحالة</th>
+                        <th>الإجراء</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-005</strong>
+                            <div class="text-sm text-gray-500">شركة التقنيات المتطورة</div>
+                        </td>
+                        <td>أحمد محمد سالم</td>
+                        <td>21 يوليو 2025 - 14:30</td>
+                        <td><span class="badge new">جديد</span></td>
+                        <td>
+                            <a href="#" class="action-btn btn-primary">
+                                <i class="fas fa-eye"></i>
+                                فتح ومراجعة
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-004</strong>
+                            <div class="text-sm text-gray-500">مجموعة الإبداع التجاري</div>
+                        </td>
+                        <td>أحمد محمد سالم</td>
+                        <td>21 يوليو 2025 - 13:15</td>
+                        <td><span class="badge new">جديد</span></td>
+                        <td>
+                            <a href="#" class="action-btn btn-primary">
+                                <i class="fas fa-eye"></i>
+                                فتح ومراجعة
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-003</strong>
+                            <div class="text-sm text-gray-500">الشركة العربية للتجارة</div>
+                        </td>
+                        <td>أحمد محمد سالم</td>
+                        <td>21 يوليو 2025 - 11:45</td>
+                        <td><span class="badge new">جديد</span></td>
+                        <td>
+                            <a href="#" class="action-btn btn-primary">
+                                <i class="fas fa-eye"></i>
+                                فتح ومراجعة
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-002</strong>
+                            <div class="text-sm text-gray-500">مؤسسة الأمل الصناعية</div>
+                        </td>
+                        <td>أحمد محمد سالم</td>
+                        <td>20 يوليو 2025 - 16:20</td>
+                        <td><span class="badge new">جديد</span></td>
+                        <td>
+                            <a href="#" class="action-btn btn-primary">
+                                <i class="fas fa-eye"></i>
+                                فتح ومراجعة
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2025-001</strong>
+                            <div class="text-sm text-gray-500">شركة النور للاستيراد</div>
+                        </td>
+                        <td>أحمد محمد سالم</td>
+                        <td>20 يوليو 2025 - 14:10</td>
+                        <td><span class="badge new">جديد</span></td>
+                        <td>
+                            <a href="#" class="action-btn btn-primary">
+                                <i class="fas fa-eye"></i>
+                                فتح ومراجعة
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Completed Tasks Tab -->
+        <div id="completed-tasks" class="tab-content">
+            <h3 class="text-xl font-bold text-primary-color mb-4">
+                <i class="fas fa-check-circle ml-2"></i>
+                أرشيف المهام المنجزة
+            </h3>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>رقم الطلب</th>
+                        <th>موظف الاستيراد</th>
+                        <th>تاريخ الإنجاز</th>
+                        <th>الحالة</th>
+                        <th>الإجراء</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>ORD-2024-150</strong>
+                            <div class="text-sm text-gray-500">شركة المستقبل التقنية</div>
+                        </td>
+                        <td>أحمد محمد سالم</td>
+                        <td>20 يوليو 2025 - 15:45</td>
+                        <td><span class="badge completed">مكتمل</span></td>
+                        <td>
+                            <a href="#" class="action-btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                                عرض التفاصيل
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2024-149</strong>
+                            <div class="text-sm text-gray-500">مجموعة الخليج التجارية</div>
+                        </td>
+                        <td>أحمد محمد سالم</td>
+                        <td>19 يوليو 2025 - 16:20</td>
+                        <td><span class="badge completed">مكتمل</span></td>
+                        <td>
+                            <a href="#" class="action-btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                                عرض التفاصيل
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>ORD-2024-148</strong>
+                            <div class="text-sm text-gray-500">الشركة الوطنية للصناعات</div>
+                        </td>
+                        <td>أحمد محمد سالم</td>
+                        <td>19 يوليو 2025 - 14:30</td>
+                        <td><span class="badge completed">مكتمل</span></td>
+                        <td>
+                            <a href="#" class="action-btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                                عرض التفاصيل
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

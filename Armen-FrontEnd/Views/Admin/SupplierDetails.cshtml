@@ -1,0 +1,548 @@
+﻿@{
+    ViewData["Title"] = "SupplierDetails";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Import/SupplierDetails.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+}
+
+@section Scripts {
+    <script src="~/js/Import/SupplierDetails.js" asp-append-version="true"></script>
+}
+
+<!-- Main Content -->
+<main class="flex-1 transition-all duration-300" id="mainContent">
+    <div class="p-6 ">
+        <!-- Supplier Profile Card -->
+        <div class="main-card mb-8" data-aos="fade-up">
+            <div class="supplier-header">
+                <div class="supplier-avatar">
+                    <img id="supplierImage" src="https://i.pravatar.cc/150?img=11" alt="صورة المورد">
+                    <div class="status-badge status-active">نشط</div>
+                </div>
+                <div class="supplier-info">
+                    <h2 id="supplierName" class="supplier-name">لي ويي</h2>
+                    <p id="supplierTitle" class="supplier-title">مدير المبيعات</p>
+                    <p id="companyName" class="company-name">Shenzhen Electronics Co.</p>
+                    <div class="supplier-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="supplierLocation">شنزن، الصين</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>عضو منذ: يناير 2020</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-truck"></i>
+                            <span id="totalOrders">87 طلب</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="supplier-rating-overview">
+                    <div class="overall-rating">
+                        <div class="rating-number">5.0</div>
+                        <div class="rating-stars">
+                            <span class="text-yellow-500">★★★★★</span>
+                        </div>
+                        <div class="rating-count">(42 تقييم)</div>
+                    </div>
+                    <div class="rating-breakdown">
+                        <div class="rating-item">
+                            <span class="rating-label">جودة المنتج</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 95%"></div>
+                            </div>
+                            <span class="rating-value">4.8</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">سرعة التسليم</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 90%"></div>
+                            </div>
+                            <span class="rating-value">4.5</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">التواصل</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="rating-value">5.0</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">الأسعار</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 88%"></div>
+                            </div>
+                            <span class="rating-value">4.4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column (2/3 width) -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Company Information Section -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-building ml-3"></i>
+                            معلومات الشركة
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">اسم الشركة:</span>
+                                <span class="info-value">Shenzhen Electronics Co., Ltd.</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">نوع النشاط:</span>
+                                <span class="info-value">تصنيع وتوزيع الإلكترونيات</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">فئة المنتجات:</span>
+                                <span class="category-badge category-electronics">إلكترونيات</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">سنة التأسيس:</span>
+                                <span class="info-value">2015</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">عدد الموظفين:</span>
+                                <span class="info-value">200-500 موظف</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">المبيعات السنوية:</span>
+                                <span class="info-value">$10-50 مليون</span>
+                            </div>
+                        </div>
+
+                        <div class="company-description mt-6">
+                            <h4 class="font-semibold mb-3">نبذة عن الشركة:</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                شركة متخصصة في تصنيع وتوزيع الأجهزة الإلكترونية عالية الجودة. تأسست الشركة في عام 2015 وسرعان ما أصبحت واحدة من الرائدة في مجال الإلكترونيات في منطقة شنزن. نحن نقدم مجموعة واسعة من المنتجات بما في ذلك الهواتف الذكية وأجهزة الكمبيوتر اللوحية والإكسسوارات الإلكترونية.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products & Services Section -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-box-open ml-3"></i>
+                            المنتجات والخدمات
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="products-grid">
+                            <div class="product-item">
+                                <div class="product-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>الهواتف الذكية</h4>
+                                    <p>هواتف ذكية بأحدث التقنيات</p>
+                                </div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-icon">
+                                    <i class="fas fa-tablet-alt"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>أجهزة لوحية</h4>
+                                    <p>أجهزة لوحية للعمل والترفيه</p>
+                                </div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-icon">
+                                    <i class="fas fa-headphones"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>الإكسسوارات</h4>
+                                    <p>إكسسوارات إلكترونية متنوعة</p>
+                                </div>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-icon">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h4>أجهزة كمبيوتر</h4>
+                                    <p>أجهزة كمبيوتر محمولة ومكتبية</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reviews Section -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-comments ml-3"></i>
+                            أحدث التقييمات
+                        </h3>
+                        <button class="action-btn btn-outline" onclick="document.getElementById('allReviewsModal').classList.remove('hidden')">
+                            <i class="fas fa-eye ml-2"></i>
+                            عرض جميع التقييمات
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <div id="reviewsList" class="reviews-list">
+                            <!-- Review Items -->
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">محمد العلي</span>
+                                        <span class="review-date">20 يناير 2025</span>
+                                    </div>
+                                    <div class="review-rating">
+                                        <span class="review-stars text-yellow-500">★★★★★</span>
+                                        <span class="rating-number">5</span>
+                                    </div>
+                                </div>
+                                <div class="review-text">مورد ممتاز، جودة المنتجات عالية والتسليم في الوقت المحدد. التواصل سهل ومهني جداً.</div>
+                            </div>
+
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">سارة أحمد</span>
+                                        <span class="review-date">18 يناير 2025</span>
+                                    </div>
+                                    <div class="review-rating">
+                                        <span class="review-stars text-yellow-500">★★★★★</span>
+                                        <span class="rating-number">5</span>
+                                    </div>
+                                </div>
+                                <div class="review-text">تعامل راقي وأسعار تنافسية. المنتجات وصلت بحالة ممتازة والتغليف احترافي.</div>
+                            </div>
+
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">خالد المطيري</span>
+                                        <span class="review-date">15 يناير 2025</span>
+                                    </div>
+                                    <div class="review-rating">
+                                        <span class="review-stars text-yellow-500">★★★★☆</span>
+                                        <span class="rating-number">4</span>
+                                    </div>
+                                </div>
+                                <div class="review-text">خدمة جيدة بشكل عام، لكن كان هناك تأخير بسيط في الشحن. عدا ذلك كل شيء ممتاز.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column (1/3 width) -->
+            <div class="space-y-8">
+                <!-- Contact Information Section -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-address-book ml-3"></i>
+                            معلومات الاتصال
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="contact-list">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <span class="contact-label">البريد الإلكتروني</span>
+                                    <span class="contact-value">li.wei@shenzhen-electronics.com</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <span class="contact-label">الهاتف</span>
+                                    <span class="contact-value">+86 755 1234 5678</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-fax"></i>
+                                <div>
+                                    <span class="contact-label">الفاكس</span>
+                                    <span class="contact-value">+86 755 1234 5679</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe"></i>
+                                <div>
+                                    <span class="contact-label">الموقع الإلكتروني</span>
+                                    <span class="contact-value">www.shenzhen-electronics.com</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <span class="contact-label">العنوان</span>
+                                    <span class="contact-value">123 Technology Street, Shenzhen, China</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Statistics Section -->
+                <div class="main-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-header">
+                        <h3 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-chart-line ml-3"></i>
+                            إحصائيات الطلبات
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats-list">
+                            <div class="stat-item">
+                                <span class="stat-label">إجمالي الطلبات</span>
+                                <span class="stat-value">87</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">طلبات هذا العام</span>
+                                <span class="stat-value">24</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">آخر طلب</span>
+                                <span class="stat-value">15 يناير 2025</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">متوسط قيمة الطلب</span>
+                                <span class="stat-value">$15,000</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">نسبة التسليم في الوقت</span>
+                                <span class="stat-value">95%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modals Section -->
+<!-- Rating Modal -->
+<div id="ratingModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden flex items-center justify-center z-50">
+    <div class="modal-content max-w-2xl w-full mx-4 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color">إضافة تقييم جديد</h3>
+            <button onclick="closeRatingModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="text-center mb-6">
+            <img class="w-20 h-20 rounded-full mx-auto mb-4" src="https://i.pravatar.cc/150?img=11" alt="صورة المورد">
+            <h4 class="text-xl font-bold text-primary-color">لي ويي</h4>
+            <p class="text-gray-600">Shenzhen Electronics Co.</p>
+        </div>
+
+        <form id="ratingForm" onsubmit="submitRating(event)">
+            <div class="mb-6">
+                <label class="form-label">التقييم العام *</label>
+                <div class="rating-input flex justify-center items-center space-x-2 mt-2">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="selectedRating" value="" required>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="form-label">جودة المنتج</label>
+                    <select class="form-input" id="productQuality">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">سرعة التسليم</label>
+                    <select class="form-input" id="deliverySpeed">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">التواصل</label>
+                    <select class="form-input" id="communication">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">الأسعار</label>
+                    <select class="form-input" id="pricing">
+                        <option value="5">ممتاز</option>
+                        <option value="4">جيد جداً</option>
+                        <option value="3">جيد</option>
+                        <option value="2">مقبول</option>
+                        <option value="1">ضعيف</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="form-label">تعليق التقييم</label>
+                <textarea id="ratingComment" class="form-input" rows="4" placeholder="شارك تجربتك مع هذا المورد..."></textarea>
+            </div>
+
+            <div class="flex space-x-4">
+                <button type="submit" class="action-btn btn-primary flex-1">
+                    <i class="fas fa-star ml-2"></i>
+                    إرسال التقييم
+                </button>
+                <button type="button" class="action-btn btn-secondary flex-1" onclick="closeRatingModal()">
+                    إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- All Reviews Modal -->
+<div id="allReviewsModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden flex items-center justify-center z-50">
+    <div class="modal-content max-w-4xl w-full mx-4 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-primary-color">جميع التقييمات</h3>
+            <button onclick="document.getElementById('allReviewsModal').classList.add('hidden')" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div id="allReviewsContent" class="reviews-list max-h-96 overflow-y-auto">
+            <!-- Review Items -->
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">محمد العلي</span>
+                        <span class="review-date">20 يناير 2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <span class="review-stars text-yellow-500">★★★★★</span>
+                        <span class="rating-number">5</span>
+                    </div>
+                </div>
+                <div class="review-text">مورد ممتاز، جودة المنتجات عالية والتسليم في الوقت المحدد. التواصل سهل ومهني جداً.</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">سارة أحمد</span>
+                        <span class="review-date">18 يناير 2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <span class="review-stars text-yellow-500">★★★★★</span>
+                        <span class="rating-number">5</span>
+                    </div>
+                </div>
+                <div class="review-text">تعامل راقي وأسعار تنافسية. المنتجات وصلت بحالة ممتازة والتغليف احترافي.</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">خالد المطيري</span>
+                        <span class="review-date">15 يناير 2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <span class="review-stars text-yellow-500">★★★★☆</span>
+                        <span class="rating-number">4</span>
+                    </div>
+                </div>
+                <div class="review-text">خدمة جيدة بشكل عام، لكن كان هناك تأخير بسيط في الشحن. عدا ذلك كل شيء ممتاز.</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">فاطمة الزهراني</span>
+                        <span class="review-date">12 يناير 2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <span class="review-stars text-yellow-500">★★★★★</span>
+                        <span class="rating-number">5</span>
+                    </div>
+                </div>
+                <div class="review-text">أفضل مورد تعاملت معه. الجودة ممتازة والأسعار معقولة. أنصح بالتعامل معهم بقوة.</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">عبدالله الشمري</span>
+                        <span class="review-date">10 يناير 2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <span class="review-stars text-yellow-500">★★★★★</span>
+                        <span class="rating-number">5</span>
+                    </div>
+                </div>
+                <div class="review-text">مورد موثوق ومنتجات عالية الجودة. خدمة العملاء ممتازة والرد سريع على الاستفسارات.</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">نورا الحربي</span>
+                        <span class="review-date">8 يناير 2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <span class="review-stars text-yellow-500">★★★★☆</span>
+                        <span class="rating-number">4</span>
+                    </div>
+                </div>
+                <div class="review-text">جودة المنتجات جيدة والأسعار مناسبة. التغليف ممتاز ولكن الشحن استغرق وقتاً أطول من المتوقع.</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <span class="reviewer-name">أحمد الغامدي</span>
+                        <span class="review-date">5 يناير 2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <span class="review-stars text-yellow-500">★★★★★</span>
+                        <span class="rating-number">5</span>
+                    </div>
+                </div>
+                <div class="review-text">تعامل ممتاز وخدمة عملاء راقية. المنتجات وصلت بحالة ممتازة والجودة عالية جداً. سأتعامل معهم مرة أخرى.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Toast Notification -->
+<div id="successToast" class="fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+    <div class="flex items-center">
+        <i class="fas fa-check-circle ml-2"></i>
+        <span id="toastMessage">تم تنفيذ العملية بنجاح!</span>
+    </div>
+</div>

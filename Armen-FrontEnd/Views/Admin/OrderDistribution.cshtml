@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Title"] = "OrderDistribution";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/js/Admin/CSS/OrderDistribution.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/Admin/js/OrderDistribution.js" asp-append-version="true"></script>
+}
+
+  
+        <div class="container-fluid py-4">
+            <div class="table-container">
+                <div class="data-table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">
+                            <i class="fas fa-tasks me-2"></i>
+                            توزيع الطلبات على الأقسام
+                        </h3>
+                        <div class="table-actions">
+                            <select id="statusFilter" class="form-select form-select-sm" style="width: 150px;">
+                                <option value="all">كل الطلبات</option>
+                                <option value="قيد المعالجة">قيد المعالجة</option>
+                                <option value="مكتمل">مكتملة</option>
+                                <option value="جديد">جديد</option>
+                                <option value="متأخر">متأخر</option>
+                            </select>
+                            <button class="btn btn-sm btn-primary">
+                                <i class="fas fa-plus me-1"></i>
+                                إضافة طلب
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الطلب</th>
+                                    <th>العميل</th>
+                                    <th>تاريخ الطلب</th>
+                                    <th>الحالة</th>
+                                    <th>القسم المختص</th>
+                                    <th>إجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row">
+                                    <td class="fw-bold text-primary">ORD-2023-125</td>
+                                    <td>شركة النصر</td>
+                                    <td>15/06/2023</td>
+                                    <td>
+                                        <span class="status-badge warning">قيد المعالجة</span>
+                                    </td>
+                                    <td>
+                                        <select class="department-select">
+                                            <option value="">اختر القسم</option>
+                                            <option value="accounting" selected>قسم المحاسبة</option>
+                                            <option value="shipping">قسم الشحن</option>
+                                            <option value="import">قسم الاستيراد</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-success action-btn">
+                                            <i class="fas fa-eye"></i>
+                                            التفاصيل
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="fw-bold text-primary">ORD-2023-124</td>
+                                    <td>شركة التقنية</td>
+                                    <td>14/06/2023</td>
+                                    <td>
+                                        <span class="status-badge success">مكتمل</span>
+                                    </td>
+                                    <td>
+                                        <select class="department-select">
+                                            <option value="">اختر القسم</option>
+                                            <option value="accounting">قسم المحاسبة</option>
+                                            <option value="shipping" selected>قسم الشحن</option>
+                                            <option value="import">قسم الاستيراد</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-success action-btn">
+                                            <i class="fas fa-eye"></i>
+                                            التفاصيل
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="fw-bold text-primary">ORD-2023-123</td>
+                                    <td>مؤسسة المستقبل</td>
+                                    <td>14/06/2023</td>
+                                    <td>
+                                        <span class="status-badge info">جديد</span>
+                                    </td>
+                                    <td>
+                                        <select class="department-select">
+                                            <option value="" selected>اختر القسم</option>
+                                            <option value="accounting">قسم المحاسبة</option>
+                                            <option value="shipping">قسم الشحن</option>
+                                            <option value="import">قسم الاستيراد</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-success action-btn">
+                                            <i class="fas fa-eye"></i>
+                                            التفاصيل
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="fw-bold text-primary">ORD-2023-122</td>
+                                    <td>شركة الأصالة</td>
+                                    <td>13/06/2023</td>
+                                    <td>
+                                        <span class="status-badge danger">متأخر</span>
+                                    </td>
+                                    <td>
+                                        <select class="department-select">
+                                            <option value="">اختر القسم</option>
+                                            <option value="accounting">قسم المحاسبة</option>
+                                            <option value="shipping">قسم الشحن</option>
+                                            <option value="import" selected>قسم الاستيراد</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-success action-btn">
+                                            <i class="fas fa-eye"></i>
+                                            التفاصيل
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+

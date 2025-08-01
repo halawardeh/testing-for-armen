@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0d2c4f',
+                        'navbar-color': '#025F70', 
+                        accent: '#00a878',
+                        'primary-color': '#0d2c4f',
+                        'accent-color': '#00a878',
+                        'gold-color': '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    @RenderSection("Styles", required: false)
+</head>
+<body class="bg-gray-100" style="font-family: 'Cairo', sans-serif;">
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle fixed right-4 top-4 z-50 p-3 rounded-lg lg:hidden" onclick="toggleSidebar()" id="sidebarToggle" style="background: linear-gradient(135deg, #f59e0b, #f97316); color: white; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 fixed right-0 top-0 h-full z-40 transform transition-transform duration-300 lg:translate-x-0" id="sidebar" data-aos="slide-left" style="background: linear-gradient(180deg, #0d2c4f 0%, #025F70 100%);">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-center mb-8 text-white">آرمن للشحن</h2>
+                <nav class="space-y-2">
+                    <a href="/Import/Dashboard" class="sidebar-item flex items-center space-x-3 space-x-reverse p-3 rounded-lg text-white hover:bg-white/10 transition-colors">
+                        <i class="fas fa-tachometer-alt w-6"></i>
+                        <span class="font-semibold">لوحة التحكم</span>
+                    </a>
+                    <a href="/Import/Tasks" class="sidebar-item flex items-center space-x-3 space-x-reverse p-3 rounded-lg text-white hover:bg-white/10 transition-colors">
+                        <i class="fas fa-tasks w-6"></i>
+                        <span class="font-semibold">جميع المهام</span>
+                    </a>
+                  
+                    <a href="/Import/Costomers" class="sidebar-item flex items-center space-x-3 space-x-reverse p-3 rounded-lg text-white hover:bg-white/10 transition-colors">
+                        <i class="fas fa-users w-6"></i>
+                        <span class="font-semibold">إدارة العملاء</span>
+                    </a>
+                    <a href="/Import/Suppliers" class="sidebar-item flex items-center space-x-3 space-x-reverse p-3 rounded-lg text-white hover:bg-white/10 transition-colors">
+                        <i class="fas fa-truck w-6"></i>
+                        <span class="font-semibold">إدارة الموردين</span>
+                    </a>
+                    <a href="/Import/Factories" class="sidebar-item flex items-center space-x-3 space-x-reverse p-3 rounded-lg text-white hover:bg-white/10 transition-colors">
+                        <i class="fas fa-industry w-6"></i>
+                        <span class="font-semibold">إدارة المصانع</span>
+                    </a>
+                    <a href="/Import/Profile" class="sidebar-item flex items-center space-x-3 space-x-reverse p-3 rounded-lg text-white hover:bg-white/10 transition-colors">
+                        <i class="fas fa-user-circle w-6"></i>
+                        <span class="font-semibold">الملف الشخصي</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 transition-all duration-300 lg:mr-64" id="mainContent">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 800
+        });
+
+        // Sidebar Toggle Function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            sidebar.classList.toggle('translate-x-full');
+            sidebar.classList.toggle('lg:translate-x-0');
+            
+            mainContent.classList.toggle('mr-0');
+            mainContent.classList.toggle('lg:mr-64');
+        }
+
+        // Handle active sidebar item
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            
+            sidebarItems.forEach(item => {
+                if (item.getAttribute('href') === currentPath) {
+                    item.style.backgroundColor = '#f59e0b';
+                    item.style.fontWeight = 'bold';
+                }
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

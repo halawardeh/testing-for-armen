@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "profile";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/js/Admin/CSS/profile.css" asp-append-version="true" />
+}
+@section Scripts {
+    <script src="~/js/Admin/js/profile.js" asp-append-version="true"></script>
+}
+<script src="~/js/Admin/profile.js" asp-append-version="true" defer></script>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content" id="mainContent">
+    <!-- شريط التنقل العلوي -->
+    <!-- محتوى صفحة البروفايل -->
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <button class="profile-edit-btn" id="editProfileBtn">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+
+                <div class="avatar-upload">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="صورة البروفايل" class="profile-avatar" id="profileAvatar">
+                    <input type="file" id="avatarInput" class="avatar-upload-input" accept="image/*">
+                </div>
+                <h3 id="profileName">أحمد محمد</h3>
+                <p class="text-white-50" id="profileRole">مدير النظام</p>
+            </div>
+
+            <div class="profile-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="profile-info-item">
+                            <div class="profile-info-label">الاسم الكامل</div>
+                            <div class="profile-info-value" id="fullNameValue">أحمد محمد علي</div>
+                            <input type="text" class="form-control d-none" id="fullNameInput" value="أحمد محمد علي">
+                        </div>
+
+                        <div class="profile-info-item">
+                            <div class="profile-info-label">البريد الإلكتروني</div>
+                            <div class="profile-info-value" id="emailValue">ahmed@armen.com</div>
+                            <input type="email" class="form-control d-none" id="emailInput" value="ahmed@armen.com">
+                        </div>
+
+                        <div class="profile-info-item">
+                            <div class="profile-info-label">رقم الهاتف</div>
+                            <div class="profile-info-value" id="phoneValue">+970 59 123 4567</div>
+                            <input type="tel" class="form-control d-none" id="phoneInput" value="+970 59 123 4567">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="profile-info-item">
+                            <div class="profile-info-label">اسم المستخدم</div>
+                            <div class="profile-info-value" id="usernameValue">ahmed_admin</div>
+                            <input type="text" class="form-control d-none" id="usernameInput" value="ahmed_admin">
+                        </div>
+
+                        <div class="profile-info-item password-field">
+                            <div class="profile-info-label">كلمة المرور</div>
+                            <div class="profile-info-value" id="passwordValue">••••••••</div>
+                            <div class="input-group d-none" id="passwordInputGroup">
+                                <input type="password" class="form-control" id="passwordInput" placeholder="كلمة المرور الجديدة">
+                                <span class="password-toggle" id="passwordToggle">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-item">
+                            <div class="profile-info-label">تاريخ الانضمام</div>
+                            <div class="profile-info-value">15/03/2022</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="profile-actions d-none" id="profileActions">
+                <button class="btn btn-secondary" id="cancelEditBtn">إلغاء</button>
+                <button class="btn btn-primary" id="saveProfileBtn">حفظ التغييرات</button>
+            </div>
+        </div>
+    </div>
+</div>
