@@ -1473,156 +1473,573 @@ input:checked + .slider:before {
     margin-bottom: 2rem;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .profile-hero-info {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .profile-hero-details h1 {
-        font-size: 2.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .inner-hero {
-        height: 300px;
-    }
-    
-    .profile-hero-details h1 {
-        font-size: 2rem;
-    }
-    
-    .hero-avatar-img {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .profile-hero-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .hero-action-btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .quick-stats-section {
-        margin-top: -50px;
-    }
-    
-    .stat-card {
-        text-align: center;
-    }
-    
-    .stat-value {
-        font-size: 2.5rem;
-    }
-    
-    .sidebar-menu {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    
-    .menu-item {
-        flex: 1;
-        min-width: 150px;
-        text-align: center;
-    }
-    
-    .addresses-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .settings-form {
-        grid-template-columns: 1fr;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .shipment-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    
-    .shipment-footer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .header-content {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-}
-
-@media (max-width: 576px) {
-    .inner-hero {
-        height: 250px;
-    }
-    
-    .profile-hero-details h1 {
-        font-size: 1.8rem;
-    }
-    
-    .hero-avatar-img {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .quick-actions-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .settings-tabs {
-        flex-direction: column;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-}
-
-/* Animation Classes */
-.animate-in {
-    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes slideInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Loading States */
-.loading {
+/* قسم نقاط الولاء المحسن */
+#loyalty {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 25px;
+    padding: 2rem;
     position: relative;
     overflow: hidden;
 }
 
-.loading::after {
+    #loyalty::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+    }
+
+.loyalty-main-card {
+    background: rgb(2 95 112 / 95%);
+    border-radius: 25px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(2, 95, 112, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+.loyalty-main-card:hover {
+    /* تغيير بسيط بدلاً من الحركة المزعجة */
+    box-shadow: 
+        0 25px 50px rgba(2, 95, 112, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.loyalty-main-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+.loyalty-main-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 60%
+    );
+    transform: rotate(-45deg);
+    animation: shimmerEffect 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmerEffect {
+    0% { transform: translateX(-100%) rotate(-45deg); }
+    100% { transform: translateX(100%) rotate(-45deg); }
+}
+
+.loyalty-points-display {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 1.5rem;
+}
+
+.loyalty-points-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+    animation: pointsPulse 2s ease-in-out infinite;
+}
+
+@keyframes pointsPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.loyalty-points-number::after {
+    content: 'نقطة';
+    font-size: 1.2rem;
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+    right: -60px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.loyalty-label {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.loyalty-level-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.current-level {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.current-level::before {
+    content: '👑';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    animation: crownBounce 2s ease-in-out infinite;
+}
+
+@keyframes crownBounce {
+    0%, 100% { transform: translateY(-50%) rotate(0deg); }
+    50% { transform: translateY(-60%) rotate(5deg); }
+}
+
+.next-level {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.loyalty-progress-section {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.progress-label {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.progress-percentage {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fbbf24;
+}
+
+.loyalty-progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.loyalty-progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1) 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.1) 75%
+    );
+    animation: progressShimmer 2s infinite;
+}
+
+@keyframes progressShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.loyalty-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
+    border-radius: 10px;
+    width: 60%;
+    transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.loyalty-progress-fill::after {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-    animation: shimmer 1.5s infinite;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: progressGlow 2s infinite;
 }
 
-@keyframes shimmer {
+@keyframes progressGlow {
     0% { left: -100%; }
     100% { left: 100%; }
+}
+
+.progress-info {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.loyalty-rewards-section {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.loyalty-rewards-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.rewards-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.rewards-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.rewards-title::before {
+    content: '🎁';
+    font-size: 1.5rem;
+    animation: giftBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes giftBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+}
+
+.rewards-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.reward-item {
+    background: linear-gradient(135deg, #f8fafc, white);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.reward-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(2, 95, 112, 0.05),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.reward-item:hover::before {
+    left: 100%;
+}
+
+.reward-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 12px 30px rgba(2, 95, 112, 0.15);
+}
+
+.reward-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.reward-item:hover .reward-icon {
+    transform: rotateY(180deg) scale(1.1);
+}
+
+.reward-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.reward-description {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.reward-cost {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #d97706;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.redeem-btn {
+    background: linear-gradient(135deg, var(--secondary-color), #e67604);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.redeem-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(200, 100, 4, 0.3);
+}
+
+.redeem-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.redeem-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.redeem-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.main-redeem-btn {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+}
+
+.main-redeem-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(251, 191, 36, 0.4);
+}
+
+.main-redeem-btn:active {
+    transform: translateY(-1px) scale(1.01);
+}
+
+/* إضافة تأثيرات الجسيمات المتحركة */
+.loyalty-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: floatParticle 3s infinite;
+}
+
+.particle:nth-child(2n) {
+    background: rgba(251, 191, 36, 0.6);
+    animation-delay: -1s;
+}
+
+.particle:nth-child(3n) {
+    animation-delay: -2s;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* تحسينات للجوال */
+@media (max-width: 768px) {
+    .loyalty-main-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .loyalty-points-number {
+        font-size: 3rem;
+    }
+    
+    .loyalty-points-number::after {
+        right: -40px;
+        font-size: 1rem;
+    }
+    
+    .loyalty-level-indicator {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .loyalty-progress-section {
+        padding: 1rem;
+    }
+    
+    .rewards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .loyalty-rewards-section,
+    .loyalty-activity-section {
+        padding: 1.5rem;
+    }
+    
+    .main-redeem-btn {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+/* تأثير الانعكاس للكارت الرئيسي */
+.loyalty-main-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/* تحسين ألوان الوضع المظلم */
+@media (prefers-color-scheme: dark) {
+    .loyalty-rewards-section,
+    .loyalty-activity-section {
+        background: rgb(2 95 112 / 95%);
+        color: white;
+    }
+    
+    .reward-item {
+        background: #374151;
+        border-color: #4b5563;
+    }
+    
+    .activity-timeline-content {
+        background: #374151;
+    }
+    
+    .activity-timeline-content:hover {
+        background: #4b5563;
+    }
 }

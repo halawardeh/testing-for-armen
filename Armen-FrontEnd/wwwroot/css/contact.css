@@ -16,7 +16,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to left, #6d390690,#6d390670);
+    background: rgba(0, 136, 255, 0.05);
 }
 
 .inner-hero-content {
@@ -73,22 +73,29 @@
 }
 
 .method-card {
-    background: #fff8f2;
+    background: rgba(0,136,255,0.05);
     padding: 30px;
-    border-radius: 2px;
+    border-radius: 18px;
     text-align: center;
-    box-shadow: 0px 0px 10px #754413;
+    box-shadow: 0 4px 24px rgba(0,136,255,0.10), 0 1.5px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.method-card:hover {
+    box-shadow: 0 8px 32px rgba(0,136,255,0.18), 0 2px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px) scale(1.02);
 }
 
 .method-icon {
     width: 70px;
     height: 70px;
-    background: var(--secondary-color);
+    background: #08f;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
+    box-shadow: 0 2px 12px rgba(0,136,255,0.10);
 }
 
 .method-icon i {
@@ -97,27 +104,27 @@
 }
 
 .method-card h3 {
-    color: var(--primary-color);
+    color: #08f;
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
 .method-card p {
-    color: #666;
+    color: #444;
     margin-bottom: 15px;
 }
 
 .method-card a,
 .method-card span {
-    color: var(--secondary-color);
+    color: #08f;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .method-card a:hover {
-    color: var(--primary-color);
+    color: #0077e6;
 }
 
 /* Contact Form Section */
@@ -138,24 +145,18 @@
 
 .form-card,
 .map-card {
-    background: white;
+    background: rgba(0,136,255,0.05);
     padding: 30px;
-    border-radius: 2px;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,136,255,0.10), 0 1.5px 8px rgba(0,0,0,0.04);
 }
 
 .form-card h2,
 .map-card h2 {
-    color: var(--primary-color);
+    color: #08f;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 30px;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
 }
 
 .form-group {
@@ -164,19 +165,16 @@
 
 .form-group label {
     display: block;
-    color: var(--primary-color);
+    color: #08f;
     font-weight: 500;
     margin-bottom: 8px;
 }
 
 .form-control {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    background: #fff8f2;
-    color: #666;
-    transition: border-color 0.3s ease;
+    background: #f7fbff;
+    border-radius: 8px;
+    color: #333;
+    box-shadow: 0 1px 4px rgba(0,136,255,0.04);
 }
 
 .form-control:focus {
@@ -185,21 +183,23 @@
 }
 
 .submit-btn {
-    background: var(--primary-color);
+    background: #08f;
     color: white;
     border: none;
     padding: 12px 30px;
-    border-radius: 2px;
+    border-radius: 18px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 12px rgba(0,136,255,0.10);
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 .submit-btn:hover {
-    background: var(--secondary-color);
+    background: #0077e6;
+    box-shadow: 0 4px 24px rgba(0,136,255,0.18);
 }
 
 .map-container {
@@ -216,10 +216,15 @@
 /* FAQ Section */
 .faq-section {
     padding: 60px 0;
+    background: #f7fbff;
+    border-radius: 18px;
+    max-width: 800px;
+    margin: 40px auto;
+    box-shadow: 0 4px 24px rgba(0,136,255,0.08);
 }
 
 .faq-section h2 {
-    color: var(--primary-color);
+    color: #08f;
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
@@ -227,61 +232,66 @@
 }
 
 .faq-grid {
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
 }
 
 .faq-card {
-    background: white;
-    border-radius: 2px;
-    margin-bottom: 15px;
+    background: rgba(0,136,255,0.13);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,136,255,0.10), 0 1.5px 8px rgba(0,0,0,0.04);
+    margin-bottom: 18px;
     overflow: hidden;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.faq-card.active {
+    box-shadow: 0 8px 32px rgba(0,136,255,0.18), 0 2px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px) scale(1.02);
 }
 
 .faq-question {
     padding: 20px;
-    background: white;
-    color: var(--primary-color);
-    font-weight: 600;
+    background: transparent;
+    color: #08f;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.3s ease;
+    transition: background 0.3s, color 0.3s;
+    font-size: 1.15rem;
 }
 
 .faq-question:hover {
-    background: #fff8f2;
+    background: rgba(0,136,255,0.07);
 }
 
 .faq-question i {
-    color: var(--secondary-color);
-    transition: transform 0.3s ease;
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: white;
-}
-
-.faq-answer-content {
-    padding: 0 20px 20px;
-    color: #666;
-    line-height: 1.6;
-}
-
-.faq-card.active .faq-question {
-    background: #fff8f2;
+    color: #08f;
+    transition: transform 0.3s;
 }
 
 .faq-card.active .faq-question i {
     transform: rotate(180deg);
 }
 
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: transparent;
+}
+
 .faq-card.active .faq-answer {
     max-height: 200px;
+}
+
+.faq-answer-content {
+    padding: 0 20px 20px;
+    color: #333;
+    line-height: 1.6;
+    font-size: 1rem;
 }
 
 /* Responsive Design */
@@ -307,4 +317,4 @@
     .form-grid {
         grid-template-columns: 1fr;
     }
-} 
+}

@@ -1,7 +1,7 @@
 /* Import Factories Page Styles */
 :root {
     --primary-color: #025f70;
-    --secondary-color: #f5a623;
+    --secondary-color: #374151; /* ??????? ????????? ???? ????? ???? */
     --accent-color: #45b7d1;
     --success-color: #28a745;
     --warning-color: #ffc107;
@@ -15,7 +15,7 @@
     --shadow-medium: 0 5px 20px rgba(0, 0, 0, 0.15);
     --shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.2);
     --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    --gradient-secondary: linear-gradient(135deg, var(--secondary-color), #ff9500);
+    --gradient-secondary: linear-gradient(135deg, var(--secondary-color), #374151);
 }
 
 /* Filter Tags */
@@ -421,8 +421,10 @@ body {
     background: rgba(139, 92, 246, 0.1) !important;
 }
 
+.text-orange-500,
 .text-orange-500:hover {
-    background: rgba(249, 115, 22, 0.1) !important;
+    color: var(--primary-color) !important;
+    background: rgba(59, 130, 246, 0.1) !important;
 }
 
 /* Pagination */

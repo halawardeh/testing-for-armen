@@ -1,7 +1,7 @@
 ﻿:root {
-    --primary-color: #025f70;
-    --secondary-color: #c86404;
-    --light-color: #FFFAF6;
+    --primary-color: #08f;
+    --secondary-color: #08f;
+    --light-color: #fff;
 }
 
 body {
@@ -10,9 +10,10 @@ body {
 }
 /* Top Bar */
 .top-bar {
-    background-color: var(--primary-color);
+    background-color: rgba(0,136,255,0.12); /* درجة أزرق فاتحة وناعمة */
+    color: #08f;
+    border-bottom: 1px solid rgba(0, 136, 255, 0.07);
     padding: 8px 0;
-    color: var(--light-color);
 }
 
 .top-bar .container {
@@ -22,28 +23,40 @@ body {
 }
 
 .contact-info a {
-    color: var(--light-color);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     margin-left: 20px;
     font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: white;
 }
 
 .contact-info a i {
     margin-left: 5px;
+    color: white;
 }
 
 .social-links a {
-    color: var(--light-color);
+    color: rgba(255, 255, 255, 0.9);
     margin-right: 15px;
     font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: white;
+    transform: translateY(-3px);
 }
 
 /* Navbar */
 .navbar {
-/*    background-color: #86b7fe;*/
-    backdrop-color:white;
-    padding: 15px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    color: #08f;
+    box-shadow: 0 2px 20px rgba(0, 136, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 136, 255, 0.07);
 }
 
 .navbar-brand img {
@@ -51,20 +64,19 @@ body {
 }
 
 .nav-link {
-    color: var(--primary-color);
-/*    color:white;*/
+    color: #08f;
     font-weight: 600;
     margin: 0 15px;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: var(--secondary-color);
+    color: #0077e6;
 }
 
 .get-quote {
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: #08f;
+    color: #fff;
     border: none;
     padding: 10px 25px;
     border-radius: 5px;
@@ -73,7 +85,37 @@ body {
 }
 
 .get-quote:hover {
-    background-color: var(--primary-color);
+    background-color: #0077e6;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 136, 255, 0.3);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 136, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px 0;
+}
+
+.dropdown-item {
+    color: var(--primary-color);
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 136, 255, 0.1);
+    color: var(--primary-color);
+    transform: translateX(-5px);
+}
+
+/* صور أو بارالاكس داخل النافبار أو الهيرو */
+.navbar-parallax-bg, .navbar-image-bg {
+    background: linear-gradient(120deg, #fff 80%, rgba(0,136,255,0.08) 100%);
 }
 
 /* Responsive Styles */
@@ -90,5 +132,5 @@ body {
         margin-right: 10px;
     }
 
-} 
+}
 

@@ -1,4 +1,34 @@
-﻿/* Hero */
+﻿/* Root Variables */
+:root {
+    --primary-color: #08f;
+    --primary-color-light: rgba(0, 136, 255, 0.08);
+    --primary-color-medium: rgba(0, 136, 255, 0.18);
+    --primary-color-glass: rgba(0, 136, 255, 0.35);
+    --secondary-color: #08f;
+    --light-color: #fff;
+}
+
+/* Body and Section Backgrounds */
+body {
+    background: linear-gradient(135deg, #fff 60%, #08f 100%);
+}
+
+.hero-section {
+    background: linear-gradient(120deg, #fff 60%, rgba(0,136,255,0.12) 100%);
+}
+
+.solutions-section,
+.transport-services,
+.workflow-section,
+.values-section {
+    background: linear-gradient(120deg, #fff 80%, rgba(0,136,255,0.08) 100%);
+}
+
+.services-simple-section {
+    background: linear-gradient(135deg, rgba(0,136,255,0.07) 60%, #fff 100%);
+}
+
+/* Hero */
 .hero-section {
     position: relative;
     height: 100vh;
@@ -66,13 +96,13 @@
 }
 
 .btn-primary {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: var(--primary-color-medium);
+    border-color: var(--primary-color-medium);
 }
 
 .btn-outline-light:hover {
@@ -143,7 +173,7 @@
 
 /* Statistics */
 .statistics-section {
-    background: #025f7085;
+    background: var(--primary-color-glass);
     border-radius: 15px;
     padding: 30px;
     display: flex;
@@ -151,7 +181,9 @@
     align-items: center;
     margin-top: 40px;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .stat-item {
@@ -200,7 +232,7 @@
 .content-block h2 {
     font-size: 2.8rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #0088ff;
     margin-bottom: 25px;
     line-height: 1.2;
 }
@@ -243,7 +275,7 @@
 
 .service-item span {
     font-size: 1rem;
-    color: var(--primary-color);
+    color: #0088ff;
     font-weight: 500;
 }
 
@@ -281,7 +313,7 @@
 .section-header h2 {
     font-size: 2.8rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #0088ff;
 }
 
 /* Services Gallery */
@@ -429,7 +461,7 @@
 .section-header h2 {
     font-size: 2.8rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #0088ff;
     margin-bottom: 50px;
     line-height: 1.2;
 }
@@ -521,7 +553,7 @@
 .workflow-item h3 {
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--primary-color);
+    color: #0088ff;
     margin-bottom: 15px;
 }
 
@@ -561,7 +593,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(#c8640492, rgba(0, 0, 0, 0.85));
+        background:rgba(0, 136, 255, 0.05);
     }
 
 .container-types-section .container {
@@ -636,7 +668,7 @@
 }
 
 .container-card h3 {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 1.5rem;
     margin-bottom: 15px;
     font-weight: 700;
@@ -657,7 +689,7 @@
 }
 
 .container-specs h4 {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 1.1rem;
     margin-bottom: 15px;
     font-weight: 600;
@@ -716,7 +748,7 @@
 }
 
 .container-features h4 {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 1.1rem;
     margin-bottom: 15px;
     font-weight: 600;
@@ -782,7 +814,7 @@
 
 @media (max-width: 576px) {
     .container-types-section {
-        padding: 40px 20px;
+        padding: 40px 0;
     }
     
     .container-card {
@@ -1354,7 +1386,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, rgba(0,26,46,0.95) 0%, rgba(0,26,46,0.85) 100%);
+    background: linear-gradient(90deg, rgba(0,102,204,0.8) 0%, rgba(0,136,255,0.7) 100%);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     z-index: 1;
 }
 
@@ -1489,7 +1523,7 @@
 }
 
 .form-container h2 {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 40px;
@@ -1508,7 +1542,7 @@
 
 .form-group label {
     display: block;
-    color: var(--primary-color);
+    color: #0088ff;
     font-weight: 600;
     margin-bottom: 8px;
 }
@@ -1524,8 +1558,8 @@
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(2, 95, 112, 0.1);
+    border-color: #0088ff;
+    box-shadow: 0 0 0 4px rgba(0, 136, 255, 0.1);
     outline: none;
 }
 
@@ -1538,7 +1572,7 @@ textarea.form-control {
     position: relative;
     width: 100%;
     padding: 16px 30px;
-    background: var(--primary-color);
+    background: #0088ff;
     color: white;
     border: none;
     border-radius: 12px;
@@ -1593,15 +1627,15 @@ textarea.form-control {
 }
 
 .contact-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: linear-gradient(120deg, #fff 80%, rgba(0,136,255,0.10) 100%);
+    border: 1px solid rgba(0,136,255,0.07);
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .contact-card h3 {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 30px;
@@ -1622,7 +1656,7 @@ textarea.form-control {
 .icon-box {
     width: 50px;
     height: 50px;
-    background: var(--primary-color);
+    background: #0088ff;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -1636,7 +1670,7 @@ textarea.form-control {
 }
 
 .info-content h4 {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 5px;
@@ -1732,13 +1766,8 @@ textarea.form-control {
     overflow: hidden;
     border-bottom: 3px solid #fff;
     color: #fff;
-    background-color: #025f70;
+    background-color: var(--primary-color);
 }
-@media (max-width: 576px) {
-    .loop-wrapper {
-        width: 400px;
-    }
-    }
 
 .mountain {
     position: absolute;
@@ -2089,7 +2118,7 @@ textarea.form-control {
 }
 
 .news-section h2 {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 50px;
@@ -2163,15 +2192,15 @@ textarea.form-control {
     display: inline-block;
     padding: 6px 15px;
     /*    background: var(--primary-color);*/
-    border: 1px solid #c86404;
-    color: #c86404;
+    border: 1px solid #08f;
+    color: #08f;
     border-radius: 20px;
     font-size: 0.85rem;
     margin-bottom: 15px;
 }
 
 .news-content h3 {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 15px;
@@ -2237,9 +2266,9 @@ textarea.form-control {
     }
 }
 
-/* ????? ????? */
+/* خدمات بسيطة */
 .services-simple-section {
-    background: linear-gradient(135deg, var(--light-color) 60%, #fff 100%);
+    background: linear-gradient(135deg, rgba(0, 136, 255, 0.05) 60%, rgba(255, 255, 255, 0.8) 100%);
     padding: 60px 0 40px 0;
     direction: rtl;
 }
@@ -2248,7 +2277,7 @@ textarea.form-control {
     margin-bottom: 40px;
 }
 .services-simple-section .section-title {
-    color: var(--primary-color);
+    color: #0088ff;
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 10px;
@@ -2266,9 +2295,10 @@ textarea.form-control {
     margin: 0 auto;
 }
 .services-simple-card {
-    background: white;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(0,136,255,0.08);
+    border: 1px solid rgba(0,136,255,0.07);
     border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(2,95,112,0.07);
     padding: 35px 20px 25px 20px;
     text-align: center;
     transition: box-shadow 0.3s, transform 0.3s;
@@ -2284,19 +2314,18 @@ textarea.form-control {
     transition: opacity 0.7s cubic-bezier(.4,1.4,.6,1), transform 0.7s cubic-bezier(.4,1.4,.6,1);
 }
 .services-simple-card:hover {
-    box-shadow: 0 12px 32px rgba(2,95,112,0.18);
+    box-shadow: 0 12px 32px rgba(0,136,255,0.18);
     transform: translateY(-8px) scale(1.04);
 }
 .services-simple-card:hover .services-simple-icon {
-    background: var(--secondary-color);
-    transform: translateY(-10px) scale(1.15) rotate(-8deg);
-    box-shadow: 0 6px 18px rgba(200,100,4,0.13);
+    background: var(--primary-color);
+    box-shadow: 0 6px 18px rgba(0,136,255,0.13);
 }
 .services-simple-icon {
     width: 60px;
     height: 60px;
     background: var(--primary-color);
-    color: white;
+    color: #fff;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2331,10 +2360,31 @@ textarea.form-control {
     color: var(--primary-color);
     font-weight: bold;
 }
-@media (max-width: 576px) {
-        .services-simple-grid
-        {
-             grid-template-columns: repeat(2, 1fr);
-        }
-    
+
+/* Navbar adjustments: الأبيض خلفية والكلام أزرق */
+.navbar {
+    background: #fff;
+    color: #08f;
+}
+
+.nav-link {
+    color: #08f;
+}
+
+.nav-link:hover {
+    color: #0077e6;
+}
+
+.get-quote {
+    background-color: #08f;
+    color: #fff;
+}
+
+.get-quote:hover {
+    background-color: #0077e6;
+}
+
+.top-bar {
+    background-color: #08f;
+    color: #fff;
 }

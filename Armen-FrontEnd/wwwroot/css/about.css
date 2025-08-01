@@ -16,7 +16,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to left, #6d390690,#6d390670);
+    background: rgba(0, 136, 255, 0.05);
 }
 
 .inner-hero-content {
@@ -33,6 +33,7 @@
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: #08f;
 }
 
 .breadcrumb {
@@ -51,7 +52,7 @@
 }
 
 .breadcrumb-item.active {
-    color: var(--secondary-color);
+    color: #08f;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -84,19 +85,19 @@
 .stat-number {
     font-size: 3rem;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: #08f;
     margin-bottom: 10px;
 }
 
 .stat-label {
-    color: var(--primary-color);
+    color: #08f;
     font-weight: 600;
 }
 
 /* Story Section */
 .story-section {
     padding: 60px 0;
-    background: #fff8f2;
+    background: linear-gradient(120deg, #fff 80%, rgba(0,136,255,0.07) 100%);
 }
 
 .story-content {
@@ -107,7 +108,7 @@
 }
 
 .story-text h2 {
-    color: var(--primary-color);
+    color: #08f;
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -133,12 +134,12 @@
 .icon-circle {
     width: 50px;
     height: 50px;
-    background: var(--secondary-color);
+    background: #08f;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #fff;
     flex-shrink: 0;
 }
     .icon-circle i{
@@ -146,7 +147,7 @@
     }
 
     .vision-text h4 {
-        color: var(--primary-color);
+        color: #08f;
         font-weight: 600;
         margin-bottom: 8px;
     }
@@ -178,13 +179,13 @@
 }
 
 .card-icon {
-    color: var(--secondary-color);
+    color: #08f;
     font-size: 2rem;
     margin-bottom: 15px;
 }
 
 .image-card h4 {
-    color: var(--primary-color);
+    color: #08f;
     font-weight: 600;
     margin-bottom: 8px;
 }
@@ -218,13 +219,13 @@
 
 
 .value-icon {
-    color: var(--secondary-color);
+    color: #08f;
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
 
 .value-card h3 {
-    color: var(--primary-color);
+    color: #08f;
     font-weight: 600;
     margin-bottom: 15px;
 }
@@ -238,7 +239,7 @@
 /* Team Section */
 .team-section {
     padding: 60px 0;
-    background: #fff8f2;
+    background: #fff;
 }
 
 .team-container {
@@ -267,15 +268,15 @@
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--secondary-color);
+    border: 4px solid #08f;
 }
 
 .member-icon {
     position: absolute;
     bottom: 0;
     right: 30%;
-    background: var(--secondary-color);
-    color: white;
+    background: #08f;
+    color: #fff;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -286,7 +287,7 @@
 }
 
 .member-info h3 {
-    color: var(--primary-color);
+    color: #08f;
     font-weight: 600;
     margin-bottom: 5px;
 }
@@ -303,19 +304,18 @@
 }
 
 .member-social a {
-    color: var(--secondary-color);
+    color: #08f;
     transition: color 0.3s ease;
 }
 
 .member-social a:hover {
-    color: var(--primary-color);
+    color: #0077e6;
 }
 
 /* Partners Section */
 .partners-section {
     padding: 60px 0;
-    background: linear-gradient(rgba(2, 95, 112, 0.95), rgba(2, 95, 112, 0.95)), 
-                url('https://mlmvamjmfkcs.i.optimole.com/w:1920/h:1080/q:mauto/ig:avif/https://elfayoumi.com/wp-content/uploads/2025/05/%D9%85%D8%B7%D8%A7%D8%B1%D8%A7%D8%AA.png');
+    background: linear-gradient(rgba(0,136,255,0.95), rgba(0,136,255,0.95)), url('https://mlmvamjmfkcs.i.optimole.com/w:1920/h:1080/q:mauto/ig:avif/https://elfayoumi.com/wp-content/uploads/2025/05/%D9%85%D8%B7%D8%A7%D8%B1%D8%A7%D8%AA.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -357,7 +357,7 @@
 }
 
 .section-header h2 {
-    color: var(--primary-color);
+    color: #08f;
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 15px;
@@ -370,7 +370,7 @@
 }
 
 .partners-section .section-header h2 {
-    color: white;
+    color: #fff;
 }
 
 /* Update story section styles */
@@ -483,4 +483,4 @@
         width: 100%;
         margin-top: 20px;
     }
-} 
+}}

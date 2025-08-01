@@ -16,7 +16,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to left, #6d390690,#6d390670);
+    background: rgba(0, 136, 255, 0.05);
 }
 
 .inner-hero-content {

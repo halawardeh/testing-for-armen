@@ -1,16 +1,16 @@
 /* Color Variables */
 :root {
-    --primary-color: #025f70;
-    --secondary-color: #f5a623;
-    --light-color: #fff8f2;
+    --primary-color: #08f;
+    --secondary-color: #4fc3f7;
+    --light-color: #f8fbff;
     --text-dark: #2c3e50;
     --text-muted: #6c757d;
     --border-color: #e8ecef;
     --success-color: #28a745;
     --error-color: #dc3545;
-    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
-    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
-    --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.2);
+    --shadow-light: 0 4px 15px rgba(0, 136, 255, 0.08);
+    --shadow-medium: 0 8px 25px rgba(0, 136, 255, 0.15);
+    --shadow-heavy: 0 15px 35px rgba(0, 136, 255, 0.2);
 }
 
 /* Inner Hero Section */
@@ -30,7 +30,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(2, 95, 112, 0.8), rgba(245, 166, 35, 0.6));
+    background: linear-gradient(135deg, rgba(0,136,255,0.13), rgba(79,195,247,0.09));
 }
 
 .inner-hero-content {
@@ -92,7 +92,7 @@
     padding: 35px;
     margin-bottom: 40px;
     box-shadow: var(--shadow-medium);
-    border: 1px solid rgba(245, 166, 35, 0.1);
+    border: 1px solid rgba(0,136,255,0.10);
     position: relative;
     overflow: hidden;
 }
@@ -278,7 +278,7 @@
     padding: 50px;
     box-shadow: var(--shadow-heavy);
     margin-bottom: 30px;
-    border: 1px solid rgba(245, 166, 35, 0.1);
+    border: 1px solid rgba(0,136,255,0.10);
     position: relative;
     overflow: hidden;
 }
@@ -746,9 +746,9 @@
 }
 
 .btn-primary {
-    background: var(--secondary-color);
+    background: var(--primary-color);
     color: white;
-    box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+    box-shadow: 0 4px 15px rgba(0,136,255,0.13);
 }
 
     .btn-primary::before {
@@ -763,41 +763,19 @@
     }
 
     .btn-primary:hover {
-        background: #e6941f;
-        transform: translateY(-4px);
-        box-shadow: 0 12px 30px rgba(245, 166, 35, 0.4);
+        background: #0077e6;
+        box-shadow: 0 12px 30px rgba(0,136,255,0.18);
     }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover i {
-            animation: buttonIcon 0.6s ease;
-        }
-
-@keyframes buttonIcon {
-    0%, 100% {
-        transform: translateX(0);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-}
 
 .btn-secondary {
-    background: transparent;
     color: var(--primary-color);
     border: 3px solid var(--primary-color);
-    box-shadow: 0 4px 15px rgba(2, 95, 112, 0.2);
+    box-shadow: 0 4px 15px rgba(0,136,255,0.10);
 }
 
     .btn-secondary:hover {
         background: var(--primary-color);
         color: white;
-        transform: translateY(-4px);
-        box-shadow: 0 12px 30px rgba(2, 95, 112, 0.3);
     }
 
 .btn-outline {
@@ -819,8 +797,8 @@
 .info-note {
     margin-top: 40px;
     padding: 25px;
-    background: linear-gradient(135deg, rgba(2, 95, 112, 0.05), rgba(2, 95, 112, 0.02));
-    border: 2px solid rgba(2, 95, 112, 0.2);
+    background: linear-gradient(135deg, rgba(0,136,255,0.07), rgba(79,195,247,0.05));
+    border: 2px solid rgba(0,136,255,0.13);
     border-radius: 15px;
     display: flex;
     align-items: flex-start;
@@ -863,7 +841,7 @@
 /* Success Card Enhanced */
 .success-card {
     text-align: center;
-    background: linear-gradient(135deg, rgba(40, 167, 69, 0.02), rgba(40, 167, 69, 0.01));
+    background: linear-gradient(135deg, rgba(0,136,255,0.07), rgba(79,195,247,0.05));
 }
 
 .success-content {
@@ -904,8 +882,8 @@
 
 /* Login Invitation Enhanced */
 .login-invitation {
-    background: linear-gradient(135deg, rgba(2, 95, 112, 0.05), rgba(245, 166, 35, 0.05));
-    border: 2px solid rgba(2, 95, 112, 0.1);
+    background: linear-gradient(135deg, rgba(0,136,255,0.07), rgba(79,195,247,0.05));
+    border: 2px solid rgba(0,136,255,0.10);
     border-radius: 20px;
     padding: 40px;
     margin: 50px 0;

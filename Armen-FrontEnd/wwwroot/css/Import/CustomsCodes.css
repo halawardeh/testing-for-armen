@@ -1,15 +1,15 @@
 ﻿:root {
-    --primary-color: #0d2c4f;
-    --navbar-color: #025F70;
-    --accent-color: #00a878;
-    --light-bg: #f4f7fa;
-    --import-color: #3b82f6;
-    --success-color: #10b981;
-    --warning-color: #f59e0b;
-    --danger-color: #ef4444;
-    --info-color: #06b6d4;
-    --excel-color: #1f7a1f;
-    --pdf-color: #dc2626;
+    --primary-color: #025f70;
+    --secondary-color: #374151; /* استبدال البرتقالي بلون رمادي أزرق */
+    --accent-color: #45b7d1;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --text-color: #2c3e50;
+    --border-color: #e9ecef;
 }
 
 * {
@@ -815,4 +815,10 @@ nav .bg-white {
 * {
     max-width: 100%;
     overflow-wrap: break-word;
+}
+
+.text-orange-500,
+.text-orange-500:hover {
+    color: var(--primary-color) !important;
+    background: rgba(59, 130, 246, 0.1) !important;
 }
